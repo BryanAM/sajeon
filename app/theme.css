@@ -1,0 +1,14 @@
+:root {
+  /* App Colors */
+  --foreground-rgb: #fff;
+}
+
+
+
+/* DARK ============================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+     /* Dark App Colors */
+    --foreground-rgb: #000; 
+  }
+}
