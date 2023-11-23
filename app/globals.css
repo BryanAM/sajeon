@@ -5,10 +5,5 @@
 @import url('theme.css');
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: white;
-  opacity: 0.8;
-  background-image:  radial-gradient(#5850EC 0.5px, transparent 0.5px), radial-gradient(#5850EC 0.5px, var(--foreground-rgb) 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0,10px 10px;
+
 }
