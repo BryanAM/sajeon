@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('theme.css');
+@import '@radix-ui/themes/styles.css';
 
 body {
 
