@@ -1,17 +1,20 @@
-import React from 'react';
-import { Flex, Text, Button, TextFieldInput, VisuallyHidden } from '@radix-ui/themes';
-
+import React from "react";
+import {
+  Text,
+  Button,
+  TextFieldInput,
+} from "@radix-ui/themes";
 
 function SajeonSearch() {
   return (
     <form>
-      <label className='flex-col flex'>
+      <label className="flex flex-col">
         <Text as="label">Sajeon</Text>
         <TextFieldInput />
       </label>
       <Button>Sajeon Search</Button>
     </form>
-  )
+  );
 }
 
 export default SajeonSearch;
