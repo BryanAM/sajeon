@@ -1,24 +1,23 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { MagnifyingGlassIcon, ThickArrowUpIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 function SajeonSearch() {
   return (
-    <form className="flex flex-row items-end justify-center gap-2">
-      <label className="flex max-w-md grow flex-col gap-2 text-center">
-        Sajeon
-        <Button className="md:hidden">
-          <MagnifyingGlassIcon height="12" width="12" />
+    <form className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center">
+      <label>Sajeon</label>
+      <div className="random-boy flex rounded-md border border-input bg-background px-1 py-1 ring-offset-background focus-within:ring-ring focus-within:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 focus-within:[&:has(input:focus)]:focus-within:ring-2 ">
+        <Button className="mr-1 md:hidden">
+          <MagnifyingGlassIcon height="16" width="16" />
         </Button>
-        <MagnifyingGlassIcon
-          className="hidden md:flex"
-          height="16"
-          width="16"
-        />
+        <span className="mr-1 flex hidden h-10 w-10 items-center justify-center md:flex">
+          <MagnifyingGlassIcon height="16" width="16" />
+        </span>
+
         <Input
           type="search"
+          variant="naked"
           enterKeyHint="search"
           maxLength={200}
           autoCapitalize="off"
@@ -26,8 +25,7 @@ function SajeonSearch() {
           autoCorrect="off"
           size={3}
         />
-      </label>
-      <Button className="hidden md:block">Sajeon Search</Button>
+      </div>
     </form>
   );
 }
