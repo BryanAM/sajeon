@@ -7,8 +7,8 @@ function SajeonSearch() {
   return (
     <form className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center">
       <label
-        htmlFor="sajeon-search-input"
-        className="bg-gradient-to-t from-neutral-900 to-neutral-700 bg-clip-text text-4xl font-extrabold text-transparent"
+        htmlFor="sajeon-search"
+        className="bg-gradient-to-t pb-3 from-neutral-900 to-neutral-700 bg-clip-text text-8xl font-extrabold text-transparent text-shadow"
       >
         Sajeon
       </label>
@@ -28,8 +28,8 @@ function SajeonSearch() {
             autoCapitalize="off"
             autoComplete="off"
             autoCorrect="off"
-            name="sajeon-search-input"
-            id="sajeon-search-input"
+            name="sajeon-search"
+            id="sajeon-search"
           />
         </div>
         <Button className="mr-1 hidden md:flex" size="lg">
@@ -41,3 +41,6 @@ function SajeonSearch() {
 }
 
 export default SajeonSearch;
+
+
+// text-shadow: 5px -4px #FFF, 1px 1px #000, 4px -4px #000, 5px -5px #000, 6px -4px #000;
