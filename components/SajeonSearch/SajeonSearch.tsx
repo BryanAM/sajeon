@@ -8,7 +8,7 @@ function SajeonSearch() {
     <form className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center">
       <label
         htmlFor="sajeon-search"
-        className="bg-gradient-to-t pb-3 from-neutral-900 to-neutral-700 bg-clip-text text-8xl font-extrabold text-transparent text-shadow"
+        className="bg-gradient-to-t pb-3 from-neutral-900 to-neutral-700 bg-clip-text text-8xl md:text-9xl font-extrabold text-transparent text-shadow"
       >
         Sajeon
       </label>
