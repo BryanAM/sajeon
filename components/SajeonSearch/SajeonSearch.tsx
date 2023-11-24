@@ -1,19 +1,14 @@
 import React from "react";
-import {
-  Text,
-  Button,
-  TextFieldInput,
-  TextFieldRoot,
-  TextFieldSlot,
-  IconButton,
-} from "@radix-ui/themes";
+import { Button } from "@/components/ui/button"
+
 
 import { MagnifyingGlassIcon, ThickArrowUpIcon } from "@radix-ui/react-icons";
 
 function SajeonSearch() {
   return (
     <form className="flex flex-row items-end justify-center gap-2">
-      <label className="flex max-w-md grow flex-col gap-2 text-center">
+      <Button>Sajeon Search</Button>
+      {/* <label className="flex max-w-md grow flex-col gap-2 text-center">
         <Text as="label" size="8">
           Sajeon
         </Text>
@@ -39,7 +34,7 @@ function SajeonSearch() {
       </label>
       <Button className="hidden md:block" size="3">
         Sajeon Search
-      </Button>
+      </Button> */}
     </form>
   );
 }
