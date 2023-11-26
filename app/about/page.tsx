@@ -20,6 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import * as Bryan from "../../assets/bryan-img.png";
 import Link from "next/link";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 
 export default function About() {
   return (
@@ -51,7 +52,8 @@ export default function About() {
             can find out more about{" "}
             <Link
               className={` ${buttonVariants({
-                variant: "link", size: "bare",
+                variant: "link",
+                size: "bare",
               })}`}
               href="/how-to"
             >
@@ -67,7 +69,8 @@ export default function About() {
             standards. Sajeon and it&apos;s components are a composite of{" "}
             <Link
               className={` ${buttonVariants({
-                variant: "link", size: "bare",
+                variant: "link",
+                size: "bare",
               })}`}
               href="https://www.radix-ui.com/primitives"
             >
@@ -76,7 +79,8 @@ export default function About() {
             ,{" "}
             <Link
               className={` ${buttonVariants({
-                variant: "link", size: "bare",
+                variant: "link",
+                size: "bare",
               })}`}
               href="https://ui.shadcn.com"
             >
@@ -114,33 +118,75 @@ export default function About() {
         <Card className="flex-1">
           <CardHeader>
             <Avatar>
-              <AvatarImage src="/assets/bryan-img.png" alt="@shadcn" />
+              <AvatarImage src="/assets/bryan-img.png" alt="@bryanam" />
               <AvatarFallback>BA</AvatarFallback>
             </Avatar>
             <CardTitle>Bryan Aument</CardTitle>
             <CardDescription>Front End / Design</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>I build user focused web tools and applications. I&apos;m learning Korean and Japanese, enjoy travel, connecting with people, and a solid cup of coffee sauce.</p>
+            <p>
+              I build user focused web tools and applications. I&apos;m learning
+              Korean and Japanese, enjoy travel, connecting with people, and a
+              solid cup of coffee sauce.
+            </p>
           </CardContent>
           <CardFooter>
-            <p>Card Footer & links</p>
+            <ul className="flex">
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://www.linkedin.com/in/bryanaument/"
+                >
+                  <LinkedInLogoIcon />
+                  <span className="px-2">Linkedin</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://github.com/BryanAM"
+                >
+                  <GitHubLogoIcon />
+                  <span className="px-2">Github</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://itsbryan.me"
+                >
+                  <span className="px-2">@itsbryan</span>
+                </Link>
+              </li>
+            </ul>
           </CardFooter>
         </Card>
         <Card className="flex-1">
           <CardHeader>
             <Avatar>
-              <AvatarImage src="/assets/nathan-img.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src="/assets/nathan-img.png" alt="@knightxthyme" />
+              <AvatarFallback>NK</AvatarFallback>
             </Avatar>
             <CardTitle>Nathan Knight</CardTitle>
             <CardDescription>Backend / Dev Ops</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Hendrerit gravida rutrum quisque non tellus orci ac. Leo in vitae turpis massa sed.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Hendrerit gravida rutrum quisque non tellus orci ac. Leo in vitae
+              turpis massa sed.
+            </p>
           </CardContent>
           <CardFooter>
-            <p>Card Footer & links</p>
+           
           </CardFooter>
         </Card>
       </div>
