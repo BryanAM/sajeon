@@ -70,7 +70,7 @@ module.exports = {
         },
       },
       textShadow: {
-        DEFAULT: "5px -4px hsl(var(--background)), 1px 1px hsl(var(--foreground)), 4px -4px hsl(var(--foreground)), 5px -5px hsl(var(--foreground)), 6px -4px hsl(var(--foreground))",
+        DEFAULT: "5px -4px hsl(var(--accent)), 1px 1px hsl(var(--accent-foreground)), 4px -4px hsl(var(--accent-foreground)), 5px -5px hsl(var(--accent-foreground)), 6px -4px hsl(var(--accent-foreground))",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
