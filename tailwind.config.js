@@ -69,13 +69,13 @@ module.exports = {
           to: { height: 0 },
         },
       },
-      textShadow: {
-        DEFAULT: "5px -4px hsl(var(--accent)), 1px 1px hsl(var(--accent-foreground)), 4px -4px hsl(var(--accent-foreground)), 5px -5px hsl(var(--accent-foreground)), 6px -4px hsl(var(--accent-foreground))",
-        inverted: "5px -4px hsl(var(--primary)), 1px 1px hsl(var(--secondary)), 4px -4px hsl(var(--secondary)), 5px -5px hsl(var(--secondary)), 6px -4px hsl(var(--secondary))",
-      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      textShadow: {
+        DEFAULT: "5px -4px hsl(var(--accent)), 1px 1px hsl(var(--accent-foreground)), 4px -4px hsl(var(--accent-foreground)), 5px -5px hsl(var(--accent-foreground)), 6px -4px hsl(var(--accent-foreground))",
+        inverted: "5px -4px hsl(var(--primary)), 1px 1px hsl(var(--secondary)), 4px -4px hsl(var(--secondary)), 5px -5px hsl(var(--secondary)), 6px -4px hsl(var(--secondary))",
       },
     },
   },
