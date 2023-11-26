@@ -189,7 +189,17 @@ export default function About() {
            
           </CardFooter>
         </Card>
+       
       </div>
+      <h2>
+        {" "}
+        <SajeonTitle
+          text="Buit With"
+          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
+        />
+        <p>introduction thank you</p>
+        popovers and attributions 
+      </h2>
     </>
   );
 }
