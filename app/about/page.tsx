@@ -192,9 +192,17 @@ export default function About() {
           className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
         />
       </h2>
-      <p>Sajeon was made possible thanks to the following tools and creators</p>
+      <p>Sajeon was made possible thanks to the following tools and creators.</p>
       <BuiltWithCards />
      
+      <h2>
+        {" "}
+        <SajeonTitle
+          text="Collaborate With Us"
+          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
+        />
+      </h2>
+      <p>We are constantly looking to improving Sajeon, the data quality, and quantity. If you think you&apos;ll be able to assist in building out or improving the Korean / English langauage corpus, contact us with a short description on how you can help and your background with Korean.</p>
     </>
   );
 }
