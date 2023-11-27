@@ -129,7 +129,7 @@ export default function About() {
             </p>
           </CardContent>
           <CardFooter>
-            <ul className="flex">
+            <ul className="flex flex-wrap">
               <li>
                 <Link
                   className={` ${buttonVariants({
@@ -188,7 +188,7 @@ export default function About() {
       <h2>
         {" "}
         <SajeonTitle
-          text="Buit With"
+          text="Built With"
           className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
         />
       </h2>
@@ -198,7 +198,7 @@ export default function About() {
       <h2>
         {" "}
         <SajeonTitle
-          text="Collaborate With Us"
+          text="Join Us"
           className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
         />
       </h2>
