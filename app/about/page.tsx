@@ -1,13 +1,14 @@
 import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
-import React from "react";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { buttonVariants } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -16,11 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import * as Bryan from "../../assets/bryan-img.png";
-import Link from "next/link";
-import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import BuiltWithCards from "./built-with-cards";
 
 export default function About() {
   return (
@@ -43,7 +40,7 @@ export default function About() {
       </h2>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
-          <AccordionTrigger>User Experience (UX)</AccordionTrigger>
+          <AccordionTrigger>User Experience</AccordionTrigger>
           <AccordionContent>
             We are building Sajeon to have an exceptional user experience. Not
             only are we building Sajeon to be responsive, adapting from mobile
@@ -185,11 +182,8 @@ export default function About() {
               turpis massa sed.
             </p>
           </CardContent>
-          <CardFooter>
-           
-          </CardFooter>
+          <CardFooter></CardFooter>
         </Card>
-       
       </div>
       <h2>
         {" "}
@@ -197,9 +191,10 @@ export default function About() {
           text="Buit With"
           className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
         />
-        <p>introduction thank you</p>
-        popovers and attributions 
       </h2>
+      <p>Sajeon was made possible thanks to the following tools and creators</p>
+      <BuiltWithCards />
+     
     </>
   );
 }
