@@ -1,0 +1,17 @@
+.animate-loop {
+  animation: slidein;
+  animation-duration: 100s;
+  animation-timing-function: linear;
+  width:fit-content;
+  animation-iteration-count: infinite;  
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-90%);
+  }
+}

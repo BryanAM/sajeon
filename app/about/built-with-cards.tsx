@@ -11,7 +11,7 @@ import {
 
 export default function BuiltWithCards() {
   return (
-    <div className="flex  flex-wrap gap-6 p-8 bg-accent rounded-md">
+    <div className="flex  flex-wrap gap-6 p-8 bg-accent rounded-md border-dashed border-2 border-foreground">
     <HoverCard>
       <HoverCardTrigger asChild>
         <Link
