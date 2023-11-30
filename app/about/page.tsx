@@ -20,6 +20,7 @@ import {
 import BuiltWithCards from "./built-with-cards";
 import { korean_data } from "./korean_data";
 import "./about.css";
+import { TwitterIcon } from "lucide-react";
 
 export default function About() {
   return (
@@ -114,7 +115,7 @@ export default function About() {
         />
       </h2>
       <div className="flex flex-col justify-between gap-8 sm:flex-row">
-        <Card className="flex-1">
+        <Card className="flex flex-1 flex-col justify-between">
           <CardHeader>
             <Avatar>
               <AvatarImage src="/assets/bryan-img.png" alt="@bryanam" />
@@ -138,6 +139,8 @@ export default function About() {
                     variant: "link",
                   })}`}
                   href="https://www.linkedin.com/in/bryanaument/"
+                  target="_blank"
+                  rel="noopener"
                 >
                   <LinkedInLogoIcon />
                   <span className="px-2">Linkedin</span>
@@ -149,6 +152,8 @@ export default function About() {
                     variant: "link",
                   })}`}
                   href="https://github.com/BryanAM"
+                  target="_blank"
+                  rel="noopener"
                 >
                   <GitHubLogoIcon />
                   <span className="px-2">Github</span>
@@ -160,6 +165,8 @@ export default function About() {
                     variant: "link",
                   })}`}
                   href="https://itsbryan.me"
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="px-2">@itsbryan</span>
                 </Link>
@@ -167,24 +174,75 @@ export default function About() {
             </ul>
           </CardFooter>
         </Card>
-        <Card className="flex-1">
+        <Card className="flex flex-1 flex-col justify-between">
           <CardHeader>
             <Avatar>
               <AvatarImage src="/assets/nathan-img.png" alt="@knightxthyme" />
               <AvatarFallback>NK</AvatarFallback>
             </Avatar>
             <CardTitle>Nathan Knight</CardTitle>
-            <CardDescription>Backend / Dev Ops</CardDescription>
+            <CardDescription>Fullstack / Software Consultant</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Hendrerit gravida rutrum quisque non tellus orci ac. Leo in vitae
-              turpis massa sed.
-            </p>
+            <p>Language and music lover. Technology and science enthusiast.</p>
           </CardContent>
-          <CardFooter></CardFooter>
+          <CardFooter>
+            <ul className="flex flex-wrap">
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://www.linkedin.com/in/nathan-d-knight/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <LinkedInLogoIcon />
+                  <span className="px-2">Linkedin</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://github.com/knightxthyme"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <GitHubLogoIcon />
+                  <span className="px-2">Github</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={` ${buttonVariants({
+                    variant: "link",
+                  })}`}
+                  href="https://twitter.com/ndknight"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <text
+                      x="4"
+                      y="16"
+                      font-family="Arial"
+                      font-size="16"
+                      fill="black"
+                    >
+                      𝕏
+                    </text>
+                  </svg>
+                  <span className="">@ndknight</span>
+                </Link>
+              </li>
+            </ul>
+          </CardFooter>
         </Card>
       </div>
       <h2>
