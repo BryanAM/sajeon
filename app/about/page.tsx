@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/card";
 import BuiltWithCards from "./built-with-cards";
 import { korean_data } from "./korean_data";
-import './about.css';
+import "./about.css";
 
 export default function About() {
   return (
@@ -212,17 +212,18 @@ export default function About() {
         improving the Korean / English langauage corpus, contact us with a short
         description on how you can help and your background with Korean.
       </p>
-      <section className="mt-12 block truncate whitespace-nowrap bg-primary pb-4 pt-4 rounded-sm">
+      <section className="mt-12 block truncate whitespace-nowrap rounded-sm bg-primary pb-4 pt-4">
         <div className="animate-loop">
-        {korean_data.map((word) => (
-          <p
-            className="inline-block pl-2 pr-2 text-2xl font-bold text-background"
-            key={word}
-          >
-            {word}<span className="ml-4">❀</span>
-          </p>
-        ))}
-        </div>     
+          {korean_data.map((word) => (
+            <p
+              className="inline-block pl-2 pr-2 text-2xl font-bold text-background"
+              key={word}
+            >
+              {word}
+              <span className="ml-4">❀</span>
+            </p>
+          ))}
+        </div>
       </section>
     </>
   );
