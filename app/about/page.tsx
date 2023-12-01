@@ -122,7 +122,7 @@ export default function About() {
               <AvatarFallback>BA</AvatarFallback>
             </Avatar>
             <CardTitle>Bryan Aument</CardTitle>
-            <CardDescription>Front End / Design</CardDescription>
+            <CardDescription>Fullstack / Design</CardDescription>
           </CardHeader>
           <CardContent>
             <p>
