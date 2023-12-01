@@ -8,6 +8,8 @@ export default function HowTo() {
         How to use{" "}
         <SajeonTitle text="Sajeon" className="inline-block" />
       </h1>
+
+      <p>Get started on how to use Sajeon to search.</p>
     </>
   );
 }
