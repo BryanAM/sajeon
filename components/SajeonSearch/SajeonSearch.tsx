@@ -13,7 +13,7 @@ function SajeonSearch() {
         </label>
         <div className="flex items-center gap-2">
           <div className="flex grow rounded-md border border-input bg-background px-1 py-1 ring-offset-background focus-within:ring-ring focus-within:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 focus-within:[&:has(input:focus)]:focus-within:ring-2 ">
-            <Button className="mr-1 md:hidden">
+            <Button className="mr-1 md:hidden" type="submit">
               <MagnifyingGlassIcon height="16" width="16" />
             </Button>
             <span className="mr-1 hidden h-10 w-10 items-center justify-center md:flex">
@@ -31,7 +31,7 @@ function SajeonSearch() {
               id="sajeon-search"
             />
           </div>
-          <Button className="mr-1 hidden md:flex" size="lg">
+          <Button className="mr-1 hidden md:flex" size="lg" type="submit">
             Search
           </Button>
         </div>
