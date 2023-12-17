@@ -231,7 +231,7 @@ export default function About() {
                     <text
                       x="4"
                       y="16"
-                      font-size="16"
+                      fontSize="16"
                       fill="hsl(var(--foreground))"
                     >
                       𝕏
