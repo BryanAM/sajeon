@@ -7,8 +7,12 @@ import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sajeon",
-  description: "Sleek and easy to use online Korean dictionary.",
+  title: "Korean English Dictionary Search",
+  description: "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  openGraph: {
+    images: ['/api/og'],
+  },
+
 };
 
 export default function RootLayout({
