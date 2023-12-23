@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
           <img
             width={50}
             height={50}
-            src="http://localhost:3000/assets/opengraph-icon.png"
+            src={`${process.env.BASE_URL}/assets/opengraph-icon.png`}
             alt="Sajeon a Korean English Dictionary"
           />
         </div>
