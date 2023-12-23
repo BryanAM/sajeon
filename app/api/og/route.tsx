@@ -8,9 +8,7 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   // Extract title from query parameters
   const { searchParams } = req.nextUrl;
-  const postTitle = searchParams.get("title");
   const postDescription = searchParams.get("description");
-  console.log("post", postDescription);
 
   // Fetch the Outfit font from the specified URL
   const interSemiBold = fetch(

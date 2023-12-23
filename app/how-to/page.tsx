@@ -1,5 +1,17 @@
 import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
 import React from "react";
+import type { Metadata } from "next";
+
+
+
+export const metadata: Metadata = {
+  title: "Korean English Dictionary Search",
+  description: "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  openGraph: {
+    images: ['/api/og'],
+  },
+
+};
 
 export default function HowTo() {
   return (
