@@ -8,15 +8,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
-  description: "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  description:
+    "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
   twitter: {
     // shows large image on twitter
-    card: 'summary_large_image'
+    card: "summary_large_image",
   },
   openGraph: {
-    images: ['/api/og'],
+    images: ["/api/og"],
   },
-
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <SajeonNavigation />
-            <div className="p-6 mt-[88px]">{children}</div>
+            <div className="mt-[88px] p-6">{children}</div>
           </ThemeProvider>
         </div>
       </body>

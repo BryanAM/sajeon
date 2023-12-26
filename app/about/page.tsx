@@ -22,12 +22,12 @@ import BuiltWithCards from "./built-with-cards";
 import { korean_data } from "./korean_data";
 import "./about.css";
 
-
 export const metadata: Metadata = {
   title: "About Sajeon - Easy and Intuitive Korean Dictionary",
-  description: "About Sajeon Search - a sleek and intuitive online Korean and English Dictionary.",
+  description:
+    "About Sajeon Search - a sleek and intuitive online Korean and English Dictionary.",
   openGraph: {
-    images: ['/api/og?description=about+sajeon+search'],
+    images: ["/api/og?description=about+sajeon+search"],
   },
 };
 
