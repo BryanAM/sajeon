@@ -8,7 +8,7 @@ function SajeonSearch() {
   return (
     <search>
       <form className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center">
-        <label htmlFor="sajeon-search">
+        <label htmlFor="search">
           <SajeonTitle text="Sajeon" />
         </label>
         <div className="flex items-center gap-2">
@@ -27,8 +27,8 @@ function SajeonSearch() {
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              name="sajeon-search"
-              id="sajeon-search"
+              name="search"
+              id="search"
             />
           </div>
           <Button className="mr-1 hidden md:flex" size="lg" type="submit">

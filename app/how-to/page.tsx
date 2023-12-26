@@ -5,12 +5,11 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Korean English Dictionary Search",
-  description: "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  title: "How to Use Sajeon - Easy and Intuitive Korean Dictionary",
+  description: "Learn how to use Sajeon Search - a sleek and intuitive online Korean and English Dictionary.",
   openGraph: {
-    images: ['/api/og'],
+    images: ['/api/og?description=how+to+use+sajeon'],
   },
-
 };
 
 export default function HowTo() {

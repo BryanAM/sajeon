@@ -7,10 +7,14 @@ import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Search for Korean and English words with Sajeon Dictionary",
+  title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
   description: "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  twitter: {
+    // shows large image on twitter
+    card: 'summary_large_image'
+  },
   openGraph: {
-    images: ['/api/og?description='],
+    images: ['/api/og'],
   },
 
 };

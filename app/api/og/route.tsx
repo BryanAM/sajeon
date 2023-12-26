@@ -8,7 +8,9 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   // Extract title from query parameters
   const { searchParams } = req.nextUrl;
-  const postDescription = searchParams.get("description");
+  const _description = searchParams.get("description");
+  const postDescription =
+    _description && _description[0].toUpperCase() + _description.substring(1);
 
   // Fetch the Outfit font from the specified URL
   const interSemiBold = fetch(
@@ -72,7 +74,7 @@ export async function GET(req: NextRequest) {
             whiteSpace: "pre-wrap",
           }}
         >
-          An online Korean English dictionary
+          { postDescription || "An online Korean English dictionary" }
           <img
             width={50}
             height={50}
