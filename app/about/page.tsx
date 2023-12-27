@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <h1 className="pb-3 text-7xl font-extrabold text-transparent text-shadow-inverted md:text-9xl">
+      <h1 className="pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
         Studying Korean made simple{" "}
         <SajeonTitle text="Sajeon" className="inline-block" />
       </h1>

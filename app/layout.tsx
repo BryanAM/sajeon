@@ -7,15 +7,17 @@ import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
   description:
     "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+  keywords: ["korean dictionary", "korean english dictionary", "study korean", "learn korean", "korean words"],
+  metadataBase: new URL(`${process.env.BASE_URL}`),
+  openGraph: {
+    images: ["/api/og"],
+  },
+  title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
   twitter: {
     // shows large image on twitter
     card: "summary_large_image",
-  },
-  openGraph: {
-    images: ["/api/og"],
   },
 };
 
