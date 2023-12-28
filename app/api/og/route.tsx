@@ -8,16 +8,16 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   // Extract title from query parameters
   const { searchParams } = req.nextUrl;
-  const _description = searchParams.get("description");
-  const postDescription =
+  const _description: string | null = searchParams.get("description");
+  const postDescription: string | null =
     _description && _description[0].toUpperCase() + _description.substring(1);
 
   // Fetch the Outfit font from the specified URL
-  const interSemiBold = fetch(
+  const interSemiBold: Promise<ArrayBuffer> = fetch(
     new URL("../../../public/fonts/Inter-Bold.ttf", import.meta.url),
   ).then((res) => res.arrayBuffer());
 
-  const fontData = await interSemiBold;
+  const fontData: ArrayBuffer = await interSemiBold;
 
   // Create an ImageResponse with dynamic content
   return new ImageResponse(
