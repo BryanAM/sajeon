@@ -1,5 +1,6 @@
 import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
 import Link from "next/link";
+import { Metadata } from "next";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
@@ -20,12 +21,20 @@ import {
 import BuiltWithCards from "./built-with-cards";
 import { korean_data } from "./korean_data";
 import "./about.css";
-import { TwitterIcon } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Sajeon - Easy and Intuitive Korean Dictionary",
+  description:
+    "About Sajeon Search - a sleek and intuitive online Korean and English Dictionary.",
+  openGraph: {
+    images: ["/api/og?description=about+sajeon+search"],
+  },
+};
 
 export default function About() {
   return (
     <>
-      <h1 className="pb-3 text-7xl font-extrabold text-transparent text-shadow-inverted md:text-9xl">
+      <h1 className="pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
         Studying Korean made simple{" "}
         <SajeonTitle text="Sajeon" className="inline-block" />
       </h1>
@@ -231,7 +240,7 @@ export default function About() {
                     <text
                       x="4"
                       y="16"
-                      font-size="16"
+                      fontSize="16"
                       fill="hsl(var(--foreground))"
                     >
                       𝕏

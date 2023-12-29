@@ -1,10 +1,10 @@
-'use client';
 import SajeonSearch from "@/components/SajeonSearch/SajeonSearch";
+import { formAction } from "@/app/actions";
 
 export default function Home() {
   return (
     <main>
-      <SajeonSearch />
+      <SajeonSearch formAction={formAction}/>
     </main>
   )
 }
