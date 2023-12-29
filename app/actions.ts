@@ -11,9 +11,11 @@ import { redirect } from 'next/navigation'
 export async function formAction(formData: FormData) {
   // do something with the query if we need to on the backend like tally frequency
   const _searchQuery: FormDataEntryValue | null = formData.get("search");
-  const queryString = String(_searchQuery);
+  const queryString = String(_searchQuery).trim();
 
   // Navigate to the new post page
-  // EncodeURIComponent to handle ALL special characters e.g. 
-  redirect(`/search/${encodeURIComponent(queryString)}`)
+  // EncodeURIComponent to handle ALL special characters e.g. " ; @" 
+  if(queryString) {
+    redirect(`/search/${encodeURIComponent(queryString)}`)
+  }
 }
