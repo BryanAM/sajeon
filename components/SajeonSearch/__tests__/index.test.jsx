@@ -6,7 +6,7 @@ describe('Sajeon Title', () => {
   it('renders with text', () => {
     const results = render(<SajeonSearch />)
 
-    const element = results.container.querySelector('#sajeon-search');
+    const element = results.container.querySelector('#search');
     expect(element).toBeInTheDocument();
   });
 });
