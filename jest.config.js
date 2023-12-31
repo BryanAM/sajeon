@@ -7,6 +7,10 @@ module.exports = {
     '!**/*.d.ts',
     '!**/node_modules/**',
   ],
+  modulePathIgnorePatterns: [
+    "/e2e/",
+    "/tests-examples/"
+  ],
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */

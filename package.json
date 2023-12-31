@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "test-e2e": "npm run build && (npm run start & npm run playwrite)",
+    "playwrite": "osascript -e 'tell application \"Terminal\" to do script \"cd '$(pwd)' && npx playwright test\"'"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
@@ -36,6 +38,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "babel-jest": "^29.7.0",
