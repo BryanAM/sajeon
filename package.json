@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "jest",
     "test-e2e": "npm run build && (npm run start & npm run playwrite)",
-    "playwrite": "osascript -e 'tell application \"Terminal\" to do script \"cd '$(pwd)' && npx playwright test\"'"
+    "playwrite": "osascript -e 'tell application \"Terminal\" to do script \"cd '$(pwd)' && npx playwright test\"'",
+    "test:all": "npm run test && npm run playwrite"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",

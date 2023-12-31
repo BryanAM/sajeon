@@ -19,3 +19,6 @@ To run  unit tests run the command
 
 To run e2e tests run the command. This command will run three, build, start and open a new terminal to run the playwrite tests.
 `npm run test-e2e`
+
+Or, you can run all testing with the following command 
+`npm run test:all`
