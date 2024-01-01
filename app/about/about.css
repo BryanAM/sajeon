@@ -1,6 +1,6 @@
 .animate-loop {
   animation: slidein;
-  animation-duration: 100s;
+  animation-duration: 300s;
   animation-timing-function: linear;
   width:fit-content;
   animation-iteration-count: infinite;  
