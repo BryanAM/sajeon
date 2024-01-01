@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
+import SajeonFooter from "@/components/SajeonFooter/SajeonFooter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +39,7 @@ export default function RootLayout({
           >
             <SajeonNavigation />
             <div className="mt-[88px] p-6">{children}</div>
+            <SajeonFooter />
           </ThemeProvider>
         </div>
       </body>
