@@ -241,7 +241,7 @@ export default function About() {
                       x="4"
                       y="16"
                       fontSize="16"
-                      fill="hsl(var(--foreground))"
+                      fill="var(--foreground)"
                     >
                       𝕏
                     </text>
