@@ -22,7 +22,7 @@ test('toggles dark theme when clicked', async ({ page }) => {
   const menuButton = page.getByText('Dark');
   await menuButton.click();
   const htmlTag = page.locator('html');
-  await expect(htmlTag).toHaveClass('dark')
+  await expect(htmlTag).toHaveClass('min-h-full relative flex flex-col dark')
 });
 
 test('toggles light theme when clicked', async ({ page }) => {
@@ -33,6 +33,6 @@ test('toggles light theme when clicked', async ({ page }) => {
   const menuButton = page.getByText('Light');
   await menuButton.click();
   const htmlTag = page.locator('html');
-  await expect(htmlTag).toHaveClass('light')
+  await expect(htmlTag).toHaveClass('min-h-full relative flex flex-col light')
 });
 
