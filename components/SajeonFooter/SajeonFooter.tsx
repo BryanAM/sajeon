@@ -1,5 +1,4 @@
 import React from "react";
-import SajeonTitle from "../SajeonTitle/SajeonTitle";
 
 function SajeonFooter() {
   return (
