@@ -50,7 +50,6 @@ function SajeonClipboardButton({
       </PopoverContent>
       <PopoverTrigger asChild>
         <Button
-     
           variant="outline"
           title="Copy to clipboard"
           size="icon"
