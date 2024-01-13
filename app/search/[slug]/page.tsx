@@ -5,7 +5,20 @@ import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 
 // TEMP MOCK DATA
 import { dataMock } from "@/__mocks__/dataMock";
-export default async function Search({ params }: { params: { slug: string } }) {
+import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
+
+
+type SearchProps = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] }
+}
+export default async function Search({ params, searchParams }: SearchProps) {
+
+  // pretend fetch to database
+  const dataFetchResults = dataMock;
+  console.log(searchParams);
+  
+
   return (
     <main>
       <SajeonSearch
@@ -14,9 +27,10 @@ export default async function Search({ params }: { params: { slug: string } }) {
       />
       <section className="mt-4 max-w-xl m-auto">
         <h2 className="mb-4 text-2xl font-semibold">Results</h2>
-        {dataMock.map((data) => (
+        {dataFetchResults.slice(0, 10).map((data) => (
            <SajeonVocabCard key={data.ID} data={data} />
         ))}
+        <SajeonPagination currentPage={searchParams} pages={Math.ceil(dataFetchResults.length / 10)}/>
       </section>
     </main>
   );

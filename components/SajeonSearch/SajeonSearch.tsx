@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
 
 function SajeonSearch({formAction, inputValue}: any) {
-  const [searchValue, setSearchValue] = useState(inputValue);
+  const [searchValue, setSearchValue] = useState(inputValue? inputValue : '');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
     setSearchValue(event.target.value);
