@@ -14,6 +14,7 @@ type SearchProps = {
 export default async function Search({ params, searchParams }: SearchProps) {
   // pretend fetch to database
   const dataFetchResults = dataMock;
+  const ITEMS_PER_PAGE = 10;
   function getOffset(): number {
     // not on the first page
     if (Object.hasOwn(searchParams, "page")) {
@@ -33,13 +34,13 @@ export default async function Search({ params, searchParams }: SearchProps) {
       <section className="m-auto mt-4 max-w-xl">
         <h2 className="mb-4 text-2xl font-semibold">Results</h2>
         {dataFetchResults
-          .slice(getOffset() * 10, getOffset() * 10 + 10)
+          .slice(getOffset() * ITEMS_PER_PAGE, getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE)
           .map((data) => (
             <SajeonVocabCard key={data.ID} data={data} />
           ))}
         <SajeonPagination
           currentPage={searchParams}
-          pages={Math.ceil(dataFetchResults.length / 10)}
+          pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
         />
       </section>
     </main>
