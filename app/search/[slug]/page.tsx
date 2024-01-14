@@ -13,7 +13,7 @@ type SearchProps = {
 };
 export default async function Search({ params, searchParams }: SearchProps) {
   // pretend fetch to database
-  const dataFetchResults = dataMock;
+  const dataFetchResults = dataMock.slice(0, 31);
   const ITEMS_PER_PAGE = 10;
   function getOffset(): number {
     // not on the first page

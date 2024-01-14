@@ -100,6 +100,10 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
     return !isLastPage() && getCurrentLayer() < getTotalLayers();
   }
 
+  function displayEllipsisBefore(): boolean {
+    return isLastPage() && pages > 3;
+  }
+
   return (
     <Pagination>
       <PaginationContent>
@@ -110,6 +114,7 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
           href={`?page=${getPreviousPage()}`}
           aria-disabled={isFirstPage()}
         />
+        {displayEllipsisBefore() && <PaginationEllipsis />}
         {Array.from(
           { length: Math.min(pages, 3) },
           (_, index: number) => getAdjustedStartPage() + index + 1,
