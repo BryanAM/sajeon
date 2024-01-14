@@ -77,22 +77,23 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
       return 0;
     }
 
-    // easy case all even numbers so we want to say offsets should be 0, 3, 6 etc...
-    const easyStartOffset = (getCurrentLayer() - 1) * 3;
+    // easy case all even numbers so we want to say offsets should be 0, 3, 6, 9 etc...
+    const evenOffset = (getCurrentLayer() - 1) * 3;
 
     // if current layer is the last layer, special behavior when we have dangling pages
     if (getCurrentLayer() === getTotalLayers()) {
       // Calculate the potential last page of the current layer
-      const potentialLastPageOfLayer = easyStartOffset + ITEMS_PER_LAYER;
+      // e.g. if 7 is the last "actual" page the last potential is "9"
+      const potentialLastPageOfLayer = evenOffset + ITEMS_PER_LAYER;
 
       // Calculate how many pages we need to backtrack if the current page is in the last layer
       const backtrack =
         potentialLastPageOfLayer > pages ? potentialLastPageOfLayer - pages : 0;
 
       // Adjust the start page for the last layer
-      return easyStartOffset - backtrack;
+      return evenOffset - backtrack;
     } else {
-      return easyStartOffset;
+      return evenOffset;
     }
   }
 
