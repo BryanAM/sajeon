@@ -14,8 +14,6 @@ type SajeonPaginationProps = {
 };
 
 function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
-
-
   const ITEMS_PER_LAYER: number = 3;
   const isLastPage = () => +currentPage.page === pages;
   const isFirstPage = () => +currentPage.page === 1 || !+currentPage.page;
@@ -43,9 +41,9 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   }
 
   /**
-   * 
+   *
    * @returns total possible layers
-   * e.g. 7 pages = 3 layers 
+   * e.g. 7 pages = 3 layers
    * 1, 2, 3
    * 4, 5, 6
    * 7 ....
@@ -54,17 +52,16 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
     return Math.ceil(pages / 3);
   }
 
-    /**
+  /**
    *
    * @returns current layer number
    *  pages 1, 2, 3 = layer 1
    *  pages 4, 5, 6 = layer 2
    *  pages 7, 8, 9 = layer 3
    */
-    function getCurrentLayer(): number {
-      return Math.floor((getCurrentPage() - 1) / 3) + 1;
-    }
-
+  function getCurrentLayer(): number {
+    return Math.floor((getCurrentPage() - 1) / 3) + 1;
+  }
 
   /**
    *
@@ -80,13 +77,24 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
       return 0;
     }
 
-    const startOffset = (getCurrentLayer() - 1) * 3;
+    // easy case all even numbers so we want to say offsets should be 0, 3, 6 etc...
+    const easyStartOffset = (getCurrentLayer() - 1) * 3;
 
+    // if current layer is the last layer, special behavior when we have dangling pages
+    if (getCurrentLayer() === getTotalLayers()) {
+      // Calculate the potential last page of the current layer
+      const potentialLastPageOfLayer = easyStartOffset + ITEMS_PER_LAYER;
 
-    return startOffset;
+      // Calculate how many pages we need to backtrack if the current page is in the last layer
+      const backtrack =
+        potentialLastPageOfLayer > pages ? potentialLastPageOfLayer - pages : 0;
+
+      // Adjust the start page for the last layer
+      return easyStartOffset - backtrack;
+    } else {
+      return easyStartOffset;
+    }
   }
-
-
 
   function displayEllipsisAfter(): boolean {
     return !isLastPage() && getCurrentLayer() < getTotalLayers();
