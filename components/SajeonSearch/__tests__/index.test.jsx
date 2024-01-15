@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, getByText, queryByRole, render, screen, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import SajeonSearch from '../SajeonSearch';
 
 describe('Sajeon Title', () => {
