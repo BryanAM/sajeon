@@ -15,16 +15,16 @@ type SajeonPaginationProps = {
 
 function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   const ITEMS_PER_LAYER: number = 3;
-  const isLastPage = () => +currentPage.page === pages;
-  const isFirstPage = () => +currentPage.page === 1 || !+currentPage.page;
+  const isLastPage = () => Number(currentPage.page) === pages;
+  const isFirstPage = () => Number(currentPage.page) === 1 || !Number(currentPage.page);
 
   function getCurrentPage(): number {
-    return Object.hasOwn(currentPage, "page") ? +currentPage.page : 1;
+    return Object.hasOwn(currentPage, "page") ? Number(currentPage.page) : 1;
   }
 
   function getNextPage(): string {
     if (Object.hasOwn(currentPage, "page")) {
-      const currPage: number = +currentPage.page;
+      const currPage: number = Number(currentPage.page);
       return currPage < pages ? String(currPage + 1) : String(pages);
     } else {
       return "2";
@@ -33,7 +33,7 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
 
   function getPreviousPage(): string {
     if (Object.hasOwn(currentPage, "page")) {
-      const currPage: number = +currentPage.page;
+      const currPage: number = Number(currentPage.page);
       return currPage > 1 ? String(currPage - 1) : "1";
     } else {
       return "1";
@@ -124,7 +124,7 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
             key={item}
             href={`?page=${item}`}
             isActive={
-              +currentPage.page === item || (!+currentPage.page && item === 1)
+              Number(currentPage.page) === item || (!Number(currentPage.page) && item === 1)
             }
           >
             {item}
