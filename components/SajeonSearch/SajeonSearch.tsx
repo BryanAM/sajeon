@@ -13,6 +13,27 @@ function SajeonSearch({formAction, inputValue}: any) {
     setSearchValue(event.target.value);
   }
 
+  const getSearchResults = async () => {
+    try {
+      const response = await fetch('/api/words', {
+        method: 'GET', // Assuming the endpoint is a GET request
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('API call failed');
+      }
+
+      const data = await response.json();
+      console.log(data); // Handle the response data, e.g., display the words
+    } catch (error) {
+      console.error('Error calling API:', error);
+    }
+  };
+
+
   return (
     <search>
       <form
@@ -49,7 +70,7 @@ function SajeonSearch({formAction, inputValue}: any) {
               onChange={(event) => onChange(event)}
             />
           </div>
-          <Button className="mr-1 hidden md:flex" size="lg" type="submit">
+          <Button onClick={getSearchResults} className="mr-1 hidden md:flex" size="lg" type="submit">
             Search
           </Button>
         </div>

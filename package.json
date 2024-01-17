@@ -32,6 +32,8 @@
     "eslint": "8.47.0",
     "eslint-config-next": "^14.0.1",
     "lucide-react": "^0.293.0",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
     "next": "^14.0.1",
     "next-themes": "^0.2.1",
     "postcss": "8.4.27",
