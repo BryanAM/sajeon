@@ -11,9 +11,32 @@ type SearchProps = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] };
 };
+
+
+async function getData(params) {
+  console.log('search Params', params.slug);
+  const res = await fetch(`${process.env.BASE_URL}/api/words`, {
+    method: 'GET', // Assuming the endpoint is a GET request
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+
+
 export default async function Search({ params, searchParams }: SearchProps) {
   // pretend fetch to database
-  const dataFetchResults = dataMock;
+  const dataFetchResults = await getData(params);
+
   const ITEMS_PER_PAGE = 10;
   const MIN_PAGINATION_RESULTS = dataFetchResults.length >  ITEMS_PER_PAGE;
   function getOffset(): number {

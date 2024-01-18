@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import SajeonClipboardButton from "@/components/SajeonClipboardButton/SajeonClipboardButton";
 
 function SajeonVocabCard({ data }: { data: SajeonVocabCardType }) {
-  const [baseURL, setBaseUrl] = useState<string>('');
+  const [baseURL, setBaseUrl] = useState<string>("");
 
   useEffect(() => {
     setBaseUrl(window.location.origin);
@@ -39,17 +39,19 @@ function SajeonVocabCard({ data }: { data: SajeonVocabCardType }) {
                 ))}
               </ol>
               <ul className="flex">
-                {data.pos?.map((speech) => (
-                  <li className="mx-1" key={speech}>
-                    <Badge variant="secondary">{speech}</Badge>
-                  </li>
-                ))}
+                <li className="mx-1">
+                  <Badge variant="secondary">{data.pos}</Badge>
+                </li>
               </ul>
             </div>
           </div>
 
           <div className="flex grow justify-end gap-2">
-            <SajeonClipboardButton copyData={`${baseURL}/search/${data.word}`} customMessage="Copied link!" iconType="share" />
+            <SajeonClipboardButton
+              copyData={`${baseURL}/search/${data.word}`}
+              customMessage="Copied link!"
+              iconType="share"
+            />
             <SajeonClipboardButton copyData={data.word} iconType="clipboard" />
           </div>
         </CardHeader>
