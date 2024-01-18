@@ -3,8 +3,9 @@ import { formAction } from "@/app/actions";
 import SajeonSearch from "@/components/SajeonSearch/SajeonSearch";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 
-// TEMP MOCK DATA
-import { dataMock } from "@/__mocks__/dataMock";
+import Word from "@/models/Word";
+import dbConnect from "@/lib/mongodb";
+
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 
 type SearchProps = {
@@ -14,28 +15,38 @@ type SearchProps = {
 
 
 async function getData(params) {
-  console.log('search Params', params.slug);
-  const res = await fetch(`${process.env.BASE_URL}/api/words`, {
-    method: 'GET', // Assuming the endpoint is a GET request
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
- 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+  await dbConnect();
+  try {
+    // Just a basic search of the definitions field for now
+    const query = { "definitions": params.slug };
+
+    const words = await Word.find(query).limit(10).lean(); // Updated query
+    return new Response(JSON.stringify(words), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: (error as any).message }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
   }
- 
-  return res.json()
 }
 
-
 export default async function Search({ params, searchParams }: SearchProps) {
+  // query the database
+  const data = await getData(params);
+  // await the json data
+  const words = await data.json();
   // pretend fetch to database
-  const dataFetchResults = await getData(params);
+  const dataFetchResults = words;
 
   const ITEMS_PER_PAGE = 10;
   const MIN_PAGINATION_RESULTS = dataFetchResults.length >  ITEMS_PER_PAGE;
