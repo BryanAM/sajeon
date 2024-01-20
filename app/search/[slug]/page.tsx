@@ -2,6 +2,7 @@ import React from "react";
 import { formAction } from "@/app/actions";
 import SajeonSearch from "@/components/SajeonSearch/SajeonSearch";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
+import { SajeonVocabCardType } from "../../../types/SajeonTypes";
 
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
@@ -14,7 +15,7 @@ type SearchProps = {
 };
 
 
-async function getData(params) {
+async function getData(params: SearchProps["params"]) {
   await dbConnect();
   try {
     // Just a basic search of the definitions field for now
@@ -73,7 +74,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
             getOffset() * ITEMS_PER_PAGE,
             getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
           )
-          .map((data) => (
+          .map((data: SajeonVocabCardType) => (
             <SajeonVocabCard key={data.ID} data={data} />
           ))}
 
