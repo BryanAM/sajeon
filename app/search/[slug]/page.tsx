@@ -53,6 +53,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
   if(dataFetchResults.length < 1) {
     notFound();
   }
+  
   // pretend fetch to database
   // const dataFetchResults = dataMock;
 
