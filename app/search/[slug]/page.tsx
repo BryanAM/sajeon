@@ -2,10 +2,9 @@ import React from "react";
 
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 import { SajeonVocabCardType } from "../../../types/SajeonTypes";
-
+import { dataMock } from "@/__mocks__/dataMock";
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
-
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 
 type SearchProps = {
@@ -15,9 +14,10 @@ type SearchProps = {
 
 async function getData(params: SearchProps["params"]) {
   await dbConnect();
+
   try {
     // Just a basic search of the definitions field for now
-    const query = { "definitions": params.slug };
+    const query = { definitions: params.slug };
 
     const words = await Word.find(query).limit(10).lean(); // Updated query
     return new Response(JSON.stringify(words), {
@@ -27,28 +27,34 @@ async function getData(params: SearchProps["params"]) {
       },
     });
   } catch (error) {
-    return new Response(
-      JSON.stringify({ message: (error as any).message }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
+    return new Response(JSON.stringify({ message: (error as any).message }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+    });
   }
 }
 
+const fetchData = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds delay
+  return fetch(`${process.env.BASE_URL}`);
+};
+
 export default async function Search({ params, searchParams }: SearchProps) {
   // query the database
+
   const data = await getData(params);
+
   // await the json data
   const words = await data.json();
-  // pretend fetch to database
+
   const dataFetchResults = words;
+  // pretend fetch to database
+  // const dataFetchResults = dataMock;
 
   const ITEMS_PER_PAGE = 10;
-  const MIN_PAGINATION_RESULTS = dataFetchResults.length >  ITEMS_PER_PAGE;
+  const MIN_PAGINATION_RESULTS = dataFetchResults.length > ITEMS_PER_PAGE;
   function getOffset(): number {
     // not on the first page
     if (Object.hasOwn(searchParams, "page")) {
@@ -59,6 +65,8 @@ export default async function Search({ params, searchParams }: SearchProps) {
     }
   }
 
+  fetchData();
+
   return (
     <main>
       <section className="m-auto mt-4 max-w-xl">
@@ -68,11 +76,11 @@ export default async function Search({ params, searchParams }: SearchProps) {
             getOffset() * ITEMS_PER_PAGE,
             getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
           )
-          .map((data: SajeonVocabCardType) => (
-            <SajeonVocabCard key={data.ID} data={data} />
+          .map((data: SajeonVocabCardType, index: number) => (
+            <SajeonVocabCard key={data.ID | index} data={data} />
           ))}
 
-        {MIN_PAGINATION_RESULTS  && (
+        {MIN_PAGINATION_RESULTS && (
           <SajeonPagination
             currentPage={searchParams}
             pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
