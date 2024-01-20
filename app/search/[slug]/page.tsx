@@ -1,6 +1,5 @@
 import React from "react";
-import { formAction } from "@/app/actions";
-import SajeonSearch from "@/components/SajeonSearch/SajeonSearch";
+
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 import { SajeonVocabCardType } from "../../../types/SajeonTypes";
 
@@ -13,7 +12,6 @@ type SearchProps = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] };
 };
-
 
 async function getData(params: SearchProps["params"]) {
   await dbConnect();
@@ -63,10 +61,6 @@ export default async function Search({ params, searchParams }: SearchProps) {
 
   return (
     <main>
-      <SajeonSearch
-        formAction={formAction}
-        inputValue={decodeURIComponent(params.slug)}
-      />
       <section className="m-auto mt-4 max-w-xl">
         <h2 className="mb-4 text-2xl font-semibold">Results</h2>
         {dataFetchResults

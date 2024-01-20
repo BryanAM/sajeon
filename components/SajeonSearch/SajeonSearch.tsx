@@ -5,19 +5,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
+import { useRouter } from 'next/navigation'
 
 function SajeonSearch({formAction, inputValue}: any) {
   const [searchValue, setSearchValue] = useState(inputValue? inputValue : '');
+  const router = useRouter()
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
     setSearchValue(event.target.value);
   }
 
+  const handleSubmit = () => {
+    router.push(`/search/${encodeURIComponent(searchValue.trim())}`)
+  }
 
   return (
     <search>
       <form
         action={formAction}
+        onSubmit={handleSubmit}
         className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center"
       >
         <label htmlFor="search">
