@@ -6,6 +6,7 @@ import { dataMock } from "@/__mocks__/dataMock";
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
+import { notFound } from 'next/navigation'
 
 type SearchProps = {
   params: { slug: string };
@@ -20,12 +21,12 @@ async function getData(params: SearchProps["params"]) {
     const query = { definitions: params.slug };
 
     const words = await Word.find(query).limit(10).lean(); // Updated query
-    return new Response(JSON.stringify(words), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      return new Response(JSON.stringify(words), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
   } catch (error) {
     return new Response(JSON.stringify({ message: (error as any).message }), {
       status: 500,
@@ -36,11 +37,6 @@ async function getData(params: SearchProps["params"]) {
   }
 }
 
-const fetchData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds delay
-  return fetch(`${process.env.BASE_URL}`);
-};
-
 export default async function Search({ params, searchParams }: SearchProps) {
   // query the database
 
@@ -50,6 +46,13 @@ export default async function Search({ params, searchParams }: SearchProps) {
   const words = await data.json();
 
   const dataFetchResults = words;
+
+  /**
+   * Return not-found page if we don't have results
+   */
+  if(dataFetchResults.length < 1) {
+    notFound();
+  }
   // pretend fetch to database
   // const dataFetchResults = dataMock;
 
@@ -64,8 +67,6 @@ export default async function Search({ params, searchParams }: SearchProps) {
       return 0;
     }
   }
-
-  fetchData();
 
   return (
     <main>
