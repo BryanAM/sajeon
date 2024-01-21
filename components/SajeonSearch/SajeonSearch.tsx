@@ -35,6 +35,7 @@ function SajeonSearch({formAction, inputValue}: any) {
               className="mr-1 md:hidden"
               type="submit"
               aria-label="search"
+              data-testid="search"
             >
               <MagnifyingGlassIcon height="16" width="16" />
             </Button>
@@ -56,7 +57,7 @@ function SajeonSearch({formAction, inputValue}: any) {
               onChange={(event) => onChange(event)}
             />
           </div>
-          <Button className="mr-1 hidden md:flex" size="lg" type="submit">
+          <Button className="mr-1 hidden md:flex" size="lg" type="submit" data-testid="search-desktop">
             Search
           </Button>
         </div>
