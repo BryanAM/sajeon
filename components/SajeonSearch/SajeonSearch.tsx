@@ -53,6 +53,7 @@ function SajeonSearch({formAction, inputValue}: any) {
               name="search"
               id="search"
               role="searchbox"
+              placeholder="Start typing any word"
               value={searchValue}
               onChange={(event) => onChange(event)}
             />

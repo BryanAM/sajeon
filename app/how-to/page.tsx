@@ -17,7 +17,6 @@ export default function HowTo() {
       <h1 className="pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
         How to use <span className="sajeon-branded-text">Sajeon</span>
       </h1>
-
       <p>Get started on how to use Sajeon to search.</p>
     </>
   );
