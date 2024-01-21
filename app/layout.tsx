@@ -47,8 +47,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            
             <SajeonNavigation />
-            <div className="mt-[88px] p-6  min-h-[100svh]">{children}</div>
+            <div className="mt-[88px] p-6  min-h-[100svh]">
+            {children}
+            </div>
           </ThemeProvider>
         </div>
         <SajeonFooter />

@@ -26,8 +26,8 @@ function SajeonSearch({formAction, inputValue}: any) {
         onSubmit={handleSubmit}
         className="m-auto flex max-w-xl flex-col justify-center gap-2 text-center"
       >
-        <label htmlFor="search">
-          <SajeonTitle text="Sajeon" />
+        <label className="sr-only" htmlFor="search">
+          sajeon search
         </label>
         <div className="flex items-center gap-2">
           <div className="flex grow rounded-md border border-input bg-background px-1 py-1 ring-offset-background focus-within:ring-ring focus-within:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 focus-within:[&:has(input:focus)]:focus-within:ring-2 ">

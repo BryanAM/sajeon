@@ -24,6 +24,7 @@ export async function generateMetadata({
 export default function RootLayout({ children, params }: LayoutProps) {
   return (
     <div>
+      <h1 className="sajeon-branded-text text-center mb-4">Sajeon</h1>
       <SajeonSearch
         formAction={formAction}
         inputValue={decodeURIComponent(params.slug)}

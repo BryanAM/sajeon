@@ -19,8 +19,6 @@ const TestSchema = new Schema({
   sentences: [Object],
 });
 
-const TestModel = mongoose.model('Test', TestSchema, 'testDB');
-
 // Creating a text index for all fields
 Object.keys(WordSchema.paths).forEach(function (path) {
   if (WordSchema.paths[path].instance === "String") {
@@ -28,7 +26,7 @@ Object.keys(WordSchema.paths).forEach(function (path) {
   }
 });
 
-const exportTestModule = mongoose.models.Test || TestModel;
+const exportTestModule = mongoose.models.Test ||  mongoose.model('Test', TestSchema, 'testDB');;
 const exportProdModule = mongoose.models.Word || mongoose.model("Word", WordSchema);
 
 const modelToExport = process.env.NODE_ENV === "test" 
