@@ -20,7 +20,7 @@ async function getData(params: SearchProps["params"]) {
     // Just a basic search of the definitions field for now
     const query = { definitions: params.slug };
 
-    const words = await Word.find(query).limit(10).lean(); // Updated query
+    const words = await Word.find(query).limit(100).lean(); // Updated query
       return new Response(JSON.stringify(words), {
         status: 200,
         headers: {
