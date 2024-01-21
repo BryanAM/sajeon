@@ -34,21 +34,17 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <h1 className="pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
+      <h1 className="mb-2 pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
         Studying Korean made simple{" "}
-        <SajeonTitle text="Sajeon" className="inline-block" />
+        <span className="sajeon-branded-text">Sajeon</span>
       </h1>
       <p>
         Sajeon is a user centered Korean English dictionary built by people who
         love to study language. We are building a dictionary from a language
         learner&apos;s point of view, and one that you will love.
       </p>
-      <h2>
-        {" "}
-        <SajeonTitle
-          text="Aim"
-          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
-        />
+      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+        Aim
       </h2>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
@@ -116,12 +112,8 @@ export default function About() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <h2>
-        {" "}
-        <SajeonTitle
-          text="Meet The Team"
-          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
-        />
+      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+        Meet The Team
       </h2>
       <div className="flex flex-col justify-between gap-8 sm:flex-row">
         <Card className="flex flex-1 flex-col justify-between">
@@ -237,12 +229,7 @@ export default function About() {
                     height="20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <text
-                      x="4"
-                      y="16"
-                      fontSize="16"
-                      fill="var(--foreground)"
-                    >
+                    <text x="4" y="16" fontSize="16" fill="var(--foreground)">
                       𝕏
                     </text>
                   </svg>
@@ -253,24 +240,16 @@ export default function About() {
           </CardFooter>
         </Card>
       </div>
-      <h2>
-        {" "}
-        <SajeonTitle
-          text="Built With"
-          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
-        />
+      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+        Built With
       </h2>
       <p>
         Sajeon was made possible thanks to the following tools and creators.
       </p>
       <BuiltWithCards />
 
-      <h2>
-        {" "}
-        <SajeonTitle
-          text="Join Us"
-          className="mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl"
-        />
+      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+        Join Us
       </h2>
       <p>
         We are constantly looking to improving Sajeon, the data quality, and

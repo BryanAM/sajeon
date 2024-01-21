@@ -77,6 +77,13 @@
   }
 }
 
+
+@layer components {
+  .sajeon-branded-text {
+    @apply text-shadow pb-3 text-7xl font-extrabold text-accent md:text-9xl;
+  }
+}
+
 /* need to override the dropdown menu from setting body to relative */
 body.sajeon-body {
   position: static !important;
