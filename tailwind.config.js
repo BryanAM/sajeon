@@ -40,6 +40,7 @@ module.exports = {
         muted: {
           DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)",
+          heavy: "var(--muted-heavy)",
         },
         accent: {
           DEFAULT: "var(--accent)",

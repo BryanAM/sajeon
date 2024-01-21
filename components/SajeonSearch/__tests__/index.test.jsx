@@ -2,6 +2,14 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import SajeonSearch from '../SajeonSearch';
 
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null
+    };
+  }
+}));
+
 describe('Sajeon Title', () => {
   it('renders with text', () => {
     const results = render(<SajeonSearch />)
