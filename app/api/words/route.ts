@@ -5,7 +5,6 @@ export async function GET() {
   await dbConnect();
   try {
     const words = await Word.find({}).limit(100);
-    console.log(words);
     return new Response(JSON.stringify(words, null, 2), {
       status: 200,
       headers: {
