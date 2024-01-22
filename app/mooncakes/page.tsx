@@ -1,17 +1,6 @@
 import dbConnect from "@/lib/mongodb";
 import Word from "@/models/Word";
 import { SajeonDataModelType } from "@/types/SajeonTypes";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import DataCard from "./data-card";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 
