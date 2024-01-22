@@ -24,11 +24,9 @@ async function getData() {
   }
 }
 
-
 type SearchProps = {
   searchParams: { [key: string]: string | string[] };
 };
-
 
 export default async function MoonCakes({ searchParams }: SearchProps) {
   const data = await getData();
@@ -40,10 +38,8 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
   function getOffset(): number {
     // not on the first page
     if (Object.hasOwn(searchParams, "page")) {
-   
       return Number(searchParams.page) - 1;
     } else {
-      
       // we are on the first page i.e. no paramater
       return 0;
     }
@@ -54,7 +50,7 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
       <h1 className="sajeon-branded-text  mb-4 text-center text-5xl md:text-8xl lg:text-9xl">
         Sajeon Word Wizardry 🪄
       </h1>
-      <ol className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 mb-6">
+      <ol className="mb-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {dataFetchResults
           .slice(
             getOffset() * ITEMS_PER_PAGE,
@@ -63,15 +59,13 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
           .map((word: SajeonDataModelType) => (
             <DataCard key={word._id} word={word} />
           ))}
-
-       
       </ol>
       {MIN_PAGINATION_RESULTS && (
-          <SajeonPagination
-            currentPage={searchParams}
-            pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
-          />
-        )}
+        <SajeonPagination
+          currentPage={searchParams}
+          pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+        />
+      )}
     </main>
   );
 }

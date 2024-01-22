@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { updateDatabase } from "@/app/actions";
 import { ToastButton } from "./toast-button";
 export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
   return (
@@ -36,44 +37,59 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
               select the Cancel Changes button.
             </DialogDescription>
           </DialogHeader>
-          <form>
+          <form action={updateDatabase}>
             <div className="grid gap-4 px-6 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+                <label htmlFor="_word-id" className="text-right">
+                  ID
+                </label>
+                <Input
+                  id="_word-id"
+                  name="_word-id"
+                  className="col-span-3 pointer-events-none cursor-not-allowed  text-muted-foreground" 
+                  spellCheck={false}
+                  value={word._id}
+                />
+              </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
+                <Label htmlFor="word" className="text-right">
                   Word
                 </Label>
                 <Input
-                  id="name"
+                  id="word"
+                  name="word"
                   className="col-span-3"
                   defaultValue={word.word}
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
+                <Label htmlFor="romaja" className="text-right">
                   Romaja
                 </Label>
                 <Input
-                  id="username"
+                  id="romaja"
+                  name="romaja"
                   className="col-span-3"
                   defaultValue={word.romaja}
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
+                <Label htmlFor="hanja" className="text-right">
                   Hanja
                 </Label>
                 <Input
-                  id="username"
+                  id="hanja"
                   className="col-span-3"
                   defaultValue={word.hanja}
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
+                <Label htmlFor="pos" className="text-right">
                   Part of Speech
                 </Label>
                 <Input
-                  id="username"
+                  id="pos"
+                  name="pos"
                   className="col-span-3"
                   defaultValue={word.pos}
                 />
@@ -83,13 +99,14 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                   <>
                     <Label
                       key={definition}
-                      htmlFor="username"
+                      htmlFor="definition"
                       className="text-right"
                     >
                       {`Definition ${index + 1}`}
                     </Label>
                     <Input
-                      id="username"
+                      id="definition"
+                      name="definition"
                       className="col-span-3"
                       defaultValue={definition}
                     />
@@ -99,19 +116,21 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
               <div className="grid grid-cols-4 items-center gap-4">
                 {word.sentences.map((sentence, index) => (
                   <>
-                    <Label htmlFor="username" className="text-right">
+                    <Label htmlFor={`sentence-${index + 1}`} className="text-right">
                       {`Korean Sentence ${index + 1}`}
                     </Label>
                     <Input
-                      id="username"
+                      id={`kr-sentence-${index + 1}`}
+                      name={`sentence-${index + 1}`}
                       className="col-span-3"
                       defaultValue={sentence.kr}
                     />
-                    <Label htmlFor="username" className="text-right">
+                    <Label htmlFor="english-sentence" className="text-right">
                       {`English Sentence ${index + 1}`}
                     </Label>
                     <Input
-                      id="username"
+                      id={`en-sentence-${index + 1}`}
+                      name={`sentence-${index + 1}`}
                       className="col-span-3"
                       defaultValue={sentence.en}
                     />
@@ -119,7 +138,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                 ))}
               </div>
             </div>
-          </form>
+     
           <DialogFooter className="justify-between gap-2 px-6">
             <DialogClose
               className={buttonVariants({ variant: "destructive" })}
@@ -129,6 +148,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
             </DialogClose>
             <ToastButton>Save Changes</ToastButton>
           </DialogFooter>
+          </form>
         </ScrollArea>
       </DialogContent>
     </Dialog>
