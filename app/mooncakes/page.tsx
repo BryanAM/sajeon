@@ -26,12 +26,11 @@ async function getData() {
 
 
 type SearchProps = {
-  params: { slug: string };
   searchParams: { [key: string]: string | string[] };
 };
 
 
-export default async function MoonCakes({ params, searchParams }: SearchProps) {
+export default async function MoonCakes({ searchParams }: SearchProps) {
   const data = await getData();
   const words = await data.json();
   const dataFetchResults = words;
