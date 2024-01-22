@@ -9,6 +9,17 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { SajeonDataModelType } from "@/types/SajeonTypes";
 
 import { Input } from "@/components/ui/input";
@@ -39,115 +50,137 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
           </DialogHeader>
           <form action={updateDatabase}>
             <div className="grid gap-4 px-6 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-                <label htmlFor="_word-id" className="text-right">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="_word-id" className="text-right">
                   ID
-                </label>
+                </Label>
                 <Input
                   id="_word-id"
                   name="_word-id"
-                  className="col-span-3 pointer-events-none cursor-not-allowed  text-muted-foreground" 
+                  className="pointer-events-none col-span-3 cursor-not-allowed border-0 text-muted-foreground"
                   spellCheck={false}
                   value={word._id}
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="word" className="text-right">
+              <div className="grid grid-cols-2 items-center gap-4">
+                <Label htmlFor="word" className="col-span-1 text-left">
                   Word
+                  <Input
+                    className="mt-1"
+                    id="word"
+                    name="word"
+                    defaultValue={word.word}
+                  />
                 </Label>
-                <Input
-                  id="word"
-                  name="word"
-                  className="col-span-3"
-                  defaultValue={word.word}
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="romaja" className="text-right">
+
+                <Label htmlFor="romaja" className="col-span-1 text-left">
                   Romaja
+                  <Input
+                    className="mt-1"
+                    id="romaja"
+                    name="romaja"
+                    defaultValue={word.romaja}
+                  />
                 </Label>
-                <Input
-                  id="romaja"
-                  name="romaja"
-                  className="col-span-3"
-                  defaultValue={word.romaja}
-                />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="hanja" className="text-right">
+              <div className="grid grid-cols-2 items-center gap-4">
+                <Label htmlFor="hanja" className="col-span-1 text-left">
                   Hanja
+                  <Input
+                    className="mt-1"
+                    id="hanja"
+                    defaultValue={word.hanja}
+                  />
                 </Label>
-                <Input
-                  id="hanja"
-                  className="col-span-3"
-                  defaultValue={word.hanja}
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="pos" className="text-right">
-                  Part of Speech
+                <Label htmlFor="pos" className="col-span-1 text-left">
+                  Select Part of Speech
+                  <Select defaultValue={word.pos}>
+                    <SelectTrigger className="mt-1" id="pos" name="pos">
+                      <SelectValue placeholder="Select a fruit" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Part of Speech</SelectLabel>
+                        <SelectItem value={word.pos}>{word.pos}</SelectItem>
+                        <SelectItem value="noun">Noun</SelectItem>
+                        <SelectItem value="adjective">Adjective</SelectItem>
+                        <SelectItem value="verb">Verb</SelectItem>
+                        <SelectItem value="adverb">Adverb</SelectItem>
+                        <SelectItem value="particle">Particle</SelectItem>
+                        <SelectItem value="pronoun">Pronoun</SelectItem>
+                        <SelectItem value="number">Number</SelectItem>
+                        <SelectItem value="determiner">Determiner</SelectItem>
+                        <SelectItem value="interjection">
+                          Interjection
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                 </Label>
-                <Input
-                  id="pos"
-                  name="pos"
-                  className="col-span-3"
-                  defaultValue={word.pos}
-                />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="grid grid-cols-1 items-center gap-4">
                 {word.definitions.map((definition, index) => (
                   <>
                     <Label
                       key={definition}
                       htmlFor="definition"
-                      className="text-right"
+                      className="col-span-1 text-left"
                     >
                       {`Definition ${index + 1}`}
+
+                      <Input
+                        id="definition"
+                        name="definition"
+                        className="mt-1"
+                        defaultValue={definition}
+                      />
                     </Label>
-                    <Input
-                      id="definition"
-                      name="definition"
-                      className="col-span-3"
-                      defaultValue={definition}
-                    />
                   </>
                 ))}
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="grid grid-cols-2 items-center gap-4">
                 {word.sentences.map((sentence, index) => (
                   <>
-                    <Label htmlFor={`sentence-${index + 1}`} className="text-right">
+                    <Label
+                      htmlFor={`sentence-${index + 1}`}
+                      className="col-span-1 text-left"
+                    >
                       {`Korean Sentence ${index + 1}`}
+
+                      <Input
+                        id={`kr-sentence-${index + 1}`}
+                        name={`sentence-${index + 1}`}
+                        className="mt-1"
+                        defaultValue={sentence.kr}
+                      />
                     </Label>
-                    <Input
-                      id={`kr-sentence-${index + 1}`}
-                      name={`sentence-${index + 1}`}
-                      className="col-span-3"
-                      defaultValue={sentence.kr}
-                    />
-                    <Label htmlFor="english-sentence" className="text-right">
+                    <Label
+                      htmlFor="english-sentence"
+                      className="col-span-1 text-left"
+                    >
                       {`English Sentence ${index + 1}`}
+
+                      <Input
+                        id={`en-sentence-${index + 1}`}
+                        name={`sentence-${index + 1}`}
+                        className="mt-1"
+                        defaultValue={sentence.en}
+                      />
                     </Label>
-                    <Input
-                      id={`en-sentence-${index + 1}`}
-                      name={`sentence-${index + 1}`}
-                      className="col-span-3"
-                      defaultValue={sentence.en}
-                    />
                   </>
                 ))}
               </div>
             </div>
-     
-          <DialogFooter className="justify-between gap-2 px-6">
-            <DialogClose
-              className={buttonVariants({ variant: "destructive" })}
-              type="button"
-            >
-              Cancel Changes
-            </DialogClose>
-            <ToastButton>Save Changes</ToastButton>
-          </DialogFooter>
+
+            <DialogFooter className="justify-between gap-2 px-6">
+              <DialogClose
+                className={buttonVariants({ variant: "destructive" })}
+                type="button"
+              >
+                Cancel Changes
+              </DialogClose>
+              <ToastButton>Save Changes</ToastButton>
+            </DialogFooter>
           </form>
         </ScrollArea>
       </DialogContent>
