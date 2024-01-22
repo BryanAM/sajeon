@@ -1,0 +1,89 @@
+import dbConnect from "@/lib/mongodb";
+import Word from "@/models/Word";
+import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import DataCard from "./data-card";
+import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
+
+async function getData() {
+  await dbConnect();
+  try {
+    const words = await Word.find({}).limit(1000).lean(); // Updated query
+    return new Response(JSON.stringify(words), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: (error as any).message }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+}
+
+
+type SearchProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] };
+};
+
+
+export default async function MoonCakes({ params, searchParams }: SearchProps) {
+  const data = await getData();
+  const words = await data.json();
+  const dataFetchResults = words;
+
+  const ITEMS_PER_PAGE = 24;
+  const MIN_PAGINATION_RESULTS = dataFetchResults.length > ITEMS_PER_PAGE;
+  function getOffset(): number {
+    // not on the first page
+    if (Object.hasOwn(searchParams, "page")) {
+   
+      return Number(searchParams.page) - 1;
+    } else {
+      
+      // we are on the first page i.e. no paramater
+      return 0;
+    }
+  }
+
+  return (
+    <main className="flex flex-col">
+      <h1 className="sajeon-branded-text  mb-4 text-center text-5xl md:text-8xl lg:text-9xl">
+        Sajeon Word Wizardry 🪄
+      </h1>
+      <ol className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 mb-6">
+        {dataFetchResults
+          .slice(
+            getOffset() * ITEMS_PER_PAGE,
+            getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
+          )
+          .map((word: SajeonDataModelType) => (
+            <DataCard key={word._id} word={word} />
+          ))}
+
+       
+      </ol>
+      {MIN_PAGINATION_RESULTS && (
+          <SajeonPagination
+            currentPage={searchParams}
+            pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+          />
+        )}
+    </main>
+  );
+}
