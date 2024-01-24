@@ -9,7 +9,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
-
 import {
   Select,
   SelectContent,
@@ -19,9 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { SajeonDataModelType } from "@/types/SajeonTypes";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -29,7 +26,12 @@ import { Pencil1Icon } from "@radix-ui/react-icons";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { updateDatabase } from "@/app/actions";
 import { ToastButton } from "./toast-button";
+import FormDefinitions from "./form-definitions";
+import FormSentences from "./form-sentences";
 export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
+  // Helper function to generate unique IDs
+
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -60,6 +62,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                   className="pointer-events-none col-span-3 cursor-not-allowed border-0 text-muted-foreground"
                   spellCheck={false}
                   value={word._id}
+                  readOnly
                 />
               </div>
               <div className="grid grid-cols-2 items-center gap-4">
@@ -118,58 +121,11 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                   </Select>
                 </Label>
               </div>
-              <div className="grid grid-cols-1 items-center gap-4">
-                {word.definitions.map((definition, index) => (
-                  <>
-                    <Label
-                      key={definition}
-                      htmlFor="definition"
-                      className="col-span-1 text-left"
-                    >
-                      {`Definition ${index + 1}`}
 
-                      <Input
-                        id="definition"
-                        name="definition"
-                        className="mt-1"
-                        defaultValue={definition}
-                      />
-                    </Label>
-                  </>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 items-center gap-4">
-                {word.sentences.map((sentence, index) => (
-                  <>
-                    <Label
-                      htmlFor={`sentence-${index + 1}`}
-                      className="col-span-1 text-left"
-                    >
-                      {`Korean Sentence ${index + 1}`}
-
-                      <Input
-                        id={`kr-sentence-${index + 1}`}
-                        name={`sentence-${index + 1}`}
-                        className="mt-1"
-                        defaultValue={sentence.kr}
-                      />
-                    </Label>
-                    <Label
-                      htmlFor="english-sentence"
-                      className="col-span-1 text-left"
-                    >
-                      {`English Sentence ${index + 1}`}
-
-                      <Input
-                        id={`en-sentence-${index + 1}`}
-                        name={`sentence-${index + 1}`}
-                        className="mt-1"
-                        defaultValue={sentence.en}
-                      />
-                    </Label>
-                  </>
-                ))}
-              </div>
+              <FormDefinitions word={word} />
+              <FormSentences word={word}/>
+             
+             
             </div>
 
             <DialogFooter className="justify-between gap-2 px-6">

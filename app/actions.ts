@@ -27,6 +27,5 @@ export async function updateDatabase(formData: FormData) {
     })
   }
 
-  console.log('Word ID: ', updated_data);
   
 }
