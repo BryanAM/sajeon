@@ -133,7 +133,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                 className={buttonVariants({ variant: "destructive" })}
                 type="button"
               >
-                Cancel Changes
+                Discard Changes
               </DialogClose>
               <ToastButton>Save Changes</ToastButton>
             </DialogFooter>
