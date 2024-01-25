@@ -40,7 +40,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
         </Button>
       </DialogTrigger>
       <DialogContent className="md:min-w-[768px]">
-        <ScrollArea className="h-[600px] w-[470px] md:w-[700px]">
+        <ScrollArea className="h-[600px] w-[370px] sm:w-[470px] md:w-[700px]">
           <DialogHeader className="px-6">
             <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
             <DialogDescription>

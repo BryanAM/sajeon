@@ -32,7 +32,7 @@ export default function FormSentences({ word }: { word: SajeonDataModelType }) {
     <div className="grid grid-cols-2 items-center gap-4">
       {sentences.map((sentence, index) => (
         <div
-          className="rounded-tr-sm border-r border-t border-solid border-muted-foreground/50 p-4"
+          className="col-span-2 md:col-span-1 rounded-tr-sm border-r border-t border-solid border-muted-foreground/50 p-4"
           key={sentence.id}
         >
           <div className="flex items-center justify-between">

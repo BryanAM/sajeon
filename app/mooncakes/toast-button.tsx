@@ -23,8 +23,8 @@ export function ToastButton({ children }: { children: React.ReactNode }) {
         toast("Updates Sent, Thank you! ❀", {
           description: formattedDate,
           action: {
-            label: "Undo",
-            onClick: () => console.log("Undo"),
+            label: "Close",
+            onClick: () => console.log("Close"),
           },
         })
       }
