@@ -13,20 +13,27 @@ import EditDialogue from "./edit-dialogue";
 
 export default function DataCard({ word }: { word: SajeonDataModelType }) {
   return (
-    <Card className="w-auto flex flex-col justify-between">
-      <CardHeader>
-        <CardTitle>{word.word}</CardTitle>
-        <CardDescription>{word.romaja}</CardDescription>
+    <Card className="flex w-auto flex-col justify-between">
+      <CardHeader className="grid grid-cols-2 border-b space-y-0">
+        <div className="col-span-1">
+          <CardTitle className="text-4xl">{word.word}</CardTitle>
+          <CardDescription className="col-span-1">
+            {word.romaja}
+          </CardDescription>
+        </div>
+        <div className="col-span-1 mt-0">
+          <p className="font-semibold">
+            POS:{" "}
+            <span className="font-normal">{word.pos || "No Value"}</span>
+          </p>
+          <p className="font-semibold">
+            Hanja:{" "}
+            <span className="font-normal">{word.hanja || "No Value"}</span>
+          </p>
+        </div>
       </CardHeader>
       <CardContent>
-        <p className="font-semibold">
-          Hanja: <span className="font-normal">{word.hanja || "No Value"}</span>
-        </p>
-        <p className="font-semibold">
-          Part of Speech:{" "}
-          <span className="font-normal">{word.pos || "No Value"}</span>
-        </p>
-        <p className="font-semibold">Definitions</p>
+        <p className="font-semibold mt-2">Definitions</p>
         <ol>
           {word.definitions.map((def) => (
             <li className="mx-6 list-decimal" key={def}>
@@ -34,8 +41,8 @@ export default function DataCard({ word }: { word: SajeonDataModelType }) {
             </li>
           ))}
         </ol>
-        <p className="font-semibold">Sentences</p>
-        <ScrollArea className="h-[150px] bg-gradient-to-t from-muted from-10% via-background">
+        <p className="font-semibold mt-2">Sentences</p>
+        <ScrollArea className="h-[150px]">
           <ol>
             {word.sentences.map((sentence) => (
               <li className="mx-6 list-decimal" key={sentence.kr}>

@@ -31,7 +31,6 @@ import FormSentences from "./form-sentences";
 export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
   // Helper function to generate unique IDs
 
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -45,8 +44,10 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
           <DialogHeader className="px-6">
             <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
             <DialogDescription>
-              After making changes to {word.word}, submit your changes to the database by selecting the &quot;Save Changes&quot; button.
-              You can abandon changes by clicking away, clicking the discard changes button, or the exit dialoge button.
+              After making changes to {word.word}, submit your changes to the
+              database by selecting the &quot;Save Changes&quot; button. You can
+              abandon changes by clicking away, clicking the discard changes
+              button, or the exit dialoge button.
             </DialogDescription>
           </DialogHeader>
           <form action={updateDatabase}>
@@ -122,9 +123,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
               </div>
 
               <FormDefinitions word={word} />
-              <FormSentences word={word}/>
-             
-             
+              <FormSentences word={word} />
             </div>
 
             <DialogFooter className="justify-between gap-2 px-6">
