@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { SajeonDataModelType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
@@ -6,36 +6,54 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { TrashIcon } from "@radix-ui/react-icons";
-import {useState} from 'react';
+import { useState } from "react";
 export default function FormSentences({ word }: { word: SajeonDataModelType }) {
-  const generateUniqueId = () => `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const generateUniqueId = () =>
+    `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-  const [definitions, setDefinitions] = useState(
-    word.definitions.map((def) => ({
+  const [sentences, setSentences] = useState(
+    word.sentences.map((sentence) => ({
       id: generateUniqueId(),
-      text: def,
+      kr: sentence.kr,
+      en: sentence.en,
     })),
   );
 
-  const addDefinition = (): void => {
-    const newDefinition = { id: generateUniqueId(), text: "" };
-    setDefinitions([...definitions, newDefinition]);
+  const addSentence = (): void => {
+    const newSentences = { id: generateUniqueId(), kr: "", en: "" };
+    setSentences([...sentences, newSentences]);
   };
 
-  const deleteDefinition = (id: string): void => {
-    setDefinitions(definitions.filter((def) => def.id !== id));
+  const deleteSentence = (id: string): void => {
+    setSentences(sentences.filter((sentence) => sentence.id !== id));
   };
 
   return (
     <div className="grid grid-cols-2 items-center gap-4">
-      {word.sentences.map((sentence, index) => (
-        <div key={sentence.kr + index}>
+      {sentences.map((sentence, index) => (
+        <div
+          className="rounded-tr-sm border-r border-t border-solid border-muted-foreground/50 p-4"
+          key={sentence.id}
+        >
+          <div className="flex items-center justify-between">
+            <h4 className="font-semibold">Sentence {index + 1}</h4>
+            <Button
+              className={`${index === 0 && "hidden"}`}
+              type="button"
+              size="smIcon"
+              variant="destructive"
+              title="delete"
+              aria-label="delete icon"
+              onClick={() => deleteSentence(sentence.id)}
+            >
+              <TrashIcon />
+            </Button>
+          </div>
           <Label
             htmlFor={`sentence-${index + 1}`}
-            className="col-span-1 text-left"
+            className="col-span-1 text-left font-normal"
           >
-            {`Korean Sentence ${index + 1}`}
-
+            Korean
             <Input
               id={`kr-sentence-${index + 1}`}
               name={`sentence-${index + 1}`}
@@ -43,9 +61,11 @@ export default function FormSentences({ word }: { word: SajeonDataModelType }) {
               defaultValue={sentence.kr}
             />
           </Label>
-          <Label htmlFor="english-sentence" className="col-span-1 text-left">
-            {`English Sentence ${index + 1}`}
-
+          <Label
+            htmlFor="english-sentence"
+            className="col-span-1 text-left font-normal"
+          >
+            English
             <Input
               id={`en-sentence-${index + 1}`}
               name={`sentence-${index + 1}`}
@@ -53,22 +73,14 @@ export default function FormSentences({ word }: { word: SajeonDataModelType }) {
               defaultValue={sentence.en}
             />
           </Label>
-          {/* <Button
-              className={`${index === 0 && "hidden"}`}
-              type="button"
-              size="smIcon"
-              variant="destructive"
-              title="delete"
-              aria-label="delete icon"
-              onClick={() => deleteDefinition(id)}
-            >
-              <TrashIcon />
-            </Button> */}
-         
         </div>
-
       ))}
-       <Button className="col-span-2" type="button" variant="secondary" onClick={() => addDefinition()}>
+      <Button
+        className="col-span-2"
+        type="button"
+        variant="secondary"
+        onClick={() => addSentence()}
+      >
         <PlusIcon height="16" width="16" />
         <span className="ml-1">Add Sentence</span>
       </Button>

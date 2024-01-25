@@ -34,7 +34,7 @@ export function ToastButton({
     className={buttonVariants({ variant: "default" })}
       type="submit"
       onClick={() =>
-        toast("Update sent to the database", {
+        toast("Updates Sent, Thank you! ❀", {
           description: formattedDate,
           action: {
             label: "Undo",

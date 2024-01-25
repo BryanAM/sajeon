@@ -43,11 +43,10 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
       <DialogContent className="md:min-w-[768px]">
         <ScrollArea className="h-[600px] w-[470px] md:w-[700px]">
           <DialogHeader className="px-6">
-            <DialogTitle>Edit Data for {word.word}</DialogTitle>
+            <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
             <DialogDescription>
-              You can make changes to the word here. After making changes select
-              the Save Changes button. If you wish to abandon any change simply
-              select the Cancel Changes button.
+              After making changes to {word.word}, submit your changes to the database by selecting the &quot;Save Changes&quot; button.
+              You can abandon changes by clicking away, clicking the discard changes button, or the exit dialoge button.
             </DialogDescription>
           </DialogHeader>
           <form action={updateDatabase}>
@@ -130,7 +129,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
 
             <DialogFooter className="justify-between gap-2 px-6">
               <DialogClose
-                className={buttonVariants({ variant: "destructive" })}
+                className={buttonVariants({ variant: "outline" })}
                 type="button"
               >
                 Discard Changes
