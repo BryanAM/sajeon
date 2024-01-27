@@ -50,25 +50,25 @@ export default function MooncakesFormSentences({ word }: { word: SajeonDataModel
             </Button>
           </div>
           <Label
-            htmlFor={`sentence-${index + 1}`}
+            htmlFor={`kr-sentence-${index + 1}`}
             className="col-span-1 text-left font-normal"
           >
             Korean
             <Input
               id={`kr-sentence-${index + 1}`}
-              name={`sentence-${index + 1}`}
+              name={`kr-sentence-${index + 1}`}
               className="mt-1 text-lg"
               defaultValue={sentence.kr}
             />
           </Label>
           <Label
-            htmlFor="english-sentence"
+            htmlFor={`en-sentence-${index + 1}`}
             className="col-span-1 text-left font-normal"
           >
             English
             <Input
               id={`en-sentence-${index + 1}`}
-              name={`sentence-${index + 1}`}
+              name={`en-sentence-${index + 1}`}
               className="mt-1 text-lg"
               defaultValue={sentence.en}
             />
