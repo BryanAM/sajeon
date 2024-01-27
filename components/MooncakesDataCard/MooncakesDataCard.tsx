@@ -11,10 +11,14 @@ import {
 } from "@/components/ui/card";
 import MooncakesEditDialogue from "@/components/MooncakesEditDialogue/MoonCakesEditDialogue";
 
-export default function MooncakesDataCard({ word }: { word: SajeonDataModelType }) {
+export default function MooncakesDataCard({
+  word,
+}: {
+  word: SajeonDataModelType;
+}) {
   return (
     <Card className="flex w-auto flex-col justify-between">
-      <CardHeader className="grid grid-cols-2 border-b space-y-0">
+      <CardHeader className="grid grid-cols-2 space-y-0 border-b">
         <div className="col-span-1">
           <CardTitle className="text-4xl">{word.word}</CardTitle>
           <CardDescription className="col-span-1">
@@ -23,8 +27,7 @@ export default function MooncakesDataCard({ word }: { word: SajeonDataModelType 
         </div>
         <div className="col-span-1 mt-0">
           <p className="font-semibold">
-            POS:{" "}
-            <span className="font-normal">{word.pos || "No Value"}</span>
+            POS: <span className="font-normal">{word.pos || "No Value"}</span>
           </p>
           <p className="font-semibold">
             Hanja:{" "}
@@ -33,7 +36,7 @@ export default function MooncakesDataCard({ word }: { word: SajeonDataModelType 
         </div>
       </CardHeader>
       <CardContent>
-        <p className="font-semibold mt-2">Definitions</p>
+        <p className="mt-2 font-semibold">Definitions</p>
         <ol>
           {word.definitions.map((def) => (
             <li className="mx-6 list-decimal" key={def}>
@@ -41,7 +44,7 @@ export default function MooncakesDataCard({ word }: { word: SajeonDataModelType 
             </li>
           ))}
         </ol>
-        <p className="font-semibold mt-2">Sentences</p>
+        <p className="mt-2 font-semibold">Sentences</p>
         <ScrollArea className="h-[150px]">
           <ol>
             {word.sentences.map((sentence) => (

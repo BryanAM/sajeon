@@ -25,6 +25,8 @@ module.exports = {
       '<rootDir>/__mocks__/fileMock.js',
     '^@/components(.*)$': '<rootDir>/components/$1',
     '^@/lib(.*)$': '<rootDir>/lib/$1',
+    '^@/app(.*)$': '<rootDir>/app/$1',
+    '^@/__mocks__(.*)$': '<rootDir>/__mocks__/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   testEnvironment: 'jsdom',
