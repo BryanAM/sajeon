@@ -184,6 +184,4 @@ describe('Mooncakes Form Definitions', () => {
       expect(validValues).toContain(def.value)
     })
   })
-
-
 }); 
