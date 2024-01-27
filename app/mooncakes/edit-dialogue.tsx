@@ -105,16 +105,16 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Part of Speech</SelectLabel>
-                        <SelectItem value={word.pos}>{word.pos}</SelectItem>
-                        <SelectItem value="noun">Noun</SelectItem>
-                        <SelectItem value="adjective">Adjective</SelectItem>
-                        <SelectItem value="verb">Verb</SelectItem>
-                        <SelectItem value="adverb">Adverb</SelectItem>
-                        <SelectItem value="particle">Particle</SelectItem>
-                        <SelectItem value="pronoun">Pronoun</SelectItem>
-                        <SelectItem value="number">Number</SelectItem>
-                        <SelectItem value="determiner">Determiner</SelectItem>
-                        <SelectItem value="interjection">
+                        <SelectItem className="text-lg" value={word.pos}>{word.pos}</SelectItem>
+                        <SelectItem className="text-lg" value="noun">Noun</SelectItem>
+                        <SelectItem className="text-lg" value="adjective">Adjective</SelectItem>
+                        <SelectItem className="text-lg" value="verb">Verb</SelectItem>
+                        <SelectItem className="text-lg" value="adverb">Adverb</SelectItem>
+                        <SelectItem className="text-lg" value="particle">Particle</SelectItem>
+                        <SelectItem className="text-lg" value="pronoun">Pronoun</SelectItem>
+                        <SelectItem className="text-lg" value="number">Number</SelectItem>
+                        <SelectItem className="text-lg" value="determiner">Determiner</SelectItem>
+                        <SelectItem className="text-lg" value="interjection">
                           Interjection
                         </SelectItem>
                       </SelectGroup>
