@@ -40,8 +40,8 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
         </Button>
       </DialogTrigger>
       <DialogContent className="md:min-w-[768px]">
-        <ScrollArea className="h-[600px] w-[370px] sm:w-[470px] md:w-[700px]">
-          <DialogHeader className="px-6">
+        <ScrollArea className="h-[600px] sm:w-[470px] md:w-[700px]">
+          <DialogHeader className="px-2">
             <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
             <DialogDescription>
               After making changes to {word.word}, submit your changes to the
@@ -51,25 +51,26 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
             </DialogDescription>
           </DialogHeader>
           <form action={updateDatabase}>
-            <div className="grid gap-4 px-6 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid gap-4 px-4 py-4">
+              <div className="flex items-center gap-4">
                 <Label htmlFor="_word-id" className="text-right">
                   ID
                 </Label>
                 <Input
                   id="_word-id"
                   name="_word-id"
-                  className="pointer-events-none col-span-3 cursor-not-allowed border-0 text-muted-foreground"
+                  className="pointer-events-none cursor-not-allowed border-0 text-muted-foreground"
                   spellCheck={false}
                   value={word._id}
                   readOnly
+                  tabIndex={-1}
                 />
               </div>
               <div className="grid grid-cols-2 items-center gap-4">
                 <Label htmlFor="word" className="col-span-1 text-left">
                   Word
                   <Input
-                    className="mt-1"
+                    className="mt-1 text-lg"
                     id="word"
                     name="word"
                     defaultValue={word.word}
@@ -79,7 +80,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                 <Label htmlFor="romaja" className="col-span-1 text-left">
                   Romaja
                   <Input
-                    className="mt-1"
+                    className="mt-1 text-lg"
                     id="romaja"
                     name="romaja"
                     defaultValue={word.romaja}
@@ -90,7 +91,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                 <Label htmlFor="hanja" className="col-span-1 text-left">
                   Hanja
                   <Input
-                    className="mt-1"
+                    className="mt-1 text-lg"
                     id="hanja"
                     defaultValue={word.hanja}
                   />
@@ -98,7 +99,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
                 <Label htmlFor="pos" className="col-span-1 text-left">
                   Select Part of Speech
                   <Select defaultValue={word.pos}>
-                    <SelectTrigger className="mt-1" id="pos" name="pos">
+                    <SelectTrigger className="mt-1 text-lg" id="pos" name="pos">
                       <SelectValue placeholder="Select a fruit" />
                     </SelectTrigger>
                     <SelectContent>
@@ -126,7 +127,7 @@ export default function EditDialogue({ word }: { word: SajeonDataModelType }) {
               <FormSentences word={word} />
             </div>
 
-            <DialogFooter className="justify-between gap-2 px-6">
+            <DialogFooter className="justify-between gap-2 px-4">
               <DialogClose
                 className={buttonVariants({ variant: "outline" })}
                 type="button"

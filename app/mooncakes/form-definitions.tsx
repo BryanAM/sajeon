@@ -40,6 +40,7 @@ export default function FormDefinitions({
             <Input
               id={`${text}-${index}`}
               name="definition"
+              className="text-lg"
               value={text}
               onChange={(e) =>
                 setDefinitions(

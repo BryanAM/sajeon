@@ -57,7 +57,7 @@ export default function FormSentences({ word }: { word: SajeonDataModelType }) {
             <Input
               id={`kr-sentence-${index + 1}`}
               name={`sentence-${index + 1}`}
-              className="mt-1"
+              className="mt-1 text-lg"
               defaultValue={sentence.kr}
             />
           </Label>
@@ -69,7 +69,7 @@ export default function FormSentences({ word }: { word: SajeonDataModelType }) {
             <Input
               id={`en-sentence-${index + 1}`}
               name={`sentence-${index + 1}`}
-              className="mt-1"
+              className="mt-1 text-lg"
               defaultValue={sentence.en}
             />
           </Label>
