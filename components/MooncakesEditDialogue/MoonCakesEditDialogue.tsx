@@ -28,7 +28,11 @@ import { updateDatabase } from "@/app/actions";
 import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
-export default function MooncakesEditDialogue({ word }: { word: SajeonDataModelType }) {
+export default function MooncakesEditDialogue({
+  word,
+}: {
+  word: SajeonDataModelType;
+}) {
   // Helper function to generate unique IDs
 
   return (
@@ -97,23 +101,35 @@ export default function MooncakesEditDialogue({ word }: { word: SajeonDataModelT
                   />
                 </Label>
                 <Label htmlFor="pos" className="col-span-1 text-left">
-                  Select Part of Speech
-                  <Select defaultValue={word.pos}>
+                  Part of Speech
+                  <Select>
                     <SelectTrigger className="mt-1 text-lg" id="pos" name="pos">
-                      <SelectValue placeholder="Select a fruit" />
+                      <SelectValue placeholder={word.pos}/>
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-80">
                       <SelectGroup>
                         <SelectLabel>Part of Speech</SelectLabel>
-                        <SelectItem className="text-lg" value={word.pos}>{word.pos}</SelectItem>
-                        <SelectItem className="text-lg" value="noun">Noun</SelectItem>
-                        <SelectItem className="text-lg" value="adjective">Adjective</SelectItem>
-                        <SelectItem className="text-lg" value="verb">Verb</SelectItem>
-                        <SelectItem className="text-lg" value="adverb">Adverb</SelectItem>
-                        <SelectItem className="text-lg" value="particle">Particle</SelectItem>
-                        <SelectItem className="text-lg" value="pronoun">Pronoun</SelectItem>
-                        <SelectItem className="text-lg" value="number">Number</SelectItem>
-                        <SelectItem className="text-lg" value="determiner">Determiner</SelectItem>
+                        <SelectItem className="text-lg" value="noun">
+                          Noun
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="adjective">
+                          Adjective
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="verb">
+                          Verb
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="adverb">
+                          Adverb
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="particle">
+                          Particle
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="pronoun">
+                          Pronoun
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="determiner">
+                          Determiner
+                        </SelectItem>
                         <SelectItem className="text-lg" value="interjection">
                           Interjection
                         </SelectItem>
