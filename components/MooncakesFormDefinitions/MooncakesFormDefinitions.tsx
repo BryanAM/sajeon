@@ -52,6 +52,7 @@ export default function MooncakesFormDefinitions({
             />
             <Button
               className={`${index === 0 && "hidden"}`}
+              disabled={index === 0}
               type="button"
               size="smIcon"
               variant="destructive"
