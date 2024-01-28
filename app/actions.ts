@@ -48,7 +48,7 @@ export async function updateDatabase(formData: FormData) {
     return updatedSentences;
   };
 
-  const updateData = {
+  const updatedData = {
     _id: formData.get("_word-id"),
     word: formData.get("word"),
     romaja: formData.get("romaja"),
@@ -59,6 +59,5 @@ export async function updateDatabase(formData: FormData) {
     sentences: formatSentenceObject(),
   };
 
-
-  console.log(updateData);
+  console.log('test', updatedData);
 }
