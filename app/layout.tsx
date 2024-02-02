@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import SajeonFooter from "@/components/SajeonFooter/SajeonFooter";
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,6 +56,7 @@ export default function RootLayout({
           </ThemeProvider>
         </div>
         <SajeonFooter />
+        <Toaster />
       </body>
     </html>
   );
