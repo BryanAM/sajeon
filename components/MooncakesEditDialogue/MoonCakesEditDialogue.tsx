@@ -104,7 +104,7 @@ export default function MooncakesEditDialogue({
                   Part of Speech
                   <Select>
                     <SelectTrigger className="mt-1 text-lg" id="pos" name="pos">
-                      <SelectValue placeholder={word.pos}/>
+                      <SelectValue placeholder={word.pos} />
                     </SelectTrigger>
                     <SelectContent className="max-h-80">
                       <SelectGroup>
