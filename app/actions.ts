@@ -86,7 +86,21 @@ export async function updateDatabase(formData: FormData) {
 export async function deleteWord(formData: FormData) {
   const _id = formData.get("_word-id");
 
-  console.log("id", _id);
+  if (_id) {
+    await dbConnect();
 
-  return;
+    try {
+      // Find the Word record by ID and update it in the DB
+      await Word.findByIdAndDelete(_id);
+      console.log(`Succesfully deleted record ID: ${_id}`);
+      revalidatePath("/");
+    } catch (error) {
+      return new Response(JSON.stringify({ message: (error as any).message }), {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  }
 }
