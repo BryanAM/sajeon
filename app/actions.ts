@@ -78,3 +78,16 @@ export async function updateDatabase(formData: FormData) {
     });
   }
 }
+
+/**
+ * 
+ * @param formData
+ * @description This action will take a word ID and remove it from the database.
+ */
+export async function deleteWord(formData: FormData) {
+  const _id = formData.get('_word-id')
+
+  console.log('id', _id);
+
+  return;
+}

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { TrashIcon } from "@radix-ui/react-icons";
+import { Trash2Icon } from "lucide-react";
 import { SajeonDataModelType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -60,7 +60,7 @@ export default function MooncakesFormDefinitions({
               aria-label="delete icon"
               onClick={() => deleteDefinition(id)}
             >
-              <TrashIcon />
+              <Trash2Icon />
             </Button>
           </div>
         </Label>

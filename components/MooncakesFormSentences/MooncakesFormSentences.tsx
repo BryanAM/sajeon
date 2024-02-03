@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { TrashIcon } from "@radix-ui/react-icons";
+import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 export default function MooncakesFormSentences({ word }: { word: SajeonDataModelType }) {
   const generateUniqueId = () =>
@@ -46,7 +46,7 @@ export default function MooncakesFormSentences({ word }: { word: SajeonDataModel
               aria-label="delete icon"
               onClick={() => deleteSentence(sentence.id)}
             >
-              <TrashIcon />
+              <Trash2Icon />
             </Button>
           </div>
           <Label
