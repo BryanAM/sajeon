@@ -2,6 +2,7 @@
 
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
+import { revalidatePath } from 'next/cache'
 
 /**
  *
@@ -61,11 +62,13 @@ export async function updateDatabase(formData: FormData) {
     sentences: formatSentenceObject(),
   };
 
+
   await dbConnect();
   try {
     // Find the Word record by ID and update it in the DB
     await Word.findByIdAndUpdate(updatedData._id, updatedData);
     console.log(`Succesfully updated record ${updatedData}`);
+    revalidatePath('/');
   } catch (error) {
     return new Response(JSON.stringify({ message: (error as any).message }), {
       status: 500,

@@ -97,40 +97,44 @@ export default function MooncakesEditDialogue({
                   <Input
                     className="mt-1 text-lg"
                     id="hanja"
+                    name="hanja"
                     defaultValue={word.hanja}
                   />
                 </Label>
                 <Label htmlFor="pos" className="col-span-1 text-left">
                   Part of Speech
-                  <Select>
-                    <SelectTrigger className="mt-1 text-lg" id="pos" name="pos">
+                  <Select name="pos" defaultValue={word.pos}>
+                    <SelectTrigger className="mt-1 text-lg">
                       <SelectValue placeholder={word.pos} />
                     </SelectTrigger>
                     <SelectContent className="max-h-80">
                       <SelectGroup>
                         <SelectLabel>Part of Speech</SelectLabel>
-                        <SelectItem className="text-lg" value="noun">
+                        <SelectItem className="text-lg" value="Noun">
                           Noun
                         </SelectItem>
-                        <SelectItem className="text-lg" value="adjective">
+                        <SelectItem className="text-lg" value="Adjective">
                           Adjective
                         </SelectItem>
-                        <SelectItem className="text-lg" value="verb">
+                        <SelectItem className="text-lg" value="Verb">
                           Verb
                         </SelectItem>
-                        <SelectItem className="text-lg" value="adverb">
+                        <SelectItem className="text-lg" value="Noun, 하다">
+                          Noun / 하다
+                        </SelectItem>
+                        <SelectItem className="text-lg" value="Adverb">
                           Adverb
                         </SelectItem>
-                        <SelectItem className="text-lg" value="particle">
+                        <SelectItem className="text-lg" value="Particle">
                           Particle
                         </SelectItem>
-                        <SelectItem className="text-lg" value="pronoun">
+                        <SelectItem className="text-lg" value="Pronoun">
                           Pronoun
                         </SelectItem>
-                        <SelectItem className="text-lg" value="determiner">
+                        <SelectItem className="text-lg" value="Determiner">
                           Determiner
                         </SelectItem>
-                        <SelectItem className="text-lg" value="interjection">
+                        <SelectItem className="text-lg" value="Interjection">
                           Interjection
                         </SelectItem>
                       </SelectGroup>
