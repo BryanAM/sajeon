@@ -2,7 +2,7 @@
 
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
-import { revalidatePath } from 'next/cache'
+import { revalidatePath } from "next/cache";
 
 /**
  *
@@ -62,13 +62,12 @@ export async function updateDatabase(formData: FormData) {
     sentences: formatSentenceObject(),
   };
 
-
   await dbConnect();
   try {
     // Find the Word record by ID and update it in the DB
     await Word.findByIdAndUpdate(updatedData._id, updatedData);
     console.log(`Succesfully updated record ${updatedData}`);
-    revalidatePath('/');
+    revalidatePath("/");
   } catch (error) {
     return new Response(JSON.stringify({ message: (error as any).message }), {
       status: 500,
@@ -80,14 +79,14 @@ export async function updateDatabase(formData: FormData) {
 }
 
 /**
- * 
+ *
  * @param formData
  * @description This action will take a word ID and remove it from the database.
  */
 export async function deleteWord(formData: FormData) {
-  const _id = formData.get('_word-id')
+  const _id = formData.get("_word-id");
 
-  console.log('id', _id);
+  console.log("id", _id);
 
   return;
 }

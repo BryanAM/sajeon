@@ -37,7 +37,8 @@ export default function MooncakesDeleteWordDialogue({
         <ScrollArea className="h-auto sm:w-[470px] md:w-[700px]">
           <DialogHeader className="px-2">
             <DialogTitle className="text-4xl">
-              Are you sure you want to permanently delete <span className="underline underline-offset-4">{word.word}</span>?
+              Are you sure you want to permanently delete{" "}
+              <span className="underline underline-offset-4">{word.word}</span>?
             </DialogTitle>
             <DialogDescription>
               If you delete the word {word.word}, it will be completely removed
