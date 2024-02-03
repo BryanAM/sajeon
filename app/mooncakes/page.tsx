@@ -6,7 +6,7 @@ import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { TrashIcon } from "@radix-ui/react-icons";
+import { Trash2Icon } from "lucide-react";
 
 async function getData() {
   await dbConnect();
@@ -99,7 +99,7 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
             variant="destructive"
             tabIndex={-1}
           >
-            <TrashIcon />
+            <Trash2Icon />
           </Button>
         </li>
       </ol>

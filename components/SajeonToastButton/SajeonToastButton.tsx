@@ -4,7 +4,10 @@ import { toast } from "sonner";
 import { DialogClose } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
 
-export function SajeonToastButton({ children }: { children: React.ReactNode }) {
+
+type variantTypes = "link" | "default" | "destructive" | "outline" | "secondary" | "ghost";
+
+export function SajeonToastButton({ children, variant="default" }: { children: React.ReactNode, variant: variantTypes}) {
   const formattedDate = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -17,7 +20,7 @@ export function SajeonToastButton({ children }: { children: React.ReactNode }) {
 
   return (
     <DialogClose
-      className={buttonVariants({ variant: "default" })}
+      className={buttonVariants({ variant: variant  })}
       type="submit"
       onClick={() =>
         toast("Updates Sent, Thank you! ❀", {

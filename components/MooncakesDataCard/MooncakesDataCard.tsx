@@ -1,6 +1,5 @@
 import { SajeonDataModelType } from "@/types/SajeonTypes";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
 import {
   Card,
   CardContent,
@@ -10,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import MooncakesEditDialogue from "@/components/MooncakesEditDialogue/MoonCakesEditDialogue";
+import MooncakesDeleteWordDialogue from '@/components/MooncakesDeleteWordDialogue/MooncakesDeleteWordDialogue';
+import { Button } from "../ui/button";
 
 export default function MooncakesDataCard({
   word,
@@ -60,6 +61,7 @@ export default function MooncakesDataCard({
       </CardContent>
       <CardFooter className="flex justify-between ">
         <MooncakesEditDialogue word={word} />
+        <MooncakesDeleteWordDialogue word={word} />
       </CardFooter>
     </Card>
   );
