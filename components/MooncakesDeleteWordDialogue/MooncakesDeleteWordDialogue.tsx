@@ -75,7 +75,7 @@ export default function MooncakesDeleteWordDialogue({
                 className={buttonVariants({ variant: "outline" })}
                 type="button"
               >
-                Discard Changes
+                Cancel
               </DialogClose>
 
               <SajeonToastButton variant="destructive">
