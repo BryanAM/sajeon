@@ -4,7 +4,8 @@ import { SajeonDataModelType } from "@/types/SajeonTypes";
 import MooncakesDataCard from "@/components/MooncakesDataCard/MooncakesDataCard";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import DirectionsDialogue from "./DirectionsDialogue";
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import MooncakesAddWords from "@/components/MooncakesAddWords/MooncakesAddWords";
 
 async function getData() {
   await dbConnect();
@@ -53,25 +54,36 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
         Sajeon Editor [mooncakes]
       </h1>
       <h2 className="mb-6 text-2xl font-extrabold text-shadow-inverted md:text-5xl lg:text-4xl">
-        Update, modify, add & delete entries and details in the Sajeon database. <DirectionsDialogue />
+        Update, modify, add & delete entries and details in the Sajeon database.{" "}
+        <DirectionsDialogue />
       </h2>
-     
-      <ol className="mb-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-        {dataFetchResults
-          .slice(
-            getOffset() * ITEMS_PER_PAGE,
-            getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
-          )
-          .map((word: SajeonDataModelType) => (
-            <MooncakesDataCard key={word._id} word={word} />
-          ))}
-      </ol>
-      {MIN_PAGINATION_RESULTS && (
-        <SajeonPagination
-          currentPage={searchParams}
-          pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
-        />
-      )}
+      <Tabs defaultValue="random">
+        <TabsList className="">
+          <TabsTrigger value="random">Random Words</TabsTrigger>
+          <TabsTrigger value="add">Add & Search Words</TabsTrigger>
+        </TabsList>
+        <TabsContent value="random">
+          <ol className="mb-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            {dataFetchResults
+              .slice(
+                getOffset() * ITEMS_PER_PAGE,
+                getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
+              )
+              .map((word: SajeonDataModelType) => (
+                <MooncakesDataCard key={word._id} word={word} />
+              ))}
+          </ol>
+          {MIN_PAGINATION_RESULTS && (
+            <SajeonPagination
+              currentPage={searchParams}
+              pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+            />
+          )}
+        </TabsContent>
+        <TabsContent value="add">
+          <MooncakesAddWords />
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }
