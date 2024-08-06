@@ -1,24 +1,71 @@
 # Sajeon A Korean English Dictionary Application 
+#  📓 Sajeon 
+> A simple, responsive Korean & English dictionary.
 
-## Getting Started
+![screen-gif](./sajeon.gif)
 
-clone the repo, install dependencies, run dev
-```bash
-npm install 
+## Guide
+- [Sajeon A Korean English Dictionary Application](#sajeon-a-korean-english-dictionary-application)
+- [📓 Sajeon](#-sajeon)
+  - [Guide](#guide)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Local Setup](#local-setup)
+  - [Useful Commands](#useful-commands)
+  - [Contributing](#contributing)
+  - [Technologies](#technologies)
 
-npm run dev
+## Getting Started 
+
+
+
+### Prerequisites
+This project uses node version 16.13.0 or greater.
+
+Also, there are three environment files you'll need to add. Please contact the admins to get a copy of the proper environment variables. 
 
 ```
+.env.production
+.env.development
+.env.test
+```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Local Setup
+1. Clone the respository.
+```bash
+$ git clone https://github.com/BryanAM/sajeon.git
+#  for ssh
+& git clone git@github.com:BryanAM/sajeon.git
+```
+2. Install the packages.
+```bash
+npm install
+```
+1. Start Sajeon
+```bash
+npm run dev
+```
+
+## Useful Commands
+
+|Command | Description |
+|--------|-------------|
+| `npm run:all` |  Run all tests |
+| `npm run test` | Run component tests in sajeon|
+| `npm run test-e2e` | run all playwrite tests |
+
+## Contributing 
+Sajeon uses next lint and prettier for eslint adherence.
 
 
-## Testing
-To run  unit tests run the command
-`npm run test`
+## Technologies
+* [nextjs](https://nextjs.org)
+* [shadcn/ui](https://ui.shadcn.com)
+* [radix-ui](https://www.radix-ui.com)
+* [tailwindcss](https://tailwindcss.com)
+* [clsx](https://github.com/lukeed/clsx#readme)
+* [mongoose & mongodb](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
+* [Lucide Icons](https://lucide.dev) 
+* [eslint](https://eslint.org)
 
-To run e2e tests run the command. This command will run three, build, start and open a new terminal to run the playwrite tests.
-`npm run test-e2e`
 
-Or, you can run all testing with the following command 
-`npm run test:all`
