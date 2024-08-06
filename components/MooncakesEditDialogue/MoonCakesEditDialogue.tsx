@@ -155,7 +155,9 @@ export default function MooncakesEditDialogue({
                 Discard Changes
               </DialogClose>
 
-              <SajeonToastButton>Save Changes</SajeonToastButton>
+              <SajeonToastButton variant="default">
+                Save Changes
+              </SajeonToastButton>
             </DialogFooter>
           </form>
         </ScrollArea>
