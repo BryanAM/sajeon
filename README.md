@@ -39,11 +39,11 @@ $ git clone https://github.com/BryanAM/sajeon.git
 ```
 2. Install the packages.
 ```bash
-npm install
+$ npm install
 ```
 1. Start Sajeon
 ```bash
-npm run dev
+$ npm run dev
 ```
 
 ## Useful Commands
