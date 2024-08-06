@@ -99,7 +99,7 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
             variant="destructive"
             tabIndex={-1}
           >
-            <TrashIcon />
+            <Trash2Icon />
           </Button>
         </li>
       </ol>
