@@ -22,7 +22,7 @@
 ### Prerequisites
 This project uses node version 16.13.0 or greater.
 
-Also, there are three environment files you'll need to add. Please contact the admins to get a copy of the proper environment variables. 
+Also, there are three required environment files. Please contact the admins to get a copy of the proper environment variables. 
 
 ```
 .env.production
