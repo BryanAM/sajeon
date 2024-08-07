@@ -1,7 +1,14 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions: NextAuthOptions = {
+// Define the expected User type if not already defined
+interface User {
+  id: string;
+  name: string;
+  password?: string; // Typically, passwords should not be exposed
+}
+
+const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -20,12 +27,14 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         // TODO: Retrieve user from MongoDB here
-        const user = { id: 42, name: "mooncakes", password: "mooncakes" };
+        // const user = { id: 42, name: "mooncakes", password: "mooncakes" };
+        const user: User = { id: "42", name: "mooncakes", password: "mooncakes" };
         if (
           credentials?.username === user.name &&
           credentials?.password === user.password
         ) {
-          return user;
+          const { password, ...userSansPassword } = user;
+          return userSansPassword;
         } else {
           return null;
         }
