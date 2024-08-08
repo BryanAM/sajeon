@@ -1,5 +1,4 @@
-# Sajeon A Korean English Dictionary Application 
-#  📓 Sajeon 
+# 📓 Sajeon A Korean English Dictionary Application 
 > A simple, responsive Korean & English dictionary.
 
 ![screen-gif](./sajeon.gif)
