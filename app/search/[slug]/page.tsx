@@ -6,7 +6,7 @@ import { dataMock } from "@/__mocks__/dataMock";
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation";
 
 type SearchProps = {
   params: { slug: string };
@@ -14,26 +14,25 @@ type SearchProps = {
 };
 
 async function getData(params: SearchProps["params"]) {
-  await dbConnect();
+  try {
+    await dbConnect();
+  } catch {
+    throw Error("We couldn't connect to the database. Try again!");
+  }
 
   try {
     // Just a basic search of the definitions field for now
     const query = { definitions: params.slug };
 
     const words = await Word.find(query).limit(100).lean(); // Updated query
-      return new Response(JSON.stringify(words), {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  } catch (error) {
-    return new Response(JSON.stringify({ message: (error as any).message }), {
-      status: 500,
+    return new Response(JSON.stringify(words), {
+      status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
+  } catch (error) {
+    throw Error("We ran into an issue fetching your results. Try again!");
   }
 }
 
@@ -50,10 +49,10 @@ export default async function Search({ params, searchParams }: SearchProps) {
   /**
    * Return not-found page if we don't have results
    */
-  if(dataFetchResults.length < 1) {
+  if (dataFetchResults.length < 1) {
     notFound();
   }
-  
+
   // pretend fetch to database
   // const dataFetchResults = dataMock;
 
