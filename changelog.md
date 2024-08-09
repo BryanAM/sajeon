@@ -24,6 +24,7 @@ Example
 ## Features
 -  **Changelog**: Added changelog to Sajeon to keep track of technical changes. [[PR - 60 ](https://github.com/BryanAM/sajeon/pull/60)]
 
-## Fixes
+## Enhancements
+-  **Search**: Added error handling when the db fails to connect, or something went wrong with the search query [[PR - 64 ](https://github.com/BryanAM/sajeon/pull/64)]
   
 
