@@ -53,9 +53,6 @@ export default async function Search({ params, searchParams }: SearchProps) {
     notFound();
   }
 
-  // pretend fetch to database
-  // const dataFetchResults = dataMock;
-
   const ITEMS_PER_PAGE = 10;
   const MIN_PAGINATION_RESULTS = dataFetchResults.length > ITEMS_PER_PAGE;
   function getOffset(): number {
