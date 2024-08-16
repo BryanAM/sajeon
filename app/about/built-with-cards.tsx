@@ -11,7 +11,7 @@ import {
 
 export default function BuiltWithCards() {
   return (
-    <div className="flex  flex-wrap gap-6 p-8 bg-accent rounded-md border-dashed border-2 border-foreground">
+    <div className="flex justify-between pt-8 pb-8">
     <HoverCard>
       <HoverCardTrigger asChild>
         <Link
@@ -207,7 +207,7 @@ export default function BuiltWithCards() {
         <div className="flex justify-between space-x-4">
           <Avatar>
             <AvatarImage
-              src="https://pbs.twimg.com/profile_images/1468993891584073729/a_op8KnL_400x400.jpg"
+              src="https://pbs.twimg.com/profile_images/1730334391501488129/G0R0sjHH_400x400.jpg"
               alt="@tailwindcss"
             />
             <AvatarFallback>TW</AvatarFallback>

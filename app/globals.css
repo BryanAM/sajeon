@@ -21,6 +21,7 @@
  
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
+    --muted-heavy: 0, 0%, 90%;
  
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
@@ -51,8 +52,9 @@
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
  
-    --muted: 0 0% 14.9%;
+    --muted: 0, 0%, 8%;
     --muted-foreground: 0 0% 63.9%;
+    --muted-heavy: 0, 0%, 14%;
  
     --accent: 0 0% 3.9%;
     --accent-foreground: 0 0% 98%;
@@ -73,4 +75,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+@layer components {
+  .sajeon-branded-text {
+    @apply text-shadow pb-3 text-7xl font-extrabold text-accent md:text-9xl;
+  }
+}
+
+/* need to override the dropdown menu from setting body to relative */
+body.sajeon-body {
+  position: static !important;
 }

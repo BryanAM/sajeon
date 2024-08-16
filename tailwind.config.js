@@ -40,6 +40,7 @@ module.exports = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
+          heavy: "hsl(var(--muted-heavy))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -74,8 +75,8 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       textShadow: {
-        DEFAULT: "5px -4px hsl(var(--accent)), 1px 1px hsl(var(--accent-foreground)), 4px -4px hsl(var(--accent-foreground)), 5px -5px hsl(var(--accent-foreground)), 6px -4px hsl(var(--accent-foreground))",
-        inverted: "5px -4px hsl(var(--primary)), 1px 1px hsl(var(--secondary)), 4px -4px hsl(var(--secondary)), 5px -5px hsl(var(--secondary)), 6px -4px hsl(var(--secondary))",
+        DEFAULT: "-4px 5px hsl(var(--accent-foreground)), 0px 0px hsl(var(--accent-foreground)), 0px -1px hsl(var(--accent-foreground)), 0px 1px hsl(var(--accent-foreground)), 1px 1px hsl(var(--accent-foreground)), 1px -1px hsl(var(--accent-foreground)), 1px 0px hsl(var(--accent-foreground)),  -1px 1px hsl(var(--accent-foreground)), -1px 0px hsl(var(--accent-foreground)), -1px -1px hsl(var(--accent-foreground))",
+        inverted: "-4px 5px hsl(var(--secondary)), 0px 0px hsl(var(--secondary)), 0px -1px hsl(var(--secondary)), 0px 1px hsl(var(--secondary)), 1px 1px hsl(var(--secondary)), 1px -1px hsl(var(--secondary)), 1px 0px hsl(var(--secondary)),  -1px 1px hsl(var(--secondary)), -1px 0px hsl(var(--secondary)), -1px -1px hsl(var(--secondary))",
       },
     },
   },

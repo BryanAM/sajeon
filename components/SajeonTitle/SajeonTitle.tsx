@@ -7,7 +7,7 @@ export interface SajeonTitleProps {
 
 function SajeonTitle({ text, className }: SajeonTitleProps) {
   return (
-    <div className={`text-shadow pb-3 text-7xl font-extrabold text-transparent md:text-9xl ${className}`}>
+    <div className={`text-shadow pb-3 text-7xl font-extrabold text-accent md:text-9xl ${className}`}>
       {text}
     </div>
   );
