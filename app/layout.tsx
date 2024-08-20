@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     startupImage: `${process.env.BASE_URL}/apple-touch-icon-180x180.png`,
   },
-  manifest: `${process.env.BASE_URL}/manifest.json`,
   icons: [
     {
       rel: "apple-touch-icon",
