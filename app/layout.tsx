@@ -58,6 +58,18 @@ export const metadata: Metadata = {
       url: `${process.env.BASE_URL}/icon-48x48.png`,
     },
     {
+      rel: "icon",
+      sizes: "192x192",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/android-chrome-192x192.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "512x512",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/android-chrome-512x512.png`,
+    },
+    {
       rel: "apple-touch-icon",
       sizes: "57x57",
       type: "image/png",
