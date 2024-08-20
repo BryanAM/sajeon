@@ -33,11 +33,30 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     startupImage: `${process.env.BASE_URL}/apple-touch-icon-180x180.png`,
   },
+  manifest: `${process.env.BASE_URL}/manifest.json`,
   icons: [
     {
       rel: "apple-touch-icon",
       type: "image/png",
       url: `${process.env.BASE_URL}/apple-touch-icon.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "16x16",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-16x16.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "32x32",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-32x32.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "48x48",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-48x48.png`,
     },
     {
       rel: "apple-touch-icon",
@@ -83,9 +102,9 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: `${process.env.BASE_URL}/favicon.ico`,
+      url: `${process.env.BASE_URL}/icon.ico`,
       type: "image/x-icon",
-      sizes: "16x16",
+      sizes: "256x256",
     },
   ],
 };
