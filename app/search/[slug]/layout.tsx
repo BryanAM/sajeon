@@ -24,6 +24,8 @@ export async function generateMetadata({
       )}"`,
       image: [`/api/og?description=Search Results For - ${params.slug}`],
       card: "summary_large_image",
+      description:
+        "Explore more results online with Sajeon, a sleek, responsive, and beautiful dictionary.",
     },
   };
 }
