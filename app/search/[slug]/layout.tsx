@@ -23,6 +23,7 @@ export async function generateMetadata({
         params.slug,
       )}"`,
       image: [`/api/og?description=Search Results For - ${params.slug}`],
+      card: "summary_large_image",
     },
   };
 }
