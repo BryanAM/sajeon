@@ -22,6 +22,7 @@ export async function generateMetadata({
       title: `Korean Dictionary Search Results For "${decodeURIComponent(
         params.slug,
       )}"`,
+      image: [`/api/og?description=Search Results For - ${params.slug}`],
     },
   };
 }
