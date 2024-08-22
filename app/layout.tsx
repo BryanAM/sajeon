@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
   twitter: {
     // shows large image on twitter
+    title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
+    description:
+      "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
     card: "summary_large_image",
   },
   appleWebApp: {
