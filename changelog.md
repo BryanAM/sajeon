@@ -27,5 +27,6 @@ Example
 ## Enhancements
 -  **Search**: Added error handling when the db fails to connect, or something went wrong with the search query [[PR - 64 ](https://github.com/BryanAM/sajeon/pull/64)]
 -  **Favicon**: Updated apple-touch-icons and favicons to run on iPhone [[PR - 68 ](https://github.com/BryanAM/sajeon/pull/68)]
+-  **Search**: Removed trailing spaces and caps from breaking search results [[PR - 74 ](https://github.com/BryanAM/sajeon/pull/74)]
   
 
