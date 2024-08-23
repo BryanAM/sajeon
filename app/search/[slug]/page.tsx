@@ -1,12 +1,11 @@
 import React from "react";
-
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 import { SajeonVocabCardType } from "../../../types/SajeonTypes";
-import { dataMock } from "@/__mocks__/dataMock";
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { notFound } from "next/navigation";
+import { cleanQuery } from "@/lib/utils";
 
 type SearchProps = {
   params: { slug: string };
@@ -22,7 +21,8 @@ async function getData(params: SearchProps["params"]) {
 
   try {
     // Just a basic search of the definitions field for now
-    const query = { definitions: params.slug };
+    const cleanedQuery = cleanQuery(params.slug);
+    const query = { definitions: cleanedQuery };
 
     const words = await Word.find(query).limit(100).lean(); // Updated query
     return new Response(JSON.stringify(words), {
