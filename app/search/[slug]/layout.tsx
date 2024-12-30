@@ -18,13 +18,22 @@ export async function generateMetadata({
     openGraph: {
       images: [`/api/og?description=Search Results For - ${params.slug}`],
     },
+    twitter: {
+      title: `Korean Dictionary Search Results For "${decodeURIComponent(
+        params.slug,
+      )}"`,
+      image: [`/api/og?description=Search Results For - ${params.slug}`],
+      card: "summary_large_image",
+      description:
+        "Explore more results online with Sajeon, a sleek, responsive, and beautiful dictionary.",
+    },
   };
 }
 
 export default function RootLayout({ children, params }: LayoutProps) {
   return (
     <div>
-      <h1 className="sajeon-branded-text text-center mb-4">Sajeon</h1>
+      <h1 className="sajeon-branded-text mb-4 text-center">Sajeon</h1>
       <SajeonSearch
         formAction={formAction}
         inputValue={decodeURIComponent(params.slug)}

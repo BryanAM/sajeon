@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
   twitter: {
     // shows large image on twitter
+    title: "Sleek and Intuitive Korean Dictionary For Korean Learners.",
+    description:
+      "Search for Korean and English words online with Sajeon, a sleek, responsive, and beautiful dictionary.",
     card: "summary_large_image",
   },
   appleWebApp: {
@@ -38,6 +41,36 @@ export const metadata: Metadata = {
       rel: "apple-touch-icon",
       type: "image/png",
       url: `${process.env.BASE_URL}/apple-touch-icon.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "16x16",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-16x16.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "32x32",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-32x32.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "48x48",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/icon-48x48.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "192x192",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/android-chrome-192x192.png`,
+    },
+    {
+      rel: "icon",
+      sizes: "512x512",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/android-chrome-512x512.png`,
     },
     {
       rel: "apple-touch-icon",
@@ -83,9 +116,9 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: `${process.env.BASE_URL}/favicon.ico`,
+      url: `${process.env.BASE_URL}/icon.ico`,
       type: "image/x-icon",
-      sizes: "16x16",
+      sizes: "256x256",
     },
   ],
 };
