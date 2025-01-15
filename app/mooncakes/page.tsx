@@ -44,7 +44,7 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
     if (Object.hasOwn(searchParams, "page")) {
       return Number(searchParams.page) - 1;
     } else {
-      // we are on the first page i.e. no paramater
+      // we are on the first page ie no paramater
       return 0;
     }
   }
