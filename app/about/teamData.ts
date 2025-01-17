@@ -37,4 +37,16 @@ export const teamData = [
     websiteTag: "@moyai-fujimura",
     key: 3,
   },
+  {
+    name: "Moonyoung Kang",
+    role: "Computational Linguist / Engineer",
+    avatarURL: "/assets/moonyoung-img.png",
+    avatarFallback: "MK",
+    avatarAlt: "@moonyoungkang",
+    intro:
+      "I'm a computational linguist, programmer, and native Korean speaker. I believe language is the bridge that connects us to others, and I hope to help expand and strengthen that connection.",
+    linkedinURL: "https://www.linkedin.com/in/moonyoungkang/",
+    githubURL: "https://github.com/yerihyo",
+    key: 4,
+  },
 ];
