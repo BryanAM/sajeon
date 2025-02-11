@@ -37,8 +37,6 @@ async function getData(params: SearchProps["params"]) {
       ],
     };
 
-    console.log(query);
-
     const words = await Word.find(query).limit(100).lean(); // Updated query
     return new Response(JSON.stringify(words), {
       status: 200,
