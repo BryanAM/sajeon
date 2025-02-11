@@ -5,7 +5,7 @@ import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { notFound } from "next/navigation";
-import { cleanQuery } from "@/lib/utils";
+import { safeQuery } from "@/lib/utils";
 
 type SearchProps = {
   params: { slug: string };
@@ -20,9 +20,24 @@ async function getData(params: SearchProps["params"]) {
   }
 
   try {
-    // Just a basic search of the definitions field for now
-    const cleanedQuery = cleanQuery(params.slug);
-    const query = { definitions: cleanedQuery };
+    const decodedQuery = decodeURIComponent(params.slug || "").trim();
+
+    // Limit query length to prevent abuse
+    if (decodedQuery.length > 50) {
+      throw Error("Search query is too long.");
+    }
+
+    const cleanedQuery: string = safeQuery(decodedQuery);
+    const regex = new RegExp(cleanedQuery, "i");
+    const query = {
+      $or: [
+        { word: regex }, // Search in 'word' (Korean word)
+        { definitions: regex }, // Search in 'definitions' (English definition)
+        { romaja: regex }, // searched romanized korean
+      ],
+    };
+
+    console.log(query);
 
     const words = await Word.find(query).limit(100).lean(); // Updated query
     return new Response(JSON.stringify(words), {
