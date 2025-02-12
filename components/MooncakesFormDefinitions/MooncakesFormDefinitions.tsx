@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Trash2Icon } from "lucide-react";
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 export default function MooncakesFormDefinitions({
   word,
 }: {
-  word: SajeonDataModelType;
+  word: DictionaryEntryType;
 }) {
   const generateUniqueId = () =>
     `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;

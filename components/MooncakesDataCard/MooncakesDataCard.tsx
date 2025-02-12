@@ -1,4 +1,4 @@
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Card,
@@ -9,13 +9,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import MooncakesEditDialogue from "@/components/MooncakesEditDialogue/MoonCakesEditDialogue";
-import MooncakesDeleteWordDialogue from '@/components/MooncakesDeleteWordDialogue/MooncakesDeleteWordDialogue';
+import MooncakesDeleteWordDialogue from "@/components/MooncakesDeleteWordDialogue/MooncakesDeleteWordDialogue";
 import { Button } from "../ui/button";
 
 export default function MooncakesDataCard({
   word,
 }: {
-  word: SajeonDataModelType;
+  word: DictionaryEntryType;
 }) {
   return (
     <Card className="flex w-auto flex-col justify-between">

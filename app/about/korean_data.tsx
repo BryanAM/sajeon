@@ -1,4 +1,4 @@
-export const korean_data: Array<string> = [
+export const korean_data: string[] = [
   "Hello",
   "안녕하세요",
   "Apple",

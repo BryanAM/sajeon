@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
 
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import { Trash2Icon } from "lucide-react";
 export default function MooncakesDeleteWordDialogue({
   word,
 }: {
-  word: SajeonDataModelType;
+  word: DictionaryEntryType;
 }) {
   // Helper function to generate unique IDs
 
