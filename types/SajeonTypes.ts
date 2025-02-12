@@ -1,16 +1,6 @@
-export type SajeonSentenceTranslationType = {
+export type SentenceType = {
   kr: string;
   en: string;
-};
-
-export type SajeonVocabCardType = {
-  ID: number;
-  word: string;
-  romaja?: string;
-  hanja?: string;
-  definitions: Array<string>;
-  pos?: Array<string>;
-  sentences?: Array<SajeonSentenceTranslationType>;
 };
 
 export type SajeonDataModelType = {
@@ -21,7 +11,7 @@ export type SajeonDataModelType = {
   definitions: Array<string>;
   explanation: string;
   pos: string;
-  sentences: Array<SajeonSentenceTranslationType>;
+  sentences: Array<SentenceType>;
 };
 
 export type TeamMemberType = {
@@ -36,4 +26,9 @@ export type TeamMemberType = {
   websiteURL?: string | undefined;
   websiteTag?: string | undefined;
   key: number;
+};
+
+export type SearchProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] };
 };
