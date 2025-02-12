@@ -5,7 +5,7 @@ import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { notFound } from "next/navigation";
-import { safeQuery } from "@/lib/utils";
+import { safeQuery, sortDocumentsByRelevance } from "@/lib/utils";
 
 type SearchProps = {
   params: { slug: string };
@@ -78,8 +78,16 @@ export default async function Search({ params, searchParams }: SearchProps) {
     notFound();
   }
 
+  const decodedQuery = decodeURIComponent(params.slug || "").trim();
+  const cleanedQuery: string = safeQuery(decodedQuery);
+
+  const sortedResults = sortDocumentsByRelevance(
+    dataFetchResults,
+    cleanedQuery,
+  );
+
   const ITEMS_PER_PAGE = 10;
-  const MIN_PAGINATION_RESULTS = dataFetchResults.length > ITEMS_PER_PAGE;
+  const MIN_PAGINATION_RESULTS = sortedResults.length > ITEMS_PER_PAGE;
   function getOffset(): number {
     // not on the first page
     if (Object.hasOwn(searchParams, "page")) {
@@ -94,7 +102,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
     <main>
       <section className="m-auto mt-4 max-w-xl">
         <h2 className="mb-4 text-2xl font-semibold">Results</h2>
-        {dataFetchResults
+        {sortedResults
           .slice(
             getOffset() * ITEMS_PER_PAGE,
             getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
@@ -106,7 +114,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
         {MIN_PAGINATION_RESULTS && (
           <SajeonPagination
             currentPage={searchParams}
-            pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+            pages={Math.ceil(sortedResults.length / ITEMS_PER_PAGE)}
           />
         )}
       </section>
