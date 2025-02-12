@@ -21,7 +21,6 @@ export default async function Search({ params, searchParams }: SearchProps) {
   }
 
   const sortedResults = sortDocumentsByRelevance(words, cleanedQuery);
-  console.log("sorted", sortedResults);
 
   const ITEMS_PER_PAGE = 10;
   const MIN_PAGINATION_RESULTS = sortedResults.length > ITEMS_PER_PAGE;

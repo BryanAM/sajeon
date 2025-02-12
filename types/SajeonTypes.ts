@@ -1,4 +1,4 @@
-export type SajeonSentenceTranslationType = {
+export type SentenceType = {
   kr: string;
   en: string;
 };
@@ -11,7 +11,7 @@ export type SajeonDataModelType = {
   definitions: Array<string>;
   explanation: string;
   pos: string;
-  sentences: Array<SajeonSentenceTranslationType>;
+  sentences: Array<SentenceType>;
 };
 
 export type TeamMemberType = {

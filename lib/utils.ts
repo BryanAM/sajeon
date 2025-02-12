@@ -28,19 +28,22 @@ export function safeQuery(query: string) {
  * Compute a relevance score for a document based on the query.
  * Prioritizes an exact match in Korean (word) or romaja over definitions.
  *
- * @param {Object} doc - A document with fields such as `word`, `romaja`, and `definitions`
+ * @param {Object} word - A word with fields such as `word`, `romaja`, and `definitions`
  * @param {string} query - The full user query (e.g., "평화 coffee")
  * @returns {number} A numeric score representing how relevant the document is.
  */
-export function computeRelevanceScore(doc, query) {
+export function computeRelevanceScore(
+  word: Pick<SajeonDataModelType, "word" | "romaja" | "definitions">,
+  query: string,
+) {
   let score = 0;
   const normalizedQuery = query.trim().toLowerCase();
 
   // --- Exact match on the full query for Korean (word) and romaja ---
-  if (doc.word && doc.word.toLowerCase() === normalizedQuery) {
+  if (word.word && word.word.toLowerCase() === normalizedQuery) {
     score += 100; // Highest priority for exact Korean match
   }
-  if (doc.romaja && doc.romaja.toLowerCase() === normalizedQuery) {
+  if (word.romaja && word.romaja.toLowerCase() === normalizedQuery) {
     score += 90; // Exact romaja match gets slightly lower than word exact match
   }
 
@@ -49,8 +52,8 @@ export function computeRelevanceScore(doc, query) {
 
   tokens.forEach((token) => {
     // --- Korean (word) field scoring ---
-    if (doc.word) {
-      const wordLower = doc.word.toLowerCase();
+    if (word.word) {
+      const wordLower = word.word.toLowerCase();
       if (wordLower === token) {
         score += 70; // Exact token match in Korean field
       } else if (wordLower.includes(token)) {
@@ -59,8 +62,8 @@ export function computeRelevanceScore(doc, query) {
     }
 
     // --- Romaja field scoring ---
-    if (doc.romaja) {
-      const romajaLower = doc.romaja.toLowerCase();
+    if (word.romaja) {
+      const romajaLower = word.romaja.toLowerCase();
       if (romajaLower === token) {
         score += 60; // Exact token match in romaja
       } else if (romajaLower.includes(token)) {
@@ -69,8 +72,8 @@ export function computeRelevanceScore(doc, query) {
     }
 
     // --- Definitions field scoring ---
-    if (doc.definitions && Array.isArray(doc.definitions)) {
-      doc.definitions.forEach((def) => {
+    if (word.definitions && Array.isArray(word.definitions)) {
+      word.definitions.forEach((def) => {
         const defLower = def.toLowerCase();
         if (defLower === token) {
           score += 40; // Exact match in definitions (lower priority)
@@ -87,7 +90,7 @@ export function computeRelevanceScore(doc, query) {
 /**
  * Sorts documents based on the computed relevance score.
  *
- * @param {Array} docs - Array of documents to be sorted.
+ * @param {Array} words - Array of words to be sorted.
  * @param {string} query - The user query to score relevance against.
  * @returns {Array} Sorted array of documents (highest scoring first).
  */
