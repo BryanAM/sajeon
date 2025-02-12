@@ -16,7 +16,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
   /**
    * Return not-found page if we don't have results
    */
-  if (words.length < 1) {
+  if (words.length === 0) {
     notFound();
   }
 

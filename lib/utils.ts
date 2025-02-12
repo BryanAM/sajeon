@@ -28,9 +28,9 @@ export function safeQuery(query: string) {
  * Compute a relevance score for a document based on the query.
  * Prioritizes an exact match in Korean (word) or romaja over definitions.
  *
- * @param {Object} word - A word with fields such as `word`, `romaja`, and `definitions`
- * @param {string} query - The full user query (e.g., "평화 coffee")
- * @returns {number} A numeric score representing how relevant the document is.
+ * word - A word with fields such as `word`, `romaja`, and `definitions`
+ * query - The full user query (e.g., "평화 coffee")
+ *  A numeric score representing how relevant the document is.
  */
 export function computeRelevanceScore(
   word: Pick<SajeonDataModelType, "word" | "romaja" | "definitions">,
@@ -41,10 +41,10 @@ export function computeRelevanceScore(
 
   // --- Exact match on the full query for Korean (word) and romaja ---
   if (word.word && word.word.toLowerCase() === normalizedQuery) {
-    score += 100; // Highest priority for exact Korean match
+    score += 1000; // Highest priority for exact Korean match
   }
   if (word.romaja && word.romaja.toLowerCase() === normalizedQuery) {
-    score += 90; // Exact romaja match gets slightly lower than word exact match
+    score += 1000; // Exact romaja match gets slightly lower than word exact match
   }
 
   // Tokenize the query for finer-grained scoring.
@@ -90,9 +90,9 @@ export function computeRelevanceScore(
 /**
  * Sorts documents based on the computed relevance score.
  *
- * @param {Array} words - Array of words to be sorted.
- * @param {string} query - The user query to score relevance against.
- * @returns {Array} Sorted array of documents (highest scoring first).
+ * words - Array of words to be sorted.
+ * query - The user query to score relevance against.
+ * Sorted array of documents (highest scoring first).
  */
 export function sortDocumentsByRelevance(
   words: Array<SajeonDataModelType>,
