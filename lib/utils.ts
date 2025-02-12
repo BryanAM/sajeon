@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { SajeonDataModelType } from "@/types/SajeonTypes";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -90,8 +91,11 @@ export function computeRelevanceScore(doc, query) {
  * @param {string} query - The user query to score relevance against.
  * @returns {Array} Sorted array of documents (highest scoring first).
  */
-export function sortDocumentsByRelevance(docs, query) {
-  return docs.sort((a, b) => {
+export function sortDocumentsByRelevance(
+  words: Array<SajeonDataModelType>,
+  query: string,
+) {
+  return words.sort((a, b) => {
     const scoreA = computeRelevanceScore(a, query);
     const scoreB = computeRelevanceScore(b, query);
     return scoreB - scoreA; // Descending order: higher scores come first.

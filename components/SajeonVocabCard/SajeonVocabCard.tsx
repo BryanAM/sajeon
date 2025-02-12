@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SajeonVocabCardType } from "../../types/SajeonTypes";
+import { SajeonDataModelType } from "../../types/SajeonTypes";
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import SajeonClipboardButton from "@/components/SajeonClipboardButton/SajeonClipboardButton";
 
-function SajeonVocabCard({ data }: { data: SajeonVocabCardType }) {
+function SajeonVocabCard({ data }: { data: SajeonDataModelType }) {
   const [baseURL, setBaseUrl] = useState<string>("");
 
   useEffect(() => {
