@@ -37,3 +37,8 @@ export type TeamMemberType = {
   websiteTag?: string | undefined;
   key: number;
 };
+
+export type SearchProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] };
+};

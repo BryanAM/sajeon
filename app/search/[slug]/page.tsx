@@ -1,18 +1,12 @@
 import React from "react";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
-import { SajeonVocabCardType } from "../../../types/SajeonTypes";
+import { SajeonVocabCardType, SearchProps } from "../../../types/SajeonTypes";
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { notFound } from "next/navigation";
 import { safeQuery, sortDocumentsByRelevance } from "@/lib/utils";
-
-type SearchProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] };
-};
-
-async function getData(params: SearchProps["params"]) {
+async function getData(cleanedQuery: string) {
   try {
     await dbConnect();
   } catch {
@@ -20,14 +14,11 @@ async function getData(params: SearchProps["params"]) {
   }
 
   try {
-    const decodedQuery = decodeURIComponent(params.slug || "").trim();
-
     // Limit query length to prevent abuse
-    if (decodedQuery.length > 50) {
+    if (cleanedQuery.length > 50) {
       throw Error("Search query is too long.");
     }
 
-    const cleanedQuery: string = safeQuery(decodedQuery);
     const koreanCharsRegex = /[\uAC00-\uD7A3]/;
     const tokens = cleanedQuery.split(/\s+/).filter(Boolean);
 
@@ -62,29 +53,20 @@ async function getData(params: SearchProps["params"]) {
 }
 
 export default async function Search({ params, searchParams }: SearchProps) {
-  // query the database
+  const decodedQuery = decodeURIComponent(params.slug || "").trim();
+  const cleanedQuery: string = safeQuery(decodedQuery);
 
-  const data = await getData(params);
-
-  // await the json data
+  const data = await getData(cleanedQuery);
   const words = await data.json();
-
-  const dataFetchResults = words;
 
   /**
    * Return not-found page if we don't have results
    */
-  if (dataFetchResults.length < 1) {
+  if (words.length < 1) {
     notFound();
   }
 
-  const decodedQuery = decodeURIComponent(params.slug || "").trim();
-  const cleanedQuery: string = safeQuery(decodedQuery);
-
-  const sortedResults = sortDocumentsByRelevance(
-    dataFetchResults,
-    cleanedQuery,
-  );
+  const sortedResults = sortDocumentsByRelevance(words, cleanedQuery);
 
   const ITEMS_PER_PAGE = 10;
   const MIN_PAGINATION_RESULTS = sortedResults.length > ITEMS_PER_PAGE;
