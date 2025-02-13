@@ -12,7 +12,7 @@ function SajeonSearch({
   inputValue,
 }: {
   formAction: FormActionType;
-  inputValue: string;
+  inputValue?: string;
 }) {
   const [searchValue, setSearchValue] = useState<string>(
     inputValue ? inputValue : "",
