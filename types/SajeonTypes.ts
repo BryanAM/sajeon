@@ -32,3 +32,5 @@ export type SearchProps = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] };
 };
+
+export type FormActionType = (formData: FormData) => Promise<void>;

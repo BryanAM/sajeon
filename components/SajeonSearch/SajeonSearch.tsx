@@ -1,23 +1,31 @@
-'use client';
+"use client";
 
-import React, { useState }from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import { FormActionType } from "@/types/SajeonTypes";
 
-function SajeonSearch({formAction, inputValue}: any) {
-  const [searchValue, setSearchValue] = useState(inputValue? inputValue : '');
-  const router = useRouter()
+function SajeonSearch({
+  formAction,
+  inputValue,
+}: {
+  formAction: FormActionType;
+  inputValue: string;
+}) {
+  const [searchValue, setSearchValue] = useState<string>(
+    inputValue ? inputValue : "",
+  );
+  const router = useRouter();
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
-  }
+  };
 
   const handleSubmit = () => {
-    router.push(`/search/${encodeURIComponent(searchValue.trim())}`)
-  }
+    router.push(`/search/${encodeURIComponent(searchValue.trim())}`);
+  };
 
   return (
     <search>
@@ -58,7 +66,12 @@ function SajeonSearch({formAction, inputValue}: any) {
               onChange={(event) => onChange(event)}
             />
           </div>
-          <Button className="mr-1 hidden md:flex" size="lg" type="submit" data-testid="search-desktop">
+          <Button
+            className="mr-1 hidden md:flex"
+            size="lg"
+            type="submit"
+            data-testid="search-desktop"
+          >
             Search
           </Button>
         </div>
