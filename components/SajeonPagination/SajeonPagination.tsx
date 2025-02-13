@@ -13,8 +13,9 @@ type SajeonPaginationProps = {
   currentPage: number;
 };
 
+const ITEMS_PER_LAYER: number = 4;
+
 function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
-  const ITEMS_PER_LAYER: number = 3;
   const isLastPage = () => currentPage === totalPages;
   const isFirstPage = () => currentPage === 1;
 
@@ -35,7 +36,7 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
    * 7 ....
    */
   function getTotalLayers(): number {
-    return Math.ceil(totalPages / 3);
+    return Math.ceil(totalPages / ITEMS_PER_LAYER);
   }
 
   /**
@@ -46,7 +47,7 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
    *  totalPages 7, 8, 9 = layer 3
    */
   function getCurrentLayer(): number {
-    return Math.floor((currentPage - 1) / 3) + 1;
+    return Math.floor((currentPage - 1) / ITEMS_PER_LAYER) + 1;
   }
 
   /**
@@ -59,12 +60,12 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
    */
   function getAdjustedStartPage(): number {
     // If there are 3 or fewer totalPages, always start pagination at 1
-    if (totalPages <= 3) {
+    if (totalPages <= ITEMS_PER_LAYER) {
       return 0;
     }
 
     // easy case all even numbers so we want to say offsets should be 0, 3, 6, 9 etc...
-    const evenOffset = (getCurrentLayer() - 1) * 3;
+    const evenOffset = (getCurrentLayer() - 1) * ITEMS_PER_LAYER;
 
     // if current layer is the last layer, special behavior when we have dangling totalPages
     if (getCurrentLayer() === getTotalLayers()) {
@@ -90,7 +91,7 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
   }
 
   function displayEllipsisBefore(): boolean {
-    return isLastPage() && totalPages > 3;
+    return isLastPage() && totalPages > ITEMS_PER_LAYER;
   }
 
   return (
@@ -105,7 +106,7 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
         />
         {displayEllipsisBefore() && <PaginationEllipsis />}
         {Array.from(
-          { length: Math.min(totalPages, 3) },
+          { length: Math.min(totalPages, ITEMS_PER_LAYER) },
           (_, index: number) => getAdjustedStartPage() + index + 1,
         ).map((item) => (
           <PaginationLink
