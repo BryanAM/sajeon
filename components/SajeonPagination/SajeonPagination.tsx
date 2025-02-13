@@ -10,34 +10,29 @@ import { cn } from "@/lib/utils";
 
 type SajeonPaginationProps = {
   totalPages: number;
-  currentPage: { [key: string]: string | string[] };
+  currentPage: number;
 };
 
 function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
   const ITEMS_PER_LAYER: number = 3;
-  const isLastPage = () => Number(currentPage.page) === totalPages;
-  const isFirstPage = () =>
-    Number(currentPage.page) === 1 || !Number(currentPage.page);
+  const isLastPage = () => currentPage === totalPages;
+  const isFirstPage = () => currentPage === 1;
 
-  function getCurrentPage(): number {
-    return Object.hasOwn(currentPage, "page") ? Number(currentPage.page) : 1;
-  }
-
-  function getNextPage(): string {
-    if (Object.hasOwn(currentPage, "page")) {
-      const currPage: number = Number(currentPage.page);
-      return currPage < totalPages ? String(currPage + 1) : String(totalPages);
+  function getNextPage(): number {
+    if (currentPage > 1) {
+      const currPage: number = Number(currentPage);
+      return currPage < totalPages ? currPage + 1 : totalPages;
     } else {
-      return "2";
+      return 2;
     }
   }
 
-  function getPreviousPage(): string {
-    if (Object.hasOwn(currentPage, "page")) {
-      const currPage: number = Number(currentPage.page);
-      return currPage > 1 ? String(currPage - 1) : "1";
+  function getPreviousPage(): number {
+    if (currentPage > 2) {
+      const currPage: number = Number(currentPage);
+      return currPage > 1 ? currPage - 1 : 1;
     } else {
-      return "1";
+      return 1;
     }
   }
 
@@ -61,7 +56,7 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
    *  totalPages 7, 8, 9 = layer 3
    */
   function getCurrentLayer(): number {
-    return Math.floor((getCurrentPage() - 1) / 3) + 1;
+    return Math.floor((currentPage - 1) / 3) + 1;
   }
 
   /**
@@ -127,8 +122,8 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
             key={item}
             href={`?page=${item}`}
             isActive={
-              Number(currentPage.page) === item ||
-              (!Number(currentPage.page) && item === 1)
+              Number(currentPage) === item ||
+              (!Number(currentPage) && item === 1)
             }
           >
             {item}

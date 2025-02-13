@@ -49,7 +49,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
 
         {MIN_PAGINATION_RESULTS && (
           <SajeonPagination
-            currentPage={searchParams}
+            currentPage={searchParams.page ? Number(searchParams.page) : 1}
             totalPages={Math.ceil(sortedResults.length / ITEMS_PER_PAGE)}
           />
         )}
