@@ -116,7 +116,7 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
       {MIN_PAGINATION_RESULTS && (
         <SajeonPagination
           currentPage={searchParams}
-          pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+          totalPages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
         />
       )}
     </main>

@@ -9,14 +9,15 @@ import {
 import { cn } from "@/lib/utils";
 
 type SajeonPaginationProps = {
-  pages: number;
+  totalPages: number;
   currentPage: { [key: string]: string | string[] };
 };
 
-function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
+function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
   const ITEMS_PER_LAYER: number = 3;
-  const isLastPage = () => Number(currentPage.page) === pages;
-  const isFirstPage = () => Number(currentPage.page) === 1 || !Number(currentPage.page);
+  const isLastPage = () => Number(currentPage.page) === totalPages;
+  const isFirstPage = () =>
+    Number(currentPage.page) === 1 || !Number(currentPage.page);
 
   function getCurrentPage(): number {
     return Object.hasOwn(currentPage, "page") ? Number(currentPage.page) : 1;
@@ -25,7 +26,7 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   function getNextPage(): string {
     if (Object.hasOwn(currentPage, "page")) {
       const currPage: number = Number(currentPage.page);
-      return currPage < pages ? String(currPage + 1) : String(pages);
+      return currPage < totalPages ? String(currPage + 1) : String(totalPages);
     } else {
       return "2";
     }
@@ -43,21 +44,21 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   /**
    *
    * @returns total possible layers
-   * e.g. 7 pages = 3 layers
+   * e.g. 7 totalPages = 3 layers
    * 1, 2, 3
    * 4, 5, 6
    * 7 ....
    */
   function getTotalLayers(): number {
-    return Math.ceil(pages / 3);
+    return Math.ceil(totalPages / 3);
   }
 
   /**
    *
    * @returns current layer number
-   *  pages 1, 2, 3 = layer 1
-   *  pages 4, 5, 6 = layer 2
-   *  pages 7, 8, 9 = layer 3
+   *  totalPages 1, 2, 3 = layer 1
+   *  totalPages 4, 5, 6 = layer 2
+   *  totalPages 7, 8, 9 = layer 3
    */
   function getCurrentLayer(): number {
     return Math.floor((getCurrentPage() - 1) / 3) + 1;
@@ -66,29 +67,31 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   /**
    *
    * @returns number
-   * @description when loading data we need to handle several cases for how many pages we render
-   * case 1: pages = 1, no pagination
-   * case 2: pages = 3, 6, 9, even pagination 1 to 3 xyz
-   * case 3: uneaven pagiantion = e.g.4, 5, 7, 8 where we need to "backtrack" handing pages and update the offset
+   * @description when loading data we need to handle several cases for how many totalPages we render
+   * case 1: totalPages = 1, no pagination
+   * case 2: totalPages = 3, 6, 9, even pagination 1 to 3 xyz
+   * case 3: uneaven pagiantion = e.g.4, 5, 7, 8 where we need to "backtrack" handing totalPages and update the offset
    */
   function getAdjustedStartPage(): number {
-    // If there are 3 or fewer pages, always start pagination at 1
-    if (pages <= 3) {
+    // If there are 3 or fewer totalPages, always start pagination at 1
+    if (totalPages <= 3) {
       return 0;
     }
 
     // easy case all even numbers so we want to say offsets should be 0, 3, 6, 9 etc...
     const evenOffset = (getCurrentLayer() - 1) * 3;
 
-    // if current layer is the last layer, special behavior when we have dangling pages
+    // if current layer is the last layer, special behavior when we have dangling totalPages
     if (getCurrentLayer() === getTotalLayers()) {
       // Calculate the potential last page of the current layer
       // e.g. if 7 is the last "actual" page the last potential is "9"
       const potentialLastPageOfLayer = evenOffset + ITEMS_PER_LAYER;
 
-      // Calculate how many pages we need to backtrack if the current page is in the last layer
+      // Calculate how many totalPages we need to backtrack if the current page is in the last layer
       const backtrack =
-        potentialLastPageOfLayer > pages ? potentialLastPageOfLayer - pages : 0;
+        potentialLastPageOfLayer > totalPages
+          ? potentialLastPageOfLayer - totalPages
+          : 0;
 
       // Adjust the start page for the last layer
       return evenOffset - backtrack;
@@ -102,7 +105,7 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
   }
 
   function displayEllipsisBefore(): boolean {
-    return isLastPage() && pages > 3;
+    return isLastPage() && totalPages > 3;
   }
 
   return (
@@ -117,14 +120,15 @@ function SajeonPagination({ pages, currentPage }: SajeonPaginationProps) {
         />
         {displayEllipsisBefore() && <PaginationEllipsis />}
         {Array.from(
-          { length: Math.min(pages, 3) },
+          { length: Math.min(totalPages, 3) },
           (_, index: number) => getAdjustedStartPage() + index + 1,
         ).map((item) => (
           <PaginationLink
             key={item}
             href={`?page=${item}`}
             isActive={
-              Number(currentPage.page) === item || (!Number(currentPage.page) && item === 1)
+              Number(currentPage.page) === item ||
+              (!Number(currentPage.page) && item === 1)
             }
           >
             {item}
