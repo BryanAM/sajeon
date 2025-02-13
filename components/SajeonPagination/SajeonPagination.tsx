@@ -19,21 +19,11 @@ function SajeonPagination({ totalPages, currentPage }: SajeonPaginationProps) {
   const isFirstPage = () => currentPage === 1;
 
   function getNextPage(): number {
-    if (currentPage > 1) {
-      const currPage: number = Number(currentPage);
-      return currPage < totalPages ? currPage + 1 : totalPages;
-    } else {
-      return 2;
-    }
+    return currentPage < totalPages ? currentPage + 1 : totalPages;
   }
 
   function getPreviousPage(): number {
-    if (currentPage > 2) {
-      const currPage: number = Number(currentPage);
-      return currPage > 1 ? currPage - 1 : 1;
-    } else {
-      return 1;
-    }
+    return currentPage > 1 ? currentPage - 1 : 1;
   }
 
   /**
