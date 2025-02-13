@@ -1,6 +1,6 @@
 import React from "react";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
-import { SearchProps, SajeonDataModelType } from "../../../types/SajeonTypes";
+import { SearchProps, DictionaryEntryType } from "../../../types/SajeonTypes";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { notFound } from "next/navigation";
 import { safeQuery, sortDocumentsByRelevance } from "@/lib/utils";
@@ -11,7 +11,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
   const cleanedQuery: string = safeQuery(decodedQuery);
 
   const data = await getData(cleanedQuery);
-  const words: Array<SajeonDataModelType> = await data.json();
+  const words: DictionaryEntryType[] = await data.json();
 
   /**
    * Return not-found page if we don't have results
@@ -43,14 +43,14 @@ export default async function Search({ params, searchParams }: SearchProps) {
             getOffset() * ITEMS_PER_PAGE,
             getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
           )
-          .map((data: SajeonDataModelType, index: number) => (
+          .map((data: DictionaryEntryType, index: number) => (
             <SajeonVocabCard key={data._id || index} data={data} />
           ))}
 
         {MIN_PAGINATION_RESULTS && (
           <SajeonPagination
-            currentPage={searchParams}
-            pages={Math.ceil(sortedResults.length / ITEMS_PER_PAGE)}
+            currentPage={searchParams.page ? Number(searchParams.page) : 1}
+            totalPages={Math.ceil(sortedResults.length / ITEMS_PER_PAGE)}
           />
         )}
       </section>

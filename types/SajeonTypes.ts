@@ -3,15 +3,15 @@ export type SentenceType = {
   en: string;
 };
 
-export type SajeonDataModelType = {
+export type DictionaryEntryType = {
   _id: string;
   word: string;
   romaja: string;
   hanja: string;
-  definitions: Array<string>;
+  definitions: string[];
   explanation: string;
   pos: string;
-  sentences: Array<SentenceType>;
+  sentences: SentenceType[];
 };
 
 export type TeamMemberType = {
@@ -32,3 +32,5 @@ export type SearchProps = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] };
 };
+
+export type FormActionType = (formData: FormData) => Promise<void>;

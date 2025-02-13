@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/mongodb";
 import Word from "@/models/Word";
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import MooncakesDataCard from "@/components/MooncakesDataCard/MooncakesDataCard";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
 import { Button } from "@/components/ui/button";
@@ -109,14 +109,14 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
             getOffset() * ITEMS_PER_PAGE,
             getOffset() * ITEMS_PER_PAGE + ITEMS_PER_PAGE,
           )
-          .map((word: SajeonDataModelType) => (
+          .map((word: DictionaryEntryType) => (
             <MooncakesDataCard key={word._id} word={word} />
           ))}
       </ol>
       {MIN_PAGINATION_RESULTS && (
         <SajeonPagination
-          currentPage={searchParams}
-          pages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
+          currentPage={searchParams.page ? Number(searchParams.page) : 1}
+          totalPages={Math.ceil(dataFetchResults.length / ITEMS_PER_PAGE)}
         />
       )}
     </main>

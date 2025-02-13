@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -33,7 +33,7 @@ export function safeQuery(query: string) {
  *  A numeric score representing how relevant the document is.
  */
 export function computeRelevanceScore(
-  word: Pick<SajeonDataModelType, "word" | "romaja" | "definitions">,
+  word: Pick<DictionaryEntryType, "word" | "romaja" | "definitions">,
   query: string,
 ) {
   let score = 0;
@@ -95,7 +95,7 @@ export function computeRelevanceScore(
  * Sorted array of documents (highest scoring first).
  */
 export function sortDocumentsByRelevance(
-  words: Array<SajeonDataModelType>,
+  words: DictionaryEntryType[],
   query: string,
 ) {
   return words.sort((a, b) => {
