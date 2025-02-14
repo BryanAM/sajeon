@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ import MooncakesFormSentences from "@/components/MooncakesFormSentences/Mooncake
 export default function MooncakesEditDialogue({
   word,
 }: {
-  word: SajeonDataModelType;
+  word: DictionaryEntryType;
 }) {
   // Helper function to generate unique IDs
 

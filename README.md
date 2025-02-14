@@ -45,6 +45,10 @@ $ npm install
 $ npm run dev
 ```
 
+sajeon will default to port: 8080
+
+To run with DB permissions you'll need to reach out to the owners to get access.
+
 ## Useful Commands
 
 |Command | Description |

@@ -1,8 +1,8 @@
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 
-export const databaseDataMock: Array<SajeonDataModelType> = [
+export const databaseDataMock: DictionaryEntryType[] = [
   {
-    _id: '1',
+    _id: "1",
     word: "사랑",
     romaja: "sarang",
     hanja: "愛",
@@ -25,7 +25,7 @@ export const databaseDataMock: Array<SajeonDataModelType> = [
     ],
   },
   {
-    _id: '2',
+    _id: "2",
     word: "행복",
     romaja: "haengbok",
     hanja: "幸福",
@@ -48,7 +48,7 @@ export const databaseDataMock: Array<SajeonDataModelType> = [
     ],
   },
   {
-    _id: '3',
+    _id: "3",
     word: "우정",
     romaja: "ujeong",
     hanja: "友情",
@@ -70,4 +70,4 @@ export const databaseDataMock: Array<SajeonDataModelType> = [
       },
     ],
   },
-]
+];

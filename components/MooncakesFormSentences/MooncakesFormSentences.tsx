@@ -1,13 +1,17 @@
 "use client";
 
-import { SajeonDataModelType } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
-export default function MooncakesFormSentences({ word }: { word: SajeonDataModelType }) {
+export default function MooncakesFormSentences({
+  word,
+}: {
+  word: DictionaryEntryType;
+}) {
   const generateUniqueId = () =>
     `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -32,7 +36,7 @@ export default function MooncakesFormSentences({ word }: { word: SajeonDataModel
     <div className="grid grid-cols-2 items-center gap-4">
       {sentences.map((sentence, index) => (
         <div
-          className="col-span-2 md:col-span-1 rounded-tr-sm border-r border-t border-solid border-muted-foreground/50 p-4"
+          className="col-span-2 rounded-tr-sm border-r border-t border-solid border-muted-foreground/50 p-4 md:col-span-1"
           key={sentence.id}
         >
           <div className="flex items-center justify-between">
