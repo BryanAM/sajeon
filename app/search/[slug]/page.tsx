@@ -1,4 +1,3 @@
-import React from "react";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 import { SearchProps, DictionaryEntryType } from "../../../types/SajeonTypes";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";

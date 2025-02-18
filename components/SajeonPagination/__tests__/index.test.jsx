@@ -1,4 +1,3 @@
-import React from "react";
 import SajeonPagination from "../SajeonPagination";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 
