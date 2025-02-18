@@ -47,35 +47,35 @@ describe("Sajeon Pagination Ellipsis Testing", () => {
   it("One page, no ellipsis", () => {
     const results = render(<SajeonPagination totalPages={1} currentPage={1} />);
 
-    const span = results.queryByText("More totalPages", { hidden: true });
+    const span = results.queryByText("More pages", { hidden: true });
     expect(span).not.toBeInTheDocument();
   });
 
   it("Two totalPages, no ellipsis", () => {
     const results = render(<SajeonPagination totalPages={2} currentPage={1} />);
 
-    const span = results.queryByText("More totalPages", { hidden: true });
+    const span = results.queryByText("More pages", { hidden: true });
     expect(span).not.toBeInTheDocument();
   });
 
   it("Three totalPages, no ellipsis", () => {
     const results = render(<SajeonPagination totalPages={3} currentPage={1} />);
 
-    const span = results.queryByText("More totalPages", { hidden: true });
+    const span = results.queryByText("More pages", { hidden: true });
     expect(span).not.toBeInTheDocument();
   });
 
   it("Four totalPages, ellipsis found", () => {
-    const results = render(<SajeonPagination totalPages={4} currentPage={1} />);
+    const results = render(<SajeonPagination totalPages={8} currentPage={1} />);
 
-    const span = results.queryByText("More totalPages", { hidden: true });
+    const span = results.queryByText("More pages", { hidden: true });
     expect(span).toBeInTheDocument();
   });
 
   it("Last page, ellipsis found i.e. because there are previous ones", () => {
     const results = render(<SajeonPagination totalPages={7} currentPage={7} />);
 
-    const span = results.queryByText("More totalPages", { hidden: true });
+    const span = results.queryByText("More pages", { hidden: true });
     expect(span).toBeInTheDocument();
   });
 });
