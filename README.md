@@ -4,8 +4,7 @@
 ![screen-gif](./sajeon.gif)
 
 ## Guide
-- [Sajeon A Korean English Dictionary Application](#sajeon-a-korean-english-dictionary-application)
-- [📓 Sajeon](#-sajeon)
+- [📓 Sajeon A Korean English Dictionary Application](#-sajeon-a-korean-english-dictionary-application)
   - [Guide](#guide)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -70,5 +69,3 @@ Sajeon uses next lint and prettier for eslint adherence.
 * [mongoose & mongodb](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
 * [Lucide Icons](https://lucide.dev) 
 * [eslint](https://eslint.org)
-
-
