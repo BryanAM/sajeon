@@ -29,8 +29,8 @@ export type TeamMemberType = {
 };
 
 export type SearchProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] }>;
 };
 
 export type FormActionType = (formData: FormData) => Promise<void>;
