@@ -1,3 +1,4 @@
+import { MAX_QUERY_LENGTH } from "@/lib/constants";
 import dbConnect from "@/lib/mongodb";
 import Word from "@/models/Word";
 
@@ -10,7 +11,7 @@ export async function getData(cleanedQuery: string) {
 
   try {
     // Limit query length to prevent abuse
-    if (cleanedQuery.length > 50) {
+    if (cleanedQuery.length > MAX_QUERY_LENGTH) {
       throw Error("Search query is too long.");
     }
 
