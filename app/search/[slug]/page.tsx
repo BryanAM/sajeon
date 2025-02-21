@@ -1,4 +1,3 @@
-import React from "react";
 import SajeonVocabCard from "@/components/SajeonVocabCard/SajeonVocabCard";
 import { SearchProps, DictionaryEntryType } from "../../../types/SajeonTypes";
 import SajeonPagination from "@/components/SajeonPagination/SajeonPagination";
@@ -7,7 +6,9 @@ import { safeQuery, sortDocumentsByRelevance } from "@/lib/utils";
 import { getData } from "@/queries/searchQueries";
 
 export default async function Search({ params, searchParams }: SearchProps) {
-  const decodedQuery = decodeURIComponent(params.slug || "").trim();
+  const { slug } = await params;
+  const { page } = await searchParams;
+  const decodedQuery = decodeURIComponent(slug || "").trim();
   const cleanedQuery: string = safeQuery(decodedQuery);
 
   const data = await getData(cleanedQuery);
@@ -26,8 +27,8 @@ export default async function Search({ params, searchParams }: SearchProps) {
   const MIN_PAGINATION_RESULTS = sortedResults.length > ITEMS_PER_PAGE;
   function getOffset(): number {
     // not on the first page
-    if (Object.hasOwn(searchParams, "page")) {
-      return Number(searchParams.page) - 1;
+    if (page) {
+      return Number(page) - 1;
     } else {
       // we are on the first page i.e. no paramater
       return 0;
@@ -49,7 +50,7 @@ export default async function Search({ params, searchParams }: SearchProps) {
 
         {MIN_PAGINATION_RESULTS && (
           <SajeonPagination
-            currentPage={searchParams.page ? Number(searchParams.page) : 1}
+            currentPage={page ? Number(page) : 1}
             totalPages={Math.ceil(sortedResults.length / ITEMS_PER_PAGE)}
           />
         )}
