@@ -12,7 +12,7 @@ export async function getData(cleanedQuery: string) {
   try {
     // Limit query length to prevent abuse
     if (cleanedQuery.length > MAX_QUERY_LENGTH) {
-      throw Error("Search query is too long.");
+      throw Error("Query length exceeds allowed 50 characters.");
     }
 
     const koreanCharsRegex = /[\uAC00-\uD7A3]/;
@@ -43,7 +43,7 @@ export async function getData(cleanedQuery: string) {
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {
-    throw Error("We ran into an issue fetching your results. Try again!");
+  } catch (error: unknown) {
+    throw Error(`Error in search query: ${error}`);
   }
 }
