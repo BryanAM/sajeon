@@ -1,5 +1,3 @@
-import SajeonTitle from "@/components/SajeonTitle/SajeonTitle";
-import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

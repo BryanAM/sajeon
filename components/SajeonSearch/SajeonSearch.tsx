@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import { FormActionType } from "@/types/SajeonTypes";
+import { MAX_QUERY_LENGTH } from "@/lib/constants";
 
 function SajeonSearch({
   formAction,
@@ -54,7 +55,7 @@ function SajeonSearch({
               type="search"
               variant="naked"
               enterKeyHint="search"
-              maxLength={200}
+              maxLength={MAX_QUERY_LENGTH}
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"

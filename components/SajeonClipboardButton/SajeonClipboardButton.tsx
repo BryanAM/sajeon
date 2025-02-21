@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Share2Icon } from "@radix-ui/react-icons";
-
 
 import {
   Popover,
@@ -22,15 +21,12 @@ function SajeonClipboardButton({
   iconType,
   customMessage,
 }: SajeonClipboardButtonProps) {
-
   const getDefaultMessage = () => {
-    return customMessage || `Copied ${copyData}`
-  }
+    return customMessage || `Copied ${copyData}`;
+  };
 
   const [open, setOpen] = useState(false);
   const [clipboardContent, setClipboardContent] = useState(getDefaultMessage());
-
-
 
   const copyToClipboard = async () => {
     try {
