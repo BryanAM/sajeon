@@ -17,7 +17,7 @@
 
 
 ### Prerequisites
-This project uses node version 16.13.0 or greater.
+This project uses node version 20 or greater.
 
 Also, there are three required environment files. Please contact the admins to get a copy of the proper environment variables. 
 
