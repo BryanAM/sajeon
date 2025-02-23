@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import BuiltWithCards from "./built-with-cards";
+
 import { korean_data } from "./korean_data";
 import "./about.css";
 import { teamData } from "./teamData";
@@ -112,23 +112,6 @@ export default function About() {
           <TeamMember key={key} {...teamData} />
         ))}
       </div>
-      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
-        Built With
-      </h2>
-      <p>
-        Sajeon was made possible thanks to the following tools and creators.
-      </p>
-      <BuiltWithCards />
-
-      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
-        Join Us
-      </h2>
-      <p>
-        We are constantly looking to improving Sajeon, the data quality, and
-        quantity. If you think you&apos;ll be able to assist in building out or
-        improving the Korean / English langauage corpus, contact us with a short
-        description on how you can help and your background with Korean.
-      </p>
       <section className="mt-12 block truncate whitespace-nowrap rounded-sm bg-primary pb-4 pt-4">
         <div className="animate-loop">
           {korean_data.map((word) => (
