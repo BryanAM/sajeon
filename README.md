@@ -1,10 +1,11 @@
-# 📓 Sajeon A Korean English Dictionary Application 
+# 📓 Sajeon A Korean English Dictionary Application v1.0.0
+
 > A simple, responsive Korean & English dictionary.
 
 ![screen-gif](./sajeon.gif)
 
 ## Guide
-- [📓 Sajeon A Korean English Dictionary Application](#-sajeon-a-korean-english-dictionary-application)
+- [📓 Sajeon A Korean English Dictionary Application v1.0.0](#-sajeon-a-korean-english-dictionary-application-v100)
   - [Guide](#guide)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
