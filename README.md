@@ -10,7 +10,6 @@
     - [Prerequisites](#prerequisites)
     - [Local Setup](#local-setup)
   - [Useful Commands](#useful-commands)
-  - [Contributing](#contributing)
   - [Technologies](#technologies)
 
 ## Getting Started 
@@ -56,10 +55,6 @@ To run with DB permissions you'll need to reach out to the owners to get access.
 | `npm run test` | Run component tests in sajeon|
 | `npm run test-e2e` | run all playwrite tests |
 
-## Contributing 
-Sajeon uses next lint and prettier for eslint adherence.
-
-
 ## Technologies
 * [nextjs](https://nextjs.org)
 * [shadcn/ui](https://ui.shadcn.com)
@@ -69,3 +64,7 @@ Sajeon uses next lint and prettier for eslint adherence.
 * [mongoose & mongodb](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
 * [Lucide Icons](https://lucide.dev) 
 * [eslint](https://eslint.org)
+* [playwright](https://playwright.dev)
+* [Testing Library](https://testing-library.com)
+* [jest](https://jestjs.io)
+* [Sonner](https://sonner.emilkowal.ski)
