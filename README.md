@@ -1,16 +1,16 @@
-# 📓 Sajeon A Korean English Dictionary Application 
-> A simple, responsive Korean & English dictionary.
+# 📓 Sajeon A Korean English Dictionary Application v1.0.0
+
+> A simple, responsive Korean & English dictionary for Korean learners.
 
 ![screen-gif](./sajeon.gif)
 
 ## Guide
-- [📓 Sajeon A Korean English Dictionary Application](#-sajeon-a-korean-english-dictionary-application)
+- [📓 Sajeon A Korean English Dictionary Application v1.0.0](#-sajeon-a-korean-english-dictionary-application-v100)
   - [Guide](#guide)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Local Setup](#local-setup)
   - [Useful Commands](#useful-commands)
-  - [Contributing](#contributing)
   - [Technologies](#technologies)
 
 ## Getting Started 
@@ -18,7 +18,7 @@
 
 
 ### Prerequisites
-This project uses node version 16.13.0 or greater.
+This project uses node version 20 or greater.
 
 Also, there are three required environment files. Please contact the admins to get a copy of the proper environment variables. 
 
@@ -56,10 +56,6 @@ To run with DB permissions you'll need to reach out to the owners to get access.
 | `npm run test` | Run component tests in sajeon|
 | `npm run test-e2e` | run all playwrite tests |
 
-## Contributing 
-Sajeon uses next lint and prettier for eslint adherence.
-
-
 ## Technologies
 * [nextjs](https://nextjs.org)
 * [shadcn/ui](https://ui.shadcn.com)
@@ -69,3 +65,7 @@ Sajeon uses next lint and prettier for eslint adherence.
 * [mongoose & mongodb](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
 * [Lucide Icons](https://lucide.dev) 
 * [eslint](https://eslint.org)
+* [playwright](https://playwright.dev)
+* [Testing Library](https://testing-library.com)
+* [jest](https://jestjs.io)
+* [Sonner](https://sonner.emilkowal.ski)
