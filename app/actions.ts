@@ -23,6 +23,8 @@ export async function formAction(formData: FormData) {
  * that will update the database and respective word.
  */
 export async function updateDatabase(formData: FormData) {
+  //TODO Authentication check before updating DB, otherwise redirect
+
   /**
    *
    * @returns an array of sentences to replace the DB entry.
