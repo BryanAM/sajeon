@@ -40,7 +40,6 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
     "next": "^15.1.7",
-    "next-auth": "^4.24.11",
     "next-themes": "^0.2.1",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
