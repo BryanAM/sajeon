@@ -68,6 +68,12 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
+      sizes: "180x180",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/apple-touch-icon-180x180.png`,
+    },
+    {
+      rel: "icon",
       sizes: "512x512",
       type: "image/png",
       url: `${process.env.BASE_URL}/android-chrome-512x512.png`,
@@ -116,9 +122,14 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: `${process.env.BASE_URL}/icon.ico`,
+      url: `${process.env.BASE_URL}/favicon.ico`,
       type: "image/x-icon",
       sizes: "256x256",
+    },
+    {
+      rel: "mask-icon",
+      url: "/safari-pinned-tab.svg",
+      color: "#000000",
     },
   ],
 };
