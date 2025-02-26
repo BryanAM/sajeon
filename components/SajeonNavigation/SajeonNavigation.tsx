@@ -2,11 +2,25 @@ import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ShieldUserIcon } from "lucide-react";
+import { ShieldUserIcon, UserPenIcon } from "lucide-react";
 
 async function SajeonNavigation() {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getRoles } = getKindeServerSession();
   const isLoggedIn = await isAuthenticated();
+  const roles = await getRoles();
+
+  const getUserRole = () => {
+    if (!roles || roles.length === 0) {
+      return {
+        name: "User",
+        key: "user",
+        id: `${crypto.randomUUID()}`,
+      };
+    }
+
+    return roles[0];
+  };
+  const userRole = getUserRole();
 
   return (
     <nav
@@ -53,8 +67,12 @@ async function SajeonNavigation() {
             <li className="mr-2 flex">
               {isLoggedIn && (
                 <>
-                  <span className="mr-1">Admin</span>
-                  <ShieldUserIcon size={18} />
+                  <span className="mr-1">{userRole.name}</span>
+                  {userRole.key === "admin" ? (
+                    <ShieldUserIcon size={18} />
+                  ) : (
+                    <UserPenIcon size={18} />
+                  )}
                 </>
               )}
             </li>
