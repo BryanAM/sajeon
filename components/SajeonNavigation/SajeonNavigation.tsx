@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { ShieldUserIcon } from "lucide-react";
 
 async function SajeonNavigation() {
   const { isAuthenticated } = getKindeServerSession();
@@ -20,27 +21,48 @@ async function SajeonNavigation() {
         dir="ltr"
       >
         <li className="flex items-center">
-          <Link
-            className=" inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-            href="/"
-          >
-            <span className="text-lg">❀</span>사전
-          </Link>
-          <Link
-            className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-            href="/about"
-          >
-            About
-          </Link>
-          {isLoggedIn && (
-            <LogoutLink className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-              Logout
-            </LogoutLink>
-          )}
+          <ul className="flex">
+            <li>
+              <Link
+                className=" inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                href="/"
+              >
+                <span className="text-lg">❀</span>사전
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                href="/about"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              {isLoggedIn && (
+                <LogoutLink className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                  Logout
+                </LogoutLink>
+              )}
+            </li>
+          </ul>
         </li>
 
         <li>
-          <SajeonThemeSelector />
+          <ul className="flex items-center text-sm font-semibold">
+            <li className="mr-2 flex">
+              {isLoggedIn && (
+                <>
+                  <span className="mr-1">Admin</span>
+                  <ShieldUserIcon size={18} />
+                </>
+              )}
+            </li>
+
+            <li>
+              <SajeonThemeSelector />
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
