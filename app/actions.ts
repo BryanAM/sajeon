@@ -3,6 +3,8 @@
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 /**
  *
@@ -23,7 +25,14 @@ export async function formAction(formData: FormData) {
  * that will update the database and respective word.
  */
 export async function updateDatabase(formData: FormData) {
-  //TODO Authentication check before updating DB, otherwise redirect
+  const { isAuthenticated, getAccessToken } = getKindeServerSession();
+  const token = await getAccessToken();
+
+  if (!(await isAuthenticated())) {
+    // check token permissions
+
+    redirect("/api/auth/login");
+  }
 
   /**
    *
