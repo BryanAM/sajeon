@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { checkPermissions } from "./api/auth/auth-utils";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
+import { NextResponse } from "next/server";
 
 /**
  *
@@ -32,61 +33,64 @@ export async function updateDatabase(formData: FormData) {
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
-    redirect("/api/auth/login");
+    return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  /**
-   *
-   * @returns an array of sentences to replace the DB entry.
-   */
-  const formatSentenceObject = (): { kr: string; en: string }[] => {
-    let updatedSentences: { kr: string; en: string }[] = [];
-    for (const [key, val] of formData.entries()) {
-      // target sentences only
-      if (key.includes("kr") || key.includes("en")) {
-        const _strSentenceIndex: string | undefined = key.split("-").pop();
-        const sentenceIndex: number = Number(_strSentenceIndex) - 1;
+  // permissions granted, authenticaed user
+  else {
+    /**
+     *
+     * @returns an array of sentences to replace the DB entry.
+     */
+    const formatSentenceObject = (): { kr: string; en: string }[] => {
+      let updatedSentences: { kr: string; en: string }[] = [];
+      for (const [key, val] of formData.entries()) {
+        // target sentences only
+        if (key.includes("kr") || key.includes("en")) {
+          const _strSentenceIndex: string | undefined = key.split("-").pop();
+          const sentenceIndex: number = Number(_strSentenceIndex) - 1;
 
-        // if that entry doesn't exist, create item in array before we push values
-        if (!updatedSentences[sentenceIndex]) {
-          updatedSentences.push({ kr: "", en: "" });
-        }
+          // if that entry doesn't exist, create item in array before we push values
+          if (!updatedSentences[sentenceIndex]) {
+            updatedSentences.push({ kr: "", en: "" });
+          }
 
-        if (key.includes("kr")) {
-          updatedSentences[sentenceIndex].kr = String(val);
-        } else {
-          updatedSentences[sentenceIndex].en = String(val);
+          if (key.includes("kr")) {
+            updatedSentences[sentenceIndex].kr = String(val);
+          } else {
+            updatedSentences[sentenceIndex].en = String(val);
+          }
         }
       }
+
+      return updatedSentences;
+    };
+
+    const updatedData = {
+      _id: formData.get("_word-id"),
+      word: formData.get("word"),
+      romaja: formData.get("romaja"),
+      hanja: formData.get("hanja"),
+      definitions: formData.getAll("definition"),
+      // explanation: formData.get('romaja'),
+      pos: formData.get("pos"),
+      sentences: formatSentenceObject(),
+    };
+
+    await dbConnect();
+    try {
+      // Find the Word record by ID and update it in the DB
+      await Word.findByIdAndUpdate(updatedData._id, updatedData);
+      console.log(`Succesfully updated record ${updatedData}`);
+      revalidatePath("/");
+    } catch (error) {
+      return new Response(JSON.stringify({ message: (error as any).message }), {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     }
-
-    return updatedSentences;
-  };
-
-  const updatedData = {
-    _id: formData.get("_word-id"),
-    word: formData.get("word"),
-    romaja: formData.get("romaja"),
-    hanja: formData.get("hanja"),
-    definitions: formData.getAll("definition"),
-    // explanation: formData.get('romaja'),
-    pos: formData.get("pos"),
-    sentences: formatSentenceObject(),
-  };
-
-  await dbConnect();
-  try {
-    // Find the Word record by ID and update it in the DB
-    await Word.findByIdAndUpdate(updatedData._id, updatedData);
-    console.log(`Succesfully updated record ${updatedData}`);
-    revalidatePath("/");
-  } catch (error) {
-    return new Response(JSON.stringify({ message: (error as any).message }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   }
 }
 
@@ -96,6 +100,14 @@ export async function updateDatabase(formData: FormData) {
  * @description This action will take a word ID and remove it from the database.
  */
 export async function deleteWord(formData: FormData) {
+  const { isAuthenticated, getAccessToken } = getKindeServerSession();
+  const token = await getAccessToken();
+  const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
+
+  if (!(await isAuthenticated()) || !hasPermissions) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
   const _id = formData.get("_word-id");
 
   if (_id) {
