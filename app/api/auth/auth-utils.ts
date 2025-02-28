@@ -6,12 +6,15 @@ import "server-only";
  * return a boolean value whether or not a user has access
  */
 export const checkPermissions = (
-  token,
+  token: any,
   validPermissions: string[],
 ): boolean => {
   if (!token || !validPermissions) {
     return false;
   }
+
+  console.log("permissions", token.permissions);
+  console.log("valid permissions", validPermissions);
 
   const requiredPermissions = new Set(validPermissions);
   const isPermitted = token.permissions.some((permission: string) =>

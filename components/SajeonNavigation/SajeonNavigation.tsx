@@ -7,18 +7,22 @@ import { ShieldUserIcon, UserPenIcon } from "lucide-react";
 async function SajeonNavigation() {
   const { isAuthenticated, getRoles } = getKindeServerSession();
   const isLoggedIn = await isAuthenticated();
-  const roles = await getRoles();
 
-  const getUserRole = () => {
-    if (!roles || roles.length === 0) {
-      return {
-        name: "User",
-        key: "user",
-        id: `${crypto.randomUUID()}`,
-      };
+  const getUserRole = async () => {
+    if (await isAuthenticated()) {
+      const roles = await getRoles();
+      if (!roles || roles.length === 0) {
+        return {
+          name: "User",
+          key: "user",
+          id: `${crypto.randomUUID()}`,
+        };
+      }
+
+      return roles[0];
+    } else {
+      return null;
     }
-
-    return roles[0];
   };
   const userRole = getUserRole();
 
