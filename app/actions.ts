@@ -5,6 +5,8 @@ import dbConnect from "@/lib/mongodb";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { checkPermissions } from "./api/auth/auth-utils";
+import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
 
 /**
  *
@@ -27,10 +29,9 @@ export async function formAction(formData: FormData) {
 export async function updateDatabase(formData: FormData) {
   const { isAuthenticated, getAccessToken } = getKindeServerSession();
   const token = await getAccessToken();
+  const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
-  if (!(await isAuthenticated())) {
-    // check token permissions
-
+  if (!(await isAuthenticated()) || !hasPermissions) {
     redirect("/api/auth/login");
   }
 

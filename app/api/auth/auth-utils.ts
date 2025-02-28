@@ -6,8 +6,8 @@ import "server-only";
  * return a boolean value whether or not a user has access
  */
 export const checkPermissions = (
-  validPermissions: string[],
   token,
+  validPermissions: string[],
 ): boolean => {
   if (!token || !validPermissions) {
     return false;
