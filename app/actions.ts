@@ -3,11 +3,13 @@
 import Word from "@/models/Word";
 import dbConnect from "@/lib/mongodb";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { checkPermissions } from "./api/auth/auth-utils";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
-import { NextResponse } from "next/server";
+
+interface HttpError extends Error {
+  statusCode?: number;
+}
 
 /**
  *
@@ -33,7 +35,9 @@ export async function updateDatabase(formData: FormData) {
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    const error: HttpError = new Error("Unauthorized");
+    error.statusCode = 401;
+    throw error;
   }
 
   // permissions granted, authenticaed user
@@ -105,7 +109,9 @@ export async function deleteWord(formData: FormData) {
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    const error: HttpError = new Error("Unauthorized");
+    error.statusCode = 401;
+    throw error;
   }
 
   const _id = formData.get("_word-id");
