@@ -24,7 +24,7 @@ async function SajeonNavigation() {
       return null;
     }
   };
-  const userRole = getUserRole();
+  const userRole = await getUserRole();
 
   return (
     <nav
