@@ -3,12 +3,13 @@ import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector"
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShieldUserIcon, UserPenIcon } from "lucide-react";
+import { UserRole } from "@/types/SajeonTypes";
 
 async function SajeonNavigation() {
   const { isAuthenticated, getRoles } = getKindeServerSession();
   const isLoggedIn = await isAuthenticated();
 
-  const getUserRole = async () => {
+  const getUserRole: UserRole = async () => {
     if (await isAuthenticated()) {
       const roles = await getRoles();
       if (!roles || roles.length === 0) {
@@ -81,7 +82,7 @@ async function SajeonNavigation() {
         <li>
           <ul className="flex items-center text-sm font-semibold">
             <li className="mr-2 flex">
-              {isLoggedIn && (
+              {isLoggedIn && userRole && (
                 <>
                   <span className="mr-1">{userRole.name}</span>
                   {userRole.key === "admin" ? (
