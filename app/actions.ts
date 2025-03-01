@@ -111,9 +111,10 @@ export async function deleteWord(formData: FormData) {
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
-    const error: HttpError = new Error("Unauthorized");
-    error.statusCode = 401;
-    throw error;
+    return {
+      error: "Unauthorized",
+      statusCode: 401,
+    };
   }
 
   const _id = formData.get("_word-id");
