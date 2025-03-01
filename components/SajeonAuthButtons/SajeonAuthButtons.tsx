@@ -1,8 +1,5 @@
 "use client";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 function SajeonAuthButtons({ className }: { className?: string }) {
@@ -12,7 +9,7 @@ function SajeonAuthButtons({ className }: { className?: string }) {
   return (
     <>
       {isLoggedIn ? (
-        <RegisterLink className={className}>Logout</RegisterLink>
+        <LogoutLink className={className}>Logout</LogoutLink>
       ) : (
         <LoginLink className={className}>Sign in</LoginLink>
       )}
