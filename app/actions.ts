@@ -8,10 +8,6 @@ import { checkPermissions } from "./api/auth/auth-utils";
 import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
 
-interface HttpError extends Error {
-  statusCode?: number;
-}
-
 /**
  *
  * @param formData
