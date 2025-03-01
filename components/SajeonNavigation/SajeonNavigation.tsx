@@ -1,17 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ShieldUserIcon, UserPenIcon } from "lucide-react";
 import { UserRole } from "@/types/SajeonTypes";
+import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 
-async function SajeonNavigation() {
-  const { isAuthenticated, getRoles } = getKindeServerSession();
-  const isLoggedIn = await isAuthenticated();
+function SajeonNavigation() {
+  const { isAuthenticated, accessToken } = useKindeBrowserClient();
+  const isLoggedIn = isAuthenticated;
 
-  const getUserRole: UserRole = async () => {
-    if (await isAuthenticated()) {
-      const roles = await getRoles();
+  const getUserRole: UserRole = () => {
+    if (isLoggedIn) {
+      const roles = accessToken.roles;
       if (!roles || roles.length === 0) {
         return {
           name: "User",
@@ -25,7 +28,8 @@ async function SajeonNavigation() {
       return null;
     }
   };
-  const userRole = await getUserRole();
+
+  const userRole = getUserRole();
 
   return (
     <nav
@@ -68,13 +72,8 @@ async function SajeonNavigation() {
                 </Link>
               </li>
             )}
-
             {isLoggedIn && (
-              <li>
-                <LogoutLink className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  Logout
-                </LogoutLink>
-              </li>
+              <SajeonAuthButtons className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50" />
             )}
           </ul>
         </li>
