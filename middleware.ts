@@ -1,10 +1,17 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
+import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import type { NextRequest } from "next/server";
 
 export default withAuth(async function middleware(req: NextRequest) {}, {
   // Middleware will allow non-authenticated users of the following routes
   publicPaths: ["/search", "/about", "/"],
-  isAuthorized: ({ token, req }: { token: any; req: NextRequest }) => {
+  isAuthorized: ({
+    token,
+    req,
+  }: {
+    token: KindeAccessToken;
+    req: NextRequest;
+  }) => {
     const path = req.nextUrl.pathname;
     if (path === "/mooncakes") {
       const requiredPermissions = new Set(["view:mooncakes", "edit:mooncakes"]);

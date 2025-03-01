@@ -41,3 +41,5 @@ export type UserRole = () => Promise<{
   key: string;
   id: string;
 } | null>;
+
+// KINDE TYPES

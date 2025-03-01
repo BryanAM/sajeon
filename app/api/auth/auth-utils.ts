@@ -1,4 +1,5 @@
 import "server-only";
+import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 
 /**
  *
@@ -6,16 +7,12 @@ import "server-only";
  * return a boolean value whether or not a user has access
  */
 export const checkPermissions = (
-  token: any,
+  token: KindeAccessToken | undefined,
   validPermissions: string[],
 ): boolean => {
-  if (!token || !validPermissions) {
+  if (!token || validPermissions.length < 1) {
     return false;
   }
-
-  console.log("permissions", token.permissions);
-  console.log("valid permissions", validPermissions);
-
   const requiredPermissions = new Set(validPermissions);
   const isPermitted = token.permissions.some((permission: string) =>
     requiredPermissions.has(permission),

@@ -5,6 +5,7 @@ import dbConnect from "@/lib/mongodb";
 import { revalidatePath } from "next/cache";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { checkPermissions } from "./api/auth/auth-utils";
+import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
 
 interface HttpError extends Error {
@@ -31,7 +32,7 @@ export async function formAction(formData: FormData) {
  */
 export async function updateDatabase(formData: FormData) {
   const { isAuthenticated, getAccessToken } = getKindeServerSession();
-  const token = await getAccessToken();
+  const token: KindeAccessToken | undefined = await getAccessToken();
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
