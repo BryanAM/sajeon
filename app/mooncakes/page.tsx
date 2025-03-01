@@ -10,6 +10,8 @@ import { Trash2Icon } from "lucide-react";
 
 /**
  * TEMPORAY, to be updated when we refacor and re-do this page
+ * Also, note we have a words api route that does something simialr we might want to remove
+ * or update
  *
  */
 async function getData() {

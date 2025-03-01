@@ -7,6 +7,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { checkPermissions } from "./api/auth/auth-utils";
 import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
+import { DictionaryEntryType, SentenceType } from "@/types/SajeonTypes";
 
 /**
  *
@@ -38,14 +39,14 @@ export async function updateDatabase(formData: FormData) {
     };
   }
 
-  // permissions granted, authenticaed user
+  // permissions granted, authenticaed user with permissions
   else {
     /**
      *
      * @returns an array of sentences to replace the DB entry.
      */
-    const formatSentenceObject = (): { kr: string; en: string }[] => {
-      let updatedSentences: { kr: string; en: string }[] = [];
+    const formatSentenceObject = (): SentenceType[] => {
+      let updatedSentences: SentenceType[] = [];
       for (const [key, val] of formData.entries()) {
         // target sentences only
         if (key.includes("kr") || key.includes("en")) {
@@ -67,6 +68,14 @@ export async function updateDatabase(formData: FormData) {
 
       return updatedSentences;
     };
+
+    /**
+     *  TODO: form validation and checks on server once we get
+     *        mooncakes fixed up. Server & Client should both use validation.
+     *        perhaps zod or something similar.
+     *  DictionaryEntryType
+     *
+     *  */
 
     const updatedData = {
       _id: formData.get("_word-id"),
@@ -112,6 +121,14 @@ export async function deleteWord(formData: FormData) {
       statusCode: 401,
     };
   }
+
+  /**
+   *  TODO: form validation and checks on server once we get
+   *        mooncakes fixed up. Server & Client should both use validation.
+   *        perhaps zod or something similar.
+   *  DictionaryEntryType
+   *
+   *  */
 
   const _id = formData.get("_word-id");
 
