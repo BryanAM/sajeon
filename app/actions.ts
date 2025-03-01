@@ -36,9 +36,10 @@ export async function updateDatabase(formData: FormData) {
   const hasPermissions = checkPermissions(token, [MOONCAKE_PERMISSIONS.edit]);
 
   if (!(await isAuthenticated()) || !hasPermissions) {
-    const error: HttpError = new Error("Unauthorized");
-    error.statusCode = 401;
-    throw error;
+    return {
+      error: "Unauthorized",
+      statusCode: 401,
+    };
   }
 
   // permissions granted, authenticaed user
