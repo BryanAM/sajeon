@@ -1,12 +1,20 @@
 import SajeonNavigation from "@/components/SajeonNavigation/SajeonNavigation";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import SajeonFooter from "@/components/SajeonFooter/SajeonFooter";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 export const metadata: Metadata = {
   description:
@@ -68,6 +76,12 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
+      sizes: "180x180",
+      type: "image/png",
+      url: `${process.env.BASE_URL}/apple-touch-icon-180x180.png`,
+    },
+    {
+      rel: "icon",
       sizes: "512x512",
       type: "image/png",
       url: `${process.env.BASE_URL}/android-chrome-512x512.png`,
@@ -116,9 +130,14 @@ export const metadata: Metadata = {
     },
     {
       rel: "icon",
-      url: `${process.env.BASE_URL}/icon.ico`,
+      url: `${process.env.BASE_URL}/favicon.ico`,
       type: "image/x-icon",
       sizes: "256x256",
+    },
+    {
+      rel: "mask-icon",
+      url: "/safari-pinned-tab.svg",
+      color: "#000000",
     },
   ],
 };
@@ -129,26 +148,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      className="relative flex min-h-full flex-col"
-      lang="en"
-      suppressHydrationWarning={true}
-    >
-      <body className={`sajeon-body mb-[112px] grow ${inter.className}`}>
-        <div className="m-auto max-w-5xl">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SajeonNavigation />
-            <div className="mt-[88px] min-h-[100svh]  p-6">{children}</div>
-          </ThemeProvider>
-        </div>
-        <SajeonFooter />
-        <Toaster />
-      </body>
-    </html>
+    <AuthProvider>
+      <html
+        className="relative flex min-h-full flex-col"
+        lang="en"
+        suppressHydrationWarning={true}
+      >
+        <body className={`sajeon-body mb-[112px] grow ${inter.className}`}>
+          <div className="m-auto max-w-5xl">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <SajeonNavigation />
+              <div className="mt-[88px] min-h-[100svh]  p-6">{children}</div>
+            </ThemeProvider>
+          </div>
+          <SajeonFooter />
+          <Toaster />
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
