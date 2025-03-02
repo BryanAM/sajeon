@@ -7,7 +7,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { checkPermissions } from "./api/auth/auth-utils";
 import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import { MOONCAKE_PERMISSIONS } from "./api/auth/app-permissions";
-import { DictionaryEntryType, SentenceType } from "@/types/SajeonTypes";
+import { SentenceType } from "@/types/SajeonTypes";
 
 /**
  *
@@ -120,33 +120,36 @@ export async function deleteWord(formData: FormData) {
       error: "Unauthorized",
       statusCode: 401,
     };
-  }
+  } else {
+    /**
+     *  TODO: form validation and checks on server once we get
+     *        mooncakes fixed up. Server & Client should both use validation.
+     *        perhaps zod or something similar.
+     *  DictionaryEntryType
+     *
+     *  */
 
-  /**
-   *  TODO: form validation and checks on server once we get
-   *        mooncakes fixed up. Server & Client should both use validation.
-   *        perhaps zod or something similar.
-   *  DictionaryEntryType
-   *
-   *  */
+    const _id = formData.get("_word-id");
 
-  const _id = formData.get("_word-id");
+    if (_id) {
+      await dbConnect();
 
-  if (_id) {
-    await dbConnect();
-
-    try {
-      // Find the Word record by ID and update it in the DB
-      await Word.findByIdAndDelete(_id);
-      console.log(`Succesfully deleted record ID: ${_id}`);
-      revalidatePath("/");
-    } catch (error) {
-      return new Response(JSON.stringify({ message: (error as any).message }), {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        // Find the Word record by ID and update it in the DB
+        await Word.findByIdAndDelete(_id);
+        console.log(`Succesfully deleted record ID: ${_id}`);
+        revalidatePath("/");
+      } catch (error) {
+        return new Response(
+          JSON.stringify({ message: (error as any).message }),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+      }
     }
   }
 }
