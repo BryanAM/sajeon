@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import SajeonFooter from "@/components/SajeonFooter/SajeonFooter";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -147,26 +148,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      className="relative flex min-h-full flex-col"
-      lang="en"
-      suppressHydrationWarning={true}
-    >
-      <body className={`sajeon-body mb-[112px] grow ${inter.className}`}>
-        <div className="m-auto max-w-5xl">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SajeonNavigation />
-            <div className="mt-[88px] min-h-[100svh]  p-6">{children}</div>
-          </ThemeProvider>
-        </div>
-        <SajeonFooter />
-        <Toaster />
-      </body>
-    </html>
+    <AuthProvider>
+      <html
+        className="relative flex min-h-full flex-col"
+        lang="en"
+        suppressHydrationWarning={true}
+      >
+        <body className={`sajeon-body mb-[112px] grow ${inter.className}`}>
+          <div className="m-auto max-w-5xl">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <SajeonNavigation />
+              <div className="mt-[88px] min-h-[100svh]  p-6">{children}</div>
+            </ThemeProvider>
+          </div>
+          <SajeonFooter />
+          <Toaster />
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

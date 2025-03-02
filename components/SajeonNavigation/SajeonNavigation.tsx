@@ -3,17 +3,16 @@
 import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
 
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { ShieldUserIcon, UserPenIcon } from "lucide-react";
 import { UserRole } from "@/types/SajeonTypes";
 import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 
 function SajeonNavigation() {
-  const { isAuthenticated, accessToken } = useKindeBrowserClient();
-  const isLoggedIn = isAuthenticated;
+  const { isAuthenticated, accessToken } = useKindeAuth();
 
   const getUserRole: UserRole = () => {
-    if (isLoggedIn) {
+    if (isAuthenticated && accessToken) {
       const roles = accessToken.roles;
       if (!roles || roles.length === 0) {
         return {
@@ -62,7 +61,7 @@ function SajeonNavigation() {
               </Link>
             </li>
 
-            {isLoggedIn && (
+            {isAuthenticated && (
               <li>
                 <Link
                   className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
@@ -72,7 +71,7 @@ function SajeonNavigation() {
                 </Link>
               </li>
             )}
-            {isLoggedIn && (
+            {isAuthenticated && (
               <SajeonAuthButtons className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50" />
             )}
           </ul>
@@ -81,7 +80,7 @@ function SajeonNavigation() {
         <li>
           <ul className="flex items-center text-sm font-semibold">
             <li className="mr-2 flex">
-              {isLoggedIn && userRole && (
+              {isAuthenticated && userRole && (
                 <>
                   <span className="mr-1">{userRole.name}</span>
                   {userRole.key === "admin" ? (
