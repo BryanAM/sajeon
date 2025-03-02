@@ -1,6 +1,8 @@
 import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
 import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
 import type { NextRequest } from "next/server";
+import { MOONCAKE_PERMISSIONS } from "./app/api/auth/app-permissions";
+import { checkPermissions } from "./app/api/auth/auth-utils";
 
 export default withAuth(async function middleware(req: NextRequest) {}, {
   // Middleware will allow non-authenticated users of the following routes
@@ -14,10 +16,10 @@ export default withAuth(async function middleware(req: NextRequest) {}, {
   }) => {
     const path = req.nextUrl.pathname;
     if (path === "/mooncakes") {
-      const requiredPermissions = new Set(["view:mooncakes", "edit:mooncakes"]);
-      return token.permissions.some((permission: string) =>
-        requiredPermissions.has(permission),
-      );
+      return checkPermissions(token, [
+        MOONCAKE_PERMISSIONS.edit,
+        MOONCAKE_PERMISSIONS.view,
+      ]);
     }
 
     return true;
