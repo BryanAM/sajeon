@@ -34,3 +34,12 @@ export type SearchProps = {
 };
 
 export type FormActionType = (formData: FormData) => Promise<void>;
+
+// USER TYPES
+export type UserRole = () => {
+  name: string;
+  key: string;
+  id: string;
+} | null;
+
+// KINDE TYPES
