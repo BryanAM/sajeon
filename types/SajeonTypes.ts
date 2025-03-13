@@ -1,3 +1,5 @@
+import { KindeAccessToken } from "@kinde-oss/kinde-auth-nextjs/types";
+
 export type SentenceType = {
   kr: string;
   en: string;
@@ -36,10 +38,17 @@ export type SearchProps = {
 export type FormActionType = (formData: FormData) => Promise<void>;
 
 // USER TYPES
-export type UserRole = () => {
+export type UserRoleType = {
   name: string;
   key: string;
   id: string;
 } | null;
+
+// NAVIGATION TYPES
+export type NavigationPropTypes = {
+  userRole: UserRoleType;
+  isAuthenticated: boolean | null;
+  accessToken: KindeAccessToken | null;
+};
 
 // KINDE TYPES
