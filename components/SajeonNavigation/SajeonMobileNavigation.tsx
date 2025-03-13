@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
 import { ShieldUserIcon, UserPenIcon } from "lucide-react";
 import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
+import { NavigationPropTypes } from "@/types/SajeonTypes";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
 
