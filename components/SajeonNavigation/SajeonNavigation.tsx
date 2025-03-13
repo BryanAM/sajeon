@@ -9,14 +9,14 @@ import { UserRoleType, NavigationPropTypes } from "@/types/SajeonTypes";
 import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
+import { SajeonMobileNavigation } from "./SajeonMobileNavigation";
 
-const DesktopNavigation = ({
+const SajeonDesktopNavigation = ({
   userRole,
   isAuthenticated,
   accessToken,
 }: NavigationPropTypes) => {
   return (
-    // <-- Add return here
     <nav
       aria-label="Main"
       data-orientation="horizontal"
@@ -115,7 +115,7 @@ function SajeonNavigation() {
   const userRole: UserRoleType = getUserRole();
 
   return (
-    <DesktopNavigation
+    <SajeonDesktopNavigation
       userRole={userRole}
       isAuthenticated={isAuthenticated}
       accessToken={accessToken}

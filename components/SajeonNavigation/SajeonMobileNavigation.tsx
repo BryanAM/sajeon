@@ -2,36 +2,16 @@
 
 import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
-
-import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { ShieldUserIcon, UserPenIcon } from "lucide-react";
-import { UserRole } from "@/types/SajeonTypes";
 import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
 
-function SajeonNavigation() {
-  const { isAuthenticated, accessToken } = useKindeAuth();
-
-  const getUserRole: UserRole = () => {
-    if (isAuthenticated && accessToken) {
-      const roles = accessToken.roles;
-      if (!roles || roles.length === 0) {
-        return {
-          name: "User",
-          key: "user",
-          id: `${crypto.randomUUID()}`,
-        };
-      }
-
-      return roles[0];
-    } else {
-      return null;
-    }
-  };
-
-  const userRole = getUserRole();
-
+export const SajeonMobileNavigation = ({
+  userRole,
+  isAuthenticated,
+  accessToken,
+}: NavigationPropTypes) => {
   return (
     <nav
       aria-label="Main"
@@ -106,6 +86,4 @@ function SajeonNavigation() {
       </ul>
     </nav>
   );
-}
-
-export default SajeonNavigation;
+};
