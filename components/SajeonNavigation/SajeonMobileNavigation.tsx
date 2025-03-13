@@ -2,20 +2,18 @@
 
 import Link from "next/link";
 import { SajeonThemeSelector } from "../SajeonThemeSelector/SajeonThemeSelector";
-import { ShieldUserIcon, UserPenIcon } from "lucide-react";
+import { Menu, ShieldUserIcon, UserPenIcon } from "lucide-react";
 import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 import { NavigationPropTypes } from "@/types/SajeonTypes";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -30,23 +28,30 @@ export const SajeonMobileNavigation = ({
     <div className="flex justify-between px-4 sm:hidden">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline">Open</Button>
+          <Button variant="outline" size="icon">
+            <Menu />
+          </Button>
         </SheetTrigger>
 
         <SheetContent>
-          {isAuthenticated && (
-            <SheetHeader>
-              <SheetTitle className="flex items-center justify-center gap-2">
-                {userRole?.name}{" "}
-                {userRole?.key === "admin" ? (
-                  <ShieldUserIcon size={18} />
-                ) : (
-                  <UserPenIcon size={18} />
-                )}
-              </SheetTitle>
-              <SheetDescription>Welcome back to Sajeon ❀</SheetDescription>
-            </SheetHeader>
-          )}
+          <SheetHeader>
+            <SheetTitle className="flex items-center justify-center gap-2">
+              {!isAuthenticated ? (
+                "Hey There 👋"
+              ) : (
+                <>
+                  {userRole?.name}{" "}
+                  {userRole?.key === "admin" ? (
+                    <ShieldUserIcon size={18} />
+                  ) : (
+                    <UserPenIcon size={18} />
+                  )}
+                </>
+              )}
+            </SheetTitle>
+            <SheetDescription>Welcome back to Sajeon ❀</SheetDescription>
+          </SheetHeader>
+
           <nav
             aria-label="Main"
             aria-orientation="vertical"
