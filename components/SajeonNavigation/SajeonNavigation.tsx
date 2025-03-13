@@ -19,12 +19,12 @@ const SajeonDesktopNavigation = ({
   return (
     <nav
       aria-label="Main"
-      data-orientation="horizontal"
+      aria-orientation="horizontal"
       dir="ltr"
       className="fixed left-0 right-0  top-0 z-10 hidden border-b-[1px] border-b-border  bg-background/95 pb-2 pl-6 pr-6 pt-2 backdrop-blur supports-[backdrop-filter]:bg-background/60 sm:block"
     >
       <ul
-        data-orientation="horizontal"
+        aria-orientation="horizontal"
         className="flex list-none justify-between"
         dir="ltr"
       >
