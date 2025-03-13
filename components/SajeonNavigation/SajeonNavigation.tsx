@@ -10,7 +10,6 @@ import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
 import { SajeonMobileNavigation } from "./SajeonMobileNavigation";
-import { useIsMobile } from "@/hooks/use-is-mobile";
 
 const SajeonDesktopNavigation = ({
   userRole,
@@ -22,7 +21,7 @@ const SajeonDesktopNavigation = ({
       aria-label="Main"
       data-orientation="horizontal"
       dir="ltr"
-      className="fixed  left-0 right-0 top-0 z-10 border-b-[1px]  border-b-border bg-background/95 pb-2 pl-6 pr-6 pt-2 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="fixed left-0 right-0  top-0 z-10 hidden border-b-[1px] border-b-border  bg-background/95 pb-2 pl-6 pr-6 pt-2 backdrop-blur supports-[backdrop-filter]:bg-background/60 sm:block"
     >
       <ul
         data-orientation="horizontal"
@@ -95,7 +94,6 @@ const SajeonDesktopNavigation = ({
 
 function SajeonNavigation() {
   const { isAuthenticated, accessToken } = useKindeAuth();
-  const isMobile = useIsMobile();
 
   const getUserRole: () => UserRoleType = () => {
     if (isAuthenticated && accessToken) {
@@ -118,20 +116,17 @@ function SajeonNavigation() {
 
   return (
     <>
-      {" "}
-      {isMobile ? (
-        <SajeonDesktopNavigation
-          userRole={userRole}
-          isAuthenticated={isAuthenticated}
-          accessToken={accessToken}
-        />
-      ) : (
-        <SajeonMobileNavigation
-          userRole={userRole}
-          isAuthenticated={isAuthenticated}
-          accessToken={accessToken}
-        />
-      )}
+      <SajeonDesktopNavigation
+        userRole={userRole}
+        isAuthenticated={isAuthenticated}
+        accessToken={accessToken}
+      />
+
+      <SajeonMobileNavigation
+        userRole={userRole}
+        isAuthenticated={isAuthenticated}
+        accessToken={accessToken}
+      />
     </>
   );
 }
