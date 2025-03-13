@@ -20,6 +20,7 @@ export const SajeonMobileNavigation = ({
       dir="ltr"
       className="fixed  left-0 right-0 top-0 z-10 border-b-[1px]  border-b-border bg-background/95 pb-2 pl-6 pr-6 pt-2 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
+      mobile
       <ul
         data-orientation="horizontal"
         className="flex list-none justify-between"

@@ -10,6 +10,7 @@ import SajeonAuthButtons from "../SajeonAuthButtons/SajeonAuthButtons";
 import { hasClientPermissions } from "@/lib/client-auth-utils";
 import { MOONCAKE_PERMISSIONS } from "@/app/api/auth/app-permissions";
 import { SajeonMobileNavigation } from "./SajeonMobileNavigation";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 const SajeonDesktopNavigation = ({
   userRole,
@@ -94,6 +95,7 @@ const SajeonDesktopNavigation = ({
 
 function SajeonNavigation() {
   const { isAuthenticated, accessToken } = useKindeAuth();
+  const isMobile = useIsMobile();
 
   const getUserRole: () => UserRoleType = () => {
     if (isAuthenticated && accessToken) {
@@ -115,11 +117,22 @@ function SajeonNavigation() {
   const userRole: UserRoleType = getUserRole();
 
   return (
-    <SajeonDesktopNavigation
-      userRole={userRole}
-      isAuthenticated={isAuthenticated}
-      accessToken={accessToken}
-    />
+    <>
+      {" "}
+      {isMobile ? (
+        <SajeonDesktopNavigation
+          userRole={userRole}
+          isAuthenticated={isAuthenticated}
+          accessToken={accessToken}
+        />
+      ) : (
+        <SajeonMobileNavigation
+          userRole={userRole}
+          isAuthenticated={isAuthenticated}
+          accessToken={accessToken}
+        />
+      )}
+    </>
   );
 }
 
