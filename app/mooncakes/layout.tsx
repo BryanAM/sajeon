@@ -1,12 +1,14 @@
-import Link from "next/link";
+import { SearchProps } from "../../types/SajeonTypes";
+import { MooncakesNavigation } from "./mooncakes-navigation";
 
 type LayoutProps = {
   children: React.ReactNode;
+  params: SearchProps["params"];
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children, params }: LayoutProps) {
   return (
-    <div className="border-indigo-300 p-4">
+    <div className="p-4">
       <div className="grid grid-cols-4">
         <h1 className="col-span-4 mb-4 text-4xl font-extrabold text-shadow-inverted md:col-span-4">
           Contributing to Sajeon
@@ -18,20 +20,10 @@ export default function RootLayout({ children }: LayoutProps) {
           accurate and valuable for language learners and enthusiasts alike.
         </h2>
       </div>
-      <nav>
-        <ul className="flex gap-2 py-4">
-          <li>
-            <Link href="/mooncakes">Dashboard</Link>
-          </li>
-          <li>
-            <Link href="/mooncakes">Edit Words</Link>
-          </li>
-          <li>
-            <Link href="/mooncakes">Feedback</Link>
-          </li>
-        </ul>
-      </nav>
-      {children}
+      <div className="border-1 rounded-md border-[1px]  px-4">
+        <MooncakesNavigation />
+        {children}
+      </div>
     </div>
   );
 }

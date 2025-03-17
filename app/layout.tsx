@@ -154,7 +154,7 @@ export default function RootLayout({
         lang="en"
         suppressHydrationWarning={true}
       >
-        <body className={`sajeon-body mb-[112px] grow ${inter.className}`}>
+        <body className={`sajeon-body grow pb-[112px] ${inter.className}`}>
           <div className="m-auto max-w-5xl">
             <ThemeProvider
               attribute="class"
@@ -163,11 +163,14 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <SajeonNavigation />
-              <div className="min-h-[100svh] p-6  sm:mt-[88px]">{children}</div>
+              <div className="mt-[40px] min-h-[100svh]  p-6 sm:mt-[88px]">
+                {children}
+              </div>
             </ThemeProvider>
           </div>
-          <SajeonFooter />
+
           <Toaster />
+          <SajeonFooter />
         </body>
       </html>
     </AuthProvider>

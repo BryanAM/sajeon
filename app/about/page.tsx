@@ -26,16 +26,16 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
-      <h1 className="mb-2 pb-3 text-7xl font-extrabold text-shadow-inverted md:text-9xl">
+      <h1 className="mb-2 pb-3 text-5xl font-extrabold text-shadow-inverted md:text-6xl">
         Studying Korean made simple{" "}
-        <span className="sajeon-branded-text">Sajeon</span>
+        <span className="sajeon-branded-text text-5xl md:text-6xl">Sajeon</span>
       </h1>
       <p>
         Sajeon is a user centered Korean English dictionary built by people who
         love to study language. We are building a dictionary from a language
         learner&apos;s point of view, and one that you will love.
       </p>
-      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+      <h2 className="sajeon-branded-text mt-12 text-5xl text-shadow md:text-5xl lg:text-5xl">
         Aim
       </h2>
       <Accordion type="single" collapsible>
@@ -104,7 +104,7 @@ export default function About() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <h2 className="sajeon-branded-text mt-12 text-6xl text-shadow md:text-6xl lg:text-6xl">
+      <h2 className="sajeon-branded-text mt-12 text-5xl text-shadow md:text-5xl lg:text-5xl">
         Meet The Team
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
