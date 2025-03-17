@@ -20,7 +20,7 @@ export default function RootLayout({ children, params }: LayoutProps) {
           accurate and valuable for language learners and enthusiasts alike.
         </h2>
       </div>
-      <div className="border-1 rounded-md border-[1px]  px-4">
+      <div className="border-1 rounded-md border-[1px]  px-4 pb-4">
         <MooncakesNavigation />
         {children}
       </div>

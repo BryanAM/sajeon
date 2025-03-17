@@ -1,3 +1,5 @@
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
 import dbConnect from "@/lib/mongodb";
 import Word from "@/models/Word";
 import { DictionaryEntryType, SearchProps } from "@/types/SajeonTypes";
@@ -35,6 +37,8 @@ import { Trash2Icon } from "lucide-react";
 // }
 
 export default async function MoonCakes({ searchParams }: SearchProps) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   // const data = await getData();
   // const words = await data.json();
   // const { page } = await searchParams;
@@ -54,6 +58,12 @@ export default async function MoonCakes({ searchParams }: SearchProps) {
 
   return (
     <main className="flex flex-col">
+      <p>Welcome Back, {user.given_name} 👋</p>
+      <p>
+        We're currently working on the dashboard but feel free to edit words or
+        submit feedback!
+      </p>
+
       {/* <ol className="mb-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         {dataFetchResults
           .slice(

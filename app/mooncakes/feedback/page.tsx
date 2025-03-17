@@ -1,3 +1,3 @@
 export default async function MooncakesFeedback() {
-  return <section>feedback page</section>;
+  return <main>feedback page</main>;
 }
