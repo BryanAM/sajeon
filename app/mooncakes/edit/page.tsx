@@ -10,7 +10,6 @@ async function getData(): Promise<Payment[]> {
       status: "pending",
       email: "m@example.com",
     },
-    // ...
   ];
 }
 
