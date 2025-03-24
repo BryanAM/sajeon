@@ -3,5 +3,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="flex flex-col">{children}</div>
+  return <div className="m-auto flex max-w-5xl flex-col">{children}</div>;
 }

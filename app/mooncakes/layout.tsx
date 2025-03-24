@@ -8,7 +8,7 @@ type LayoutProps = {
 
 export default function RootLayout({ children, params }: LayoutProps) {
   return (
-    <div className="p-4">
+    <div className="m-auto max-w-[90rem] p-4">
       <div className="grid grid-cols-4">
         <h1 className="col-span-4 mb-4 text-4xl font-extrabold text-shadow-inverted md:col-span-4">
           Contributing to Sajeon

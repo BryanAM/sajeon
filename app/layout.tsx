@@ -155,7 +155,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <body className={`sajeon-body grow pb-[112px] ${inter.className}`}>
-          <div className="m-auto max-w-5xl">
+          <div>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
