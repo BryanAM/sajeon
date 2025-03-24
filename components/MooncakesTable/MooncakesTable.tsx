@@ -31,6 +31,11 @@ export function MooncakesTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  console.log(
+    "table rowmodel",
+    table.getRowModel().rows[0].getVisibleCells()[0].getContext(),
+  );
+
   return (
     <div className="rounded-md border">
       <Table>

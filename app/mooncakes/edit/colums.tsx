@@ -8,36 +8,32 @@ import { DictionaryEntryType } from "@/types/SajeonTypes";
 const columnHelper = createColumnHelper<DictionaryEntryType>();
 
 export const columns: ColumnDef<DictionaryEntryType>[] = [
-  columnHelper.display({
-    id: "word",
+  {
+    accessorKey: "word",
     header: "Korean",
-  }),
-  columnHelper.display({
-    id: "romaja",
+  },
+  {
+    accessorKey: "romaja",
     header: "Romaja",
-  }),
-  columnHelper.display({
-    id: "hanja",
+  },
+  {
+    accessorKey: "hanja",
     header: "Hanja",
-  }),
-  columnHelper.display({
-    id: "pos",
+  },
+  {
+    accessorKey: "pos",
     header: "Part of Speech",
-  }),
-  columnHelper.display({
-    id: "sentences",
+  },
+  {
+    accessorKey: "definitions",
+    header: "Definitions",
+  },
+  {
+    accessorKey: "sentences",
     header: "Sentences",
-  }),
-  columnHelper.display({
-    id: "topik_level",
-    header: "Topik Level",
-  }),
-  columnHelper.display({
-    id: "frequency_score",
-    header: "Frequency Score",
-  }),
-  columnHelper.display({
-    id: "validation",
-    header: "Validation",
-  }),
+  },
+  {
+    accessorKey: "explanation",
+    header: "explanation",
+  },
 ];
