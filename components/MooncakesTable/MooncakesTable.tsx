@@ -5,6 +5,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  RowData,
 } from "@tanstack/react-table";
 
 import {
@@ -16,15 +17,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<TData, any>[];
   data: TData[];
 }
 
-export function MooncakesTable<TData, TValue>({
+export function MooncakesTable<TData extends RowData>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
   const table = useReactTable({
     data,
     columns,

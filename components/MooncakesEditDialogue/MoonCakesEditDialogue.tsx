@@ -28,21 +28,19 @@ import { updateDatabase } from "@/app/actions";
 import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
+
 export default function MooncakesEditDialogue({
   word,
+  trigger,
 }: {
   word: DictionaryEntryType;
+  trigger: React.ReactNode;
 }) {
   // Helper function to generate unique IDs
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button>
-          <Pencil1Icon className="mr-2 h-4 w-4" />
-          Edit Data
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="md:min-w-[768px]">
         <ScrollArea className="h-[600px] sm:w-[470px] md:w-[700px]">
           <DialogHeader className="px-2">
