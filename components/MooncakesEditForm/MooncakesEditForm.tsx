@@ -42,20 +42,30 @@ import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastBut
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
 
-import { Text } from "lucide-react";
+import { Text, PencilOff } from "lucide-react";
 
 const formSchema = z.object({
+  _wordId: z.string(),
   word: z.string().min(1, {
-    message: "Username must be at least 1 characters.",
+    message: "Hangul must be at least 1 characters.",
+  }),
+  romaja: z.string().min(1, {
+    message: "Romaja must be at least 1 characters.",
+  }),
+  hanja: z.string().min(1, {
+    message: "Hanja must be at least 1 characters.",
   }),
 });
 
-export function MooncakesEditForm() {
+export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      word: "",
+      _wordId: word._id,
+      word: word.word || "",
+      romaja: word.romaja || "",
+      hanja: word.hanja || "",
     },
   });
 
@@ -71,6 +81,35 @@ export function MooncakesEditForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
+          name="_wordId"
+          render={({ field }) => (
+            <FormItem className="grid grid-cols-6 items-center">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <span className="flex items-start">
+                  <PencilOff size={14} className="mx-2" /> ID
+                </span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="col-span-4 mt-0 font-normal"
+                  placeholder="+ add hangul"
+                  variant="naked"
+                  spellCheck={false}
+                  readOnly
+                  tabIndex={-1}
+                  disabled
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is word ID. It can't be modified.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="word"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
@@ -81,7 +120,7 @@ export function MooncakesEditForm() {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-4 mt-0 font-normal"
+                  className="col-span-4 mt-0 font-light"
                   placeholder="+ add hangul"
                   variant="naked"
                   {...field}
@@ -89,6 +128,58 @@ export function MooncakesEditForm() {
               </FormControl>
               <FormDescription className="sr-only">
                 This is the korean word written in hangul
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="romaja"
+          render={({ field }) => (
+            <FormItem className="grid grid-cols-6 items-center">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <span className="flex items-start">
+                  <Text size={14} className="mx-2" /> Romaja
+                </span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="col-span-4 mt-0 font-light"
+                  placeholder="+ add romaja"
+                  variant="naked"
+                  spellCheck={false}
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is the romaja for the korean word.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="hanja"
+          render={({ field }) => (
+            <FormItem className="grid grid-cols-6 items-center">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <span className="flex items-start">
+                  <Text size={14} className="mx-2" /> Hanja
+                </span>
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="col-span-4 mt-0 font-light"
+                  placeholder="+ add hanja"
+                  spellCheck={false}
+                  variant="naked"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is the hanja for the korean word.
               </FormDescription>
               <FormMessage />
             </FormItem>

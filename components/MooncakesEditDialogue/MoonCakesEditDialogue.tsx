@@ -52,7 +52,7 @@ export default function MooncakesEditDialogue({
               you click 'Save'.
             </DialogDescription>
           </DialogHeader>
-          <MooncakesEditForm />
+          <MooncakesEditForm word={word} />
           <form action={updateDatabase}>
             <div className="grid gap-4 px-4 py-4">
               <div className="flex items-center gap-4">
