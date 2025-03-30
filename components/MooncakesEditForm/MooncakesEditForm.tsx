@@ -42,6 +42,8 @@ import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastBut
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
 
+import { Text } from "lucide-react";
+
 const formSchema = z.object({
   word: z.string().min(1, {
     message: "Username must be at least 1 characters.",
@@ -71,13 +73,15 @@ export function MooncakesEditForm() {
           control={form.control}
           name="word"
           render={({ field }) => (
-            <FormItem className="grid grid-cols-4 items-center">
-              <FormLabel className="col-span-1 font-normal text-muted-foreground">
-                Korean Word{" "}
+            <FormItem className="grid grid-cols-6 items-center">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <span className="flex items-start">
+                  <Text size={14} className="mx-2" /> Korean
+                </span>
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-3 font-normal"
+                  className="col-span-4 mt-0 font-normal"
                   placeholder="+ add hangul"
                   variant="naked"
                   {...field}
