@@ -41,9 +41,9 @@ export default function MooncakesEditDialogue({
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="md:min-w-[768px]">
-        <ScrollArea className="h-[600px] sm:w-[470px] md:w-[700px]">
-          <DialogHeader className="px-2">
+      <DialogContent className="h-full min-w-full md:h-[75%] md:min-w-[90%]">
+        <ScrollArea className="sm:w-[470px]  md:min-w-fit">
+          <DialogHeader>
             <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
             <DialogDescription>
               After making changes to {word.word}, submit your changes to the
@@ -53,7 +53,7 @@ export default function MooncakesEditDialogue({
             </DialogDescription>
           </DialogHeader>
           <form action={updateDatabase}>
-            <div className="grid gap-4 px-4 py-4">
+            <div className="grid gap-4 px-1 py-1">
               <div className="flex items-center gap-4">
                 <Label htmlFor="_word-id" className="text-right">
                   ID
