@@ -42,19 +42,31 @@ import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastBut
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
 
-import { Text, PencilOff } from "lucide-react";
+import { Text, PencilOff, List } from "lucide-react";
 
 const formSchema = z.object({
   _wordId: z.string(),
   word: z.string().min(1, {
     message: "Hangul must be at least 1 characters.",
   }),
-  romaja: z.string().min(1, {
-    message: "Romaja must be at least 1 characters.",
-  }),
-  hanja: z.string().min(1, {
-    message: "Hanja must be at least 1 characters.",
-  }),
+  romaja: z
+    .string()
+    .min(1, {
+      message: "Romaja must be at least 1 characters.",
+    })
+    .optional(),
+  hanja: z
+    .string()
+    .min(1, {
+      message: "Hanja must be at least 1 characters.",
+    })
+    .optional(),
+  pos: z
+    .string()
+    .min(1, {
+      message: "Part of speech must be at least 1 characters.",
+    })
+    .optional(),
 });
 
 export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
@@ -66,6 +78,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
       word: word.word || "",
       romaja: word.romaja || "",
       hanja: word.hanja || "",
+      pos: word.pos || "",
     },
   });
 
@@ -178,6 +191,61 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                   {...field}
                 />
               </FormControl>
+              <FormDescription className="sr-only">
+                This is the hanja for the korean word.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pos"
+          render={({ field }) => (
+            <FormItem className="grid grid-cols-6 items-center">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <span className="flex items-start">
+                  <List size={14} className="mx-2" /> Part of Speech
+                </span>
+              </FormLabel>
+
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="mt-1 text-lg">
+                    <SelectValue placeholder="select part of speech" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="max-h-80">
+                  <SelectItem className="text-lg" value="Noun">
+                    Noun
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Adjective">
+                    Adjective
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Verb">
+                    Verb
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Noun, 하다">
+                    Noun / 하다
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Adverb">
+                    Adverb
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Particle">
+                    Particle
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Pronoun">
+                    Pronoun
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Determiner">
+                    Determiner
+                  </SelectItem>
+                  <SelectItem className="text-lg" value="Interjection">
+                    Interjection
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+
               <FormDescription className="sr-only">
                 This is the hanja for the korean word.
               </FormDescription>

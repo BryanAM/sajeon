@@ -18,7 +18,7 @@ async function getData(): Promise<DictionaryEntryType[]> {
       ],
       explanation:
         "To study and think deeply about something with careful consideration of facts.",
-      pos: "동사",
+      pos: "Verb",
       sentences: [
         {
           kr: "<문장> 학자는 고어를 고구하여 한글의 역사를 밝혀냈다.",
