@@ -9,7 +9,8 @@ const inputVariants = cva(
       variant: {
         default:
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        naked: "focus-visible:outline-none border-none",
+        naked:
+          "border-0 hover:bg-muted focus-visible:outline-none focus:bg-white focus:border-[1px] focus:shadow-md focus:border-muted-heavy",
       },
     },
     defaultVariants: {

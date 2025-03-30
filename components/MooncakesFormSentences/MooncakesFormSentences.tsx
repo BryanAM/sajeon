@@ -60,6 +60,7 @@ export default function MooncakesFormSentences({
             Korean
             <Input
               id={`kr-sentence-${index + 1}`}
+              variant="naked"
               name={`kr-sentence-${index + 1}`}
               className="mt-1 text-lg"
               defaultValue={sentence.kr}
@@ -72,6 +73,7 @@ export default function MooncakesFormSentences({
             English
             <Input
               id={`en-sentence-${index + 1}`}
+              variant="naked"
               name={`en-sentence-${index + 1}`}
               className="mt-1 text-lg"
               defaultValue={sentence.en}

@@ -42,14 +42,15 @@ export default function MooncakesEditDialogue({
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="h-full min-w-full md:h-[75%] md:min-w-[90%]">
-        <ScrollArea className="sm:w-[470px]  md:min-w-fit">
+        <ScrollArea className="sm:w-full  md:min-w-fit">
           <DialogHeader className="px-4 pt-4">
-            <DialogTitle className="text-4xl">Editing: {word.word}</DialogTitle>
-            <DialogDescription>
-              After making changes to {word.word}, submit your changes to the
-              database by selecting the &quot;Save Changes&quot; button. You can
-              abandon changes by clicking away, clicking the discard changes
-              button, or the exit dialoge button.
+            <DialogTitle className="text-left md:text-2xl">
+              Editing Vocabulary - {word.word}
+            </DialogTitle>
+            <DialogDescription className="text-left">
+              Update the word's details below. You can edit, add, or remove
+              definitions and example sentences. Changes won't be saved until
+              you click 'Save'.
             </DialogDescription>
           </DialogHeader>
           <form action={updateDatabase}>
@@ -68,11 +69,12 @@ export default function MooncakesEditDialogue({
                   tabIndex={-1}
                 />
               </div>
-              <div className="grid grid-cols-2 items-center gap-4">
+              <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="word" className="col-span-1 text-left">
                   Word
                   <Input
-                    className="mt-1 text-lg"
+                    className="col-span-3 mt-1 text-lg"
+                    variant="naked"
                     id="word"
                     name="word"
                     defaultValue={word.word}
@@ -82,18 +84,20 @@ export default function MooncakesEditDialogue({
                 <Label htmlFor="romaja" className="col-span-1 text-left">
                   Romaja
                   <Input
-                    className="mt-1 text-lg"
+                    className="col-span-3 mt-1 text-lg"
+                    variant="naked"
                     id="romaja"
                     name="romaja"
                     defaultValue={word.romaja}
                   />
                 </Label>
               </div>
-              <div className="grid grid-cols-2 items-center gap-4">
+              <div className="grid grid-cols-1 items-center gap-4">
                 <Label htmlFor="hanja" className="col-span-1 text-left">
                   Hanja
                   <Input
                     className="mt-1 text-lg"
+                    variant="naked"
                     id="hanja"
                     name="hanja"
                     defaultValue={word.hanja}

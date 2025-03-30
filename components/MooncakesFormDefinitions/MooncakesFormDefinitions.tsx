@@ -40,6 +40,7 @@ export default function MooncakesFormDefinitions({
             <Input
               id={`${text}-${index}`}
               name="definition"
+              variant="naked"
               className="text-lg"
               value={text}
               onChange={(e) =>
