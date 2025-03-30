@@ -21,13 +21,12 @@ import {
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Pencil1Icon } from "@radix-ui/react-icons";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { updateDatabase } from "@/app/actions";
 import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
+import { MooncakesEditForm } from "../MooncakesEditForm/MooncakesEditForm";
 
 export default function MooncakesEditDialogue({
   word,
@@ -53,6 +52,7 @@ export default function MooncakesEditDialogue({
               you click 'Save'.
             </DialogDescription>
           </DialogHeader>
+          <MooncakesEditForm />
           <form action={updateDatabase}>
             <div className="grid gap-4 px-4 py-4">
               <div className="flex items-center gap-4">

@@ -1,0 +1,106 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { updateDatabase } from "@/app/actions";
+import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
+import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
+import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
+
+const formSchema = z.object({
+  word: z.string().min(1, {
+    message: "Username must be at least 1 characters.",
+  }),
+});
+
+export function MooncakesEditForm() {
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      word: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="word"
+          render={({ field }) => (
+            <FormItem className="grid grid-cols-4 items-center">
+              <FormLabel className="col-span-1 font-normal text-muted-foreground">
+                Korean Word{" "}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="col-span-3 font-normal"
+                  placeholder="+ add hangul"
+                  variant="naked"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="sr-only">
+                This is the korean word written in hangul
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <DialogFooter className="justify-between gap-2 px-4">
+          <DialogClose
+            className={buttonVariants({ variant: "outline" })}
+            type="button"
+          >
+            Discard Changes
+          </DialogClose>
+
+          <SajeonToastButton variant="default">Save Changes</SajeonToastButton>
+        </DialogFooter>
+      </form>
+    </Form>
+  );
+}
