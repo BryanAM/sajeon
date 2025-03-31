@@ -54,7 +54,9 @@ const PART_OF_SPEECH = [
   "Pronoun",
   "Determiner",
   "Interjection",
-];
+] as const;
+
+export type PartOfSpeech = (typeof PART_OF_SPEECH)[number];
 
 const formSchema = z.object({
   _wordId: z.string(),
@@ -75,8 +77,9 @@ const formSchema = z.object({
     .optional(),
   pos: z
     .string()
-    .min(1, {
-      message: "Part of speech must be at least 1 characters.",
+    .transform((val) => (val === "" ? undefined : val))
+    .refine((val) => !val || PART_OF_SPEECH.includes(val as PartOfSpeech), {
+      message: "Please select a valid part of speech.",
     })
     .optional(),
 });
@@ -90,7 +93,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
       word: word.word || "",
       romaja: word.romaja || "",
       hanja: word.hanja || "",
-      pos: word.pos || "",
+      pos: typeof word.pos === "string" ? word.pos : "",
     },
   });
 
