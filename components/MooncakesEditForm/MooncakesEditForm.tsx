@@ -44,6 +44,18 @@ import MooncakesFormSentences from "@/components/MooncakesFormSentences/Mooncake
 
 import { Text, PencilOff, List } from "lucide-react";
 
+const PART_OF_SPEECH = [
+  "Noun",
+  "Adjective",
+  "Verb",
+  "Noun, 하다",
+  "Adverb",
+  "Particle",
+  "Pronoun",
+  "Determiner",
+  "Interjection",
+];
+
 const formSchema = z.object({
   _wordId: z.string(),
   word: z.string().min(1, {
@@ -201,57 +213,61 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
         <FormField
           control={form.control}
           name="pos"
-          render={({ field }) => (
-            <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground">
-                <span className="flex items-start">
-                  <List size={14} className="mx-2" /> Part of Speech
-                </span>
-              </FormLabel>
+          render={({ field }) => {
+            const isValidValue = PART_OF_SPEECH.includes(String(field.value));
+            const posValue = field.value ? field.value : "";
 
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="mt-1 text-lg">
-                    <SelectValue placeholder="select part of speech" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="max-h-80">
-                  <SelectItem className="text-lg" value="Noun">
-                    Noun
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Adjective">
-                    Adjective
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Verb">
-                    Verb
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Noun, 하다">
-                    Noun / 하다
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Adverb">
-                    Adverb
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Particle">
-                    Particle
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Pronoun">
-                    Pronoun
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Determiner">
-                    Determiner
-                  </SelectItem>
-                  <SelectItem className="text-lg" value="Interjection">
-                    Interjection
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+            return (
+              <FormItem className="grid grid-cols-6 items-center">
+                <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                  <span className="flex items-start">
+                    <List size={14} className="mx-2" /> Part of Speech
+                  </span>
+                </FormLabel>
 
-              <FormDescription className="sr-only">
-                This is the hanja for the korean word.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy  focus:bg-white focus:shadow-md focus:ring-0 focus:ring-offset-0  focus-visible:outline-none"
+                      placeholder="select part of speech"
+                    >
+                      <SelectValue placeholder="select part of speech" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="max-h-80">
+                    {!isValidValue && (
+                      <SelectItem
+                        disabled
+                        className="font-light"
+                        value={posValue}
+                      >
+                        {posValue}
+                      </SelectItem>
+                    )}
+
+                    {PART_OF_SPEECH.map((pos) => (
+                      <SelectItem
+                        className="text-lg font-light"
+                        key={pos}
+                        value={pos}
+                      >
+                        {pos}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <FormDescription className="sr-only">
+                  This is the part of speech for the korean word.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
         <DialogFooter className="justify-between gap-2 px-4">
           <DialogClose
