@@ -9,20 +9,8 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { updateDatabase } from "@/app/actions";
 import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
 import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
 import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
@@ -35,12 +23,10 @@ export default function MooncakesEditDialogue({
   word: DictionaryEntryType;
   trigger: React.ReactNode;
 }) {
-  // Helper function to generate unique IDs
-
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-h-screen min-w-full overflow-y-auto md:h-[75%] md:min-w-[90%] ">
+      <DialogContent className="max-h-screen min-w-full overflow-y-auto py-12 md:h-[75%] md:min-w-[90%] md:py-4 ">
         <ScrollArea className="sm:w-full  md:min-w-fit">
           <DialogHeader className="px-4 pt-4">
             <DialogTitle className="text-left md:text-2xl">

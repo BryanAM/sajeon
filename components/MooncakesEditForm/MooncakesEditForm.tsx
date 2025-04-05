@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,34 +13,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { buttonVariants } from "@/components/ui/button";
-import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { updateDatabase } from "@/app/actions";
-import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
-import MooncakesFormDefinitions from "@/components/MooncakesFormDefinitions/MooncakesFormDefinitions";
-import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
-
 import { Text, PencilOff, List } from "lucide-react";
 
 const PART_OF_SPEECH = [
@@ -216,7 +195,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           control={form.control}
           name="pos"
           render={({ field }) => {
-            const isValidValue = PART_OF_SPEECH.includes(String(field.value));
+            const isValidValue = PART_OF_SPEECH.includes(field.value);
             const posValue = field.value ? field.value : "";
 
             return (
