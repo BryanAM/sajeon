@@ -120,7 +120,6 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormControl>
                 <Input
                   className="col-span-4 mt-0 font-normal"
-                  placeholder="+ add hangul"
                   variant="naked"
                   spellCheck={false}
                   readOnly
@@ -272,16 +271,6 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
             );
           }}
         />
-        <DialogFooter className="justify-between gap-2 px-4">
-          <DialogClose
-            className={buttonVariants({ variant: "outline" })}
-            type="button"
-          >
-            Discard Changes
-          </DialogClose>
-
-          <SajeonToastButton variant="default">Save Changes</SajeonToastButton>
-        </DialogFooter>
       </form>
     </Form>
   );

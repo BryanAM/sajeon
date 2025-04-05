@@ -40,7 +40,7 @@ export default function MooncakesEditDialogue({
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="h-full min-w-full md:h-[75%] md:min-w-[90%]">
+      <DialogContent className="max-h-screen min-w-full overflow-y-auto md:h-[75%] md:min-w-[90%] ">
         <ScrollArea className="sm:w-full  md:min-w-fit">
           <DialogHeader className="px-4 pt-4">
             <DialogTitle className="text-left md:text-2xl">
@@ -53,25 +53,24 @@ export default function MooncakesEditDialogue({
             </DialogDescription>
           </DialogHeader>
           <MooncakesEditForm word={word} />
-          <form action={updateDatabase}>
-            <div className="grid gap-4 px-4 py-4">
-              <MooncakesFormDefinitions word={word} />
-              <MooncakesFormSentences word={word} />
-            </div>
 
-            <DialogFooter className="justify-between gap-2 px-4">
-              <DialogClose
-                className={buttonVariants({ variant: "outline" })}
-                type="button"
-              >
-                Discard Changes
-              </DialogClose>
+          <div className="grid gap-4 px-4 py-4">
+            <MooncakesFormDefinitions word={word} />
+            <MooncakesFormSentences word={word} />
+          </div>
 
-              <SajeonToastButton variant="default">
-                Save Changes
-              </SajeonToastButton>
-            </DialogFooter>
-          </form>
+          <DialogFooter className="justify-between gap-2 px-4">
+            <DialogClose
+              className={buttonVariants({ variant: "outline" })}
+              type="button"
+            >
+              Discard Changes
+            </DialogClose>
+
+            <SajeonToastButton variant="default">
+              Save Changes
+            </SajeonToastButton>
+          </DialogFooter>
         </ScrollArea>
       </DialogContent>
     </Dialog>
