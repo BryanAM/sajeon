@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import {
   Form,
@@ -21,7 +21,8 @@ import {
 } from "@/components/ui/select";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
-import { Text, PencilOff, List } from "lucide-react";
+import { Text, PencilOff, List, Trash2 } from "lucide-react";
+import { Button } from "../ui/button";
 
 const PART_OF_SPEECH = [
   "Noun",
@@ -61,7 +62,14 @@ const formSchema = z.object({
       message: "Please select a valid part of speech.",
     })
     .optional(),
+  definitions: z
+    .array(z.object({ id: z.string(), value: z.string() }))
+    .optional(),
 });
+
+// A helper to generate unique IDs.
+const generateUniqueId = () =>
+  `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
   // 1. Define your form.
@@ -73,13 +81,23 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
       romaja: word.romaja || "",
       hanja: word.hanja || "",
       pos: typeof word.pos === "string" ? word.pos : "",
+      definitions: (word.definitions || []).map((def) => ({
+        id: generateUniqueId(),
+        value: def,
+      })),
     },
+  });
+
+  // Use the useFieldArray hook for dynamic definitions.
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "definitions",
   });
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    // ✅ This will be type-safe and validaated.
     console.log(values);
   }
 
@@ -250,6 +268,57 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
             );
           }}
         />
+        {/* DEFINITIONS */}
+        <div className="grid grid-cols-6 items-center gap-2">
+          <FormLabel className="col-span-2 font-normal text-muted-foreground">
+            <span className="flex items-start">
+              <Text size={14} className="mx-2" /> Definitions
+            </span>
+          </FormLabel>
+          {fields.map((field, index) => (
+            <div
+              key={field.id}
+              className="col-span-4 col-start-3 flex font-light"
+            >
+              <FormField
+                control={form.control}
+                name={`definitions.${index}.value`}
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormControl>
+                      <Input
+                        className="font-light"
+                        variant="naked"
+                        placeholder={`Definition ${index + 1}`}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className="px-2 text-sm text-muted-foreground"
+              >
+                <Trash2
+                  size={16}
+                  aria-label={`delete definition ${field.value}`}
+                />
+              </button>
+            </div>
+          ))}
+
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => append({ value: "", id: generateUniqueId() })}
+            className="col-start-3 w-max justify-start text-muted-foreground"
+          >
+            + Add Definition
+          </Button>
+        </div>
       </form>
     </Form>
   );
