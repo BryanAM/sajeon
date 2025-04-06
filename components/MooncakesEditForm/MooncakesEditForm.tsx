@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DictionaryEntryType } from "@/types/SajeonTypes";
+import { DictionaryEntryType, SentenceType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Text, PencilOff, List, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
@@ -65,6 +65,9 @@ const formSchema = z.object({
   definitions: z
     .array(z.object({ id: z.string(), value: z.string() }))
     .optional(),
+  sentences: z
+    .array(z.object({ id: z.string(), kr: z.string(), en: z.string() }))
+    .default([]),
 });
 
 // A helper to generate unique IDs.
@@ -85,6 +88,11 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
         id: generateUniqueId(),
         value: def,
       })),
+      sentences: (word.sentences || []).map((sentence: SentenceType) => ({
+        id: generateUniqueId(),
+        kr: sentence.kr,
+        en: sentence.en,
+      })),
     },
   });
 
@@ -92,6 +100,16 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "definitions",
+  });
+
+  // Use the useFieldArray hook for dynamic definitions.
+  const {
+    fields: sentenceFields,
+    append: sentenceAppend,
+    remove: sentenceRemove,
+  } = useFieldArray({
+    control: form.control,
+    name: "sentences",
   });
 
   // 2. Define a submit handler.
@@ -289,7 +307,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                       <Input
                         className="font-light"
                         variant="naked"
-                        placeholder={`Definition ${index + 1}`}
+                        placeholder={`Enter definition ${index + 1}`}
                         {...field}
                       />
                     </FormControl>
@@ -317,6 +335,77 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
             className="col-start-3 w-max justify-start text-muted-foreground"
           >
             + Add Definition
+          </Button>
+        </div>
+
+        {/* SENTENCES */}
+        <div className="relative grid grid-cols-6 items-center gap-2">
+          <FormLabel className="col-span-2 font-normal text-muted-foreground">
+            <span className="flex items-start">
+              <Text size={14} className="mx-2" /> Sentences
+            </span>
+          </FormLabel>
+          {sentenceFields.map((field, index) => (
+            <div
+              key={field.id}
+              className="col-span-4 col-start-3 flex font-light"
+            >
+              <FormField
+                control={form.control}
+                name={`sentences.${index}.kr`}
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="font-light focus:absolute focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
+                        variant="naked"
+                        placeholder={`Enter korean sentence ${index + 1}`}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`sentences.${index}.en`}
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormControl>
+                      <Input
+                        className="font-light focus:absolute focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
+                        variant="naked"
+                        placeholder={`Enter english sentence ${index + 1}`}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => sentenceRemove(index)}
+                className="px-2 text-sm text-muted-foreground"
+              >
+                <Trash2
+                  size={16}
+                  aria-label={`delete definition ${field.en}}`}
+                />
+              </button>
+            </div>
+          ))}
+
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() =>
+              sentenceAppend({ id: generateUniqueId(), kr: "", en: "" })
+            }
+            className="col-start-3 w-max justify-start text-muted-foreground"
+          >
+            + Add Sentence
           </Button>
         </div>
       </form>

@@ -12,7 +12,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
-import MooncakesFormSentences from "@/components/MooncakesFormSentences/MooncakesFormSentences";
 import { MooncakesEditForm } from "../MooncakesEditForm/MooncakesEditForm";
 
 export default function MooncakesEditDialogue({
@@ -26,8 +25,8 @@ export default function MooncakesEditDialogue({
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-h-full min-w-full overflow-y-auto pb-12 md:h-[75%]  md:min-w-[90%] md:py-4 ">
-        <ScrollArea className="sm:w-full  md:min-w-fit">
-          <DialogHeader className="px-4 pt-12">
+        <ScrollArea className="px-2 sm:w-full  md:min-w-fit">
+          <DialogHeader className="pt-12">
             <DialogTitle className="text-left md:text-2xl">
               Editing Vocabulary - {word.word}
             </DialogTitle>
@@ -38,10 +37,6 @@ export default function MooncakesEditDialogue({
             </DialogDescription>
           </DialogHeader>
           <MooncakesEditForm word={word} />
-
-          <div className="grid gap-4 px-4 py-4">
-            <MooncakesFormSentences word={word} />
-          </div>
 
           <DialogFooter className="justify-between gap-2 px-4">
             <DialogClose
