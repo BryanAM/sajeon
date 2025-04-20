@@ -11,6 +11,8 @@ const inputVariants = cva(
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         naked:
           "border-0 hover:bg-muted focus-visible:outline-none focus:bg-background focus:border-[1px] focus:shadow-md focus:border-muted-heavy",
+        nakedError:
+          "hover:bg-muted focus-visible:outline-none focus:bg-background border-[1px] focus:shadow-md border-destructive",
       },
     },
     defaultVariants: {

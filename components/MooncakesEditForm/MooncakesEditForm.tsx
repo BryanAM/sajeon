@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Text, PencilOff, List, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { PARTS_OF_SPEECH } from "@/lib/constants";
@@ -55,9 +56,12 @@ const formSchema = z.object({
     })
     .regex(hangulRegex, { message: "Only Korean characters are allowed." })
     .regex(safeInputRegex, { message: "Remove any <, >, `, \\" }),
-  romaja: z.string().min(1, {
-    message: "Romaja must be at least 1 character.",
-  }),
+  romaja: z
+    .string()
+    .min(1, {
+      message: "Romaja must be at least 1 character.",
+    })
+    .regex(safeInputRegex, { message: "Remove any <, >, `, \\" }),
   hanja: z
     .string()
     .regex(safeInputRegex, { message: "Remove any <, >, `, \\" })
@@ -184,14 +188,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is word ID. It can't be modified.
               </FormDescription>
-              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+              <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name="word"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="grid grid-cols-6 items-center">
               <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
@@ -202,21 +206,21 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 <Input
                   className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add hangul"
-                  variant="naked"
+                  variant={!!fieldState.error ? "nakedError" : "naked"}
                   {...field}
                 />
               </FormControl>
               <FormDescription className="sr-only">
                 This is the korean word written in hangul
               </FormDescription>
-              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+              <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name="romaja"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="grid grid-cols-6 items-center">
               <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
@@ -227,7 +231,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 <Input
                   className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add romaja"
-                  variant="naked"
+                  variant={!!fieldState.error ? "nakedError" : "naked"}
                   spellCheck={false}
                   {...field}
                 />
@@ -235,14 +239,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is the romaja for the korean word.
               </FormDescription>
-              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+              <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name="hanja"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="grid grid-cols-6 items-center">
               <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
@@ -254,21 +258,21 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                   className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add hanja"
                   spellCheck={false}
-                  variant="naked"
+                  variant={!!fieldState.error ? "nakedError" : "naked"}
                   {...field}
                 />
               </FormControl>
               <FormDescription className="sr-only">
                 This is the hanja for the korean word.
               </FormDescription>
-              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+              <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
           name="pos"
-          render={({ field }) => {
+          render={({ field, fieldState }) => {
             const isValidValue = PARTS_OF_SPEECH.includes(field.value);
             const posValue = field.value ? field.value : "";
 
@@ -287,7 +291,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 >
                   <FormControl>
                     <SelectTrigger
-                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy focus:bg-background  focus:shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:outline-none  md:col-span-5"
+                      className={`
+                        col-span-4 mt-1
+                        border ${fieldState.error ? "border-destructive" : "border-transparent"}
+                        font-light ring-0
+                        hover:bg-muted
+                        focus:border focus:border-muted-heavy focus:bg-background focus:shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:outline-none
+                        md:col-span-5
+                      `}
                       placeholder="select part of speech"
                     >
                       <SelectValue placeholder="select part of speech" />
@@ -319,7 +330,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 <FormDescription className="sr-only">
                   This is the part of speech for the korean word.
                 </FormDescription>
-                <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+                <FormMessage className="col-span-4  col-start-3 pl-2 md:col-span-5 md:col-start-2" />
               </FormItem>
             );
           }}
@@ -339,17 +350,17 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormField
                 control={form.control}
                 name={`definitions.${index}.value`}
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <FormItem className="flex-1">
                     <FormControl>
                       <Input
                         className="font-light"
-                        variant="naked"
+                        variant={!!fieldState.error ? "nakedError" : "naked"}
                         placeholder={`Enter definition ${index + 1}`}
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
+                    <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
                   </FormItem>
                 )}
               />
@@ -375,9 +386,9 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
             + Add Definition
           </Button>
         </div>
-        SENTENCES
-        <div className="relative grid grid-cols-6 items-center gap-2">
-          <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
+        {/* SENTENCES */}
+        <div className=" grid grid-cols-6 items-center gap-4">
+          <FormLabel className="col-span-2 self-start pt-3 font-normal text-muted-foreground md:col-span-1">
             <span className="flex items-start">
               <Text size={14} className="mx-2" /> Sentences
             </span>
@@ -385,47 +396,49 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           {sentenceFields.map((field, index) => (
             <div
               key={field.id}
-              className="col-span-4 col-start-3 flex font-light md:col-span-5 md:col-start-2"
+              className="col-span-4 col-start-3 grid grid-cols-12 gap-2 font-light md:col-span-5 md:col-start-2"
             >
-              <FormField
-                control={form.control}
-                name={`sentences.${index}.kr`}
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormControl>
-                      <Input
-                        {...field}
-                        className="font-light focus:absolute focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
-                        variant="naked"
-                        placeholder={`Enter korean sentence ${index + 1}`}
-                      />
-                    </FormControl>
-                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name={`sentences.${index}.en`}
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormControl>
-                      <Input
-                        className="font-light focus:absolute focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
-                        variant="naked"
-                        placeholder={`Enter english sentence ${index + 1}`}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
-                  </FormItem>
-                )}
-              />
+              <div className="col-span-11 flex flex-col gap-4 md:flex-row">
+                <FormField
+                  control={form.control}
+                  name={`sentences.${index}.kr`}
+                  render={({ field, fieldState }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input
+                          {...field}
+                          className="font-light focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
+                          variant={!!fieldState.error ? "nakedError" : "naked"}
+                          placeholder={`Enter korean sentence ${index + 1}`}
+                        />
+                      </FormControl>
+                      <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name={`sentences.${index}.en`}
+                  render={({ field, fieldState }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input
+                          className="font-light focus:inset-0 focus:-top-10 md:focus:static md:focus:top-0"
+                          variant={!!fieldState.error ? "nakedError" : "naked"}
+                          placeholder={`Enter english sentence ${index + 1}`}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="col-span-4 col-start-3 pl-2 md:col-span-5 md:col-start-2" />
+                    </FormItem>
+                  )}
+                />
+              </div>
               {index >= 1 && (
                 <button
                   type="button"
                   onClick={() => sentenceRemove(index)}
-                  className="px-2 text-sm text-muted-foreground"
+                  className="col-span-1 justify-self-end px-2 text-sm text-muted-foreground"
                 >
                   <Trash2
                     size={16}
@@ -433,6 +446,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                   />
                 </button>
               )}
+              <Separator className="col-span-full md:hidden" />
             </div>
           ))}
 
