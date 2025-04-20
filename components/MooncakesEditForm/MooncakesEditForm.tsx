@@ -35,6 +35,16 @@ import { buttonVariants } from "@/components/ui/button";
 // CJK Unified Ideographs = Hanja
 const hanjaRegex = /^[\u4E00-\u9FFF]+$/;
 const hangulRegex = /^[가-힣\s]+$/;
+/**
+ * safeInputRegex:
+ *  - Ensures the string does NOT contain any of these unsafe characters:
+ *      <   (less‑than)
+ *      >   (greater‑than)
+ *      `   (backtick)
+ *      \   (backslash)
+ *  - Allows everything else (letters, digits, punctuation, quotes, semicolons, slashes, emojis, whitespace, newlines, etc.).
+ */
+const safeInputRegex = /^(?![\s\S]*[<>`\\])[\s\S]*$/;
 
 const formSchema = z.object({
   _wordId: z.string(),
@@ -43,12 +53,14 @@ const formSchema = z.object({
     .min(1, {
       message: "Korean requires at least 1 character",
     })
-    .regex(hangulRegex, { message: "Only Korean characters are allowed." }),
+    .regex(hangulRegex, { message: "Only Korean characters are allowed." })
+    .regex(safeInputRegex, { message: "Remove any <, >, `, \\" }),
   romaja: z.string().min(1, {
     message: "Romaja must be at least 1 character.",
   }),
   hanja: z
     .string()
+    .regex(safeInputRegex, { message: "Remove any <, >, `, \\" })
     .optional()
     .refine(
       (val) =>
@@ -61,13 +73,33 @@ const formSchema = z.object({
     errorMap: () => ({ message: "Please select a part of speech." }),
   }),
   definitions: z
-    .array(z.object({ value: z.string() }))
-    .refine((defs) => defs.length > 0, {
+    .array(
+      z.object({
+        value: z
+          .string()
+          .regex(safeInputRegex, { message: "Remove any <, >, `, \\" })
+          .min(1, { message: "Definitions require at least 1 character." }),
+      }),
+    )
+    .min(1, {
       message: "At least 1 definition is required.",
     }),
-  sentences: z.array(z.object({ kr: z.string(), en: z.string() })).min(1, {
-    message: "At least 1 setences is required.",
-  }),
+  sentences: z
+    .array(
+      z.object({
+        kr: z
+          .string()
+          .regex(safeInputRegex, { message: "Remove any <, >, `, \\" })
+          .min(1, { message: "Definitions require at least 1 character." }),
+        en: z
+          .string()
+          .regex(safeInputRegex, { message: "Remove any <, >, `, \\" })
+          .min(1, { message: "Definitions require at least 1 character." }),
+      }),
+    )
+    .min(1, {
+      message: "At least 1 setences is required.",
+    }),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
