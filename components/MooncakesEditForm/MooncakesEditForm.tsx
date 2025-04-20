@@ -1,8 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFieldArray } from "react-hook-form";
+import {
+  useForm,
+  useFieldArray,
+  FieldErrors,
+  useController,
+} from "react-hook-form";
 import { z } from "zod";
+import { DialogFooter, DialogClose } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -19,20 +25,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DictionaryEntryType, PartOfSpeech } from "@/types/SajeonTypes";
+import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Text, PencilOff, List, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { PARTS_OF_SPEECH } from "@/lib/constants";
+import { buttonVariants } from "@/components/ui/button";
 
 // CJK Unified Ideographs = Hanja
 const hanjaRegex = /^[\u4E00-\u9FFF]+$/;
+const hangulRegex = /^[가-힣\s]+$/;
 
 const formSchema = z.object({
   _wordId: z.string(),
-  word: z.string().min(1, {
-    message: "Hangul must be at least 1 character.",
-  }),
+  word: z
+    .string()
+    .min(1, {
+      message: "Korean requires at least 1 character",
+    })
+    .regex(hangulRegex, { message: "Only Korean characters are allowed." }),
   romaja: z.string().min(1, {
     message: "Romaja must be at least 1 character.",
   }),
@@ -43,7 +54,7 @@ const formSchema = z.object({
       (val) =>
         val === undefined || val === null || val === "" || hanjaRegex.test(val),
       {
-        message: "Hanja must only contain valid Chinese characters.",
+        message: "Hanja must be valid Chinese characters.",
       },
     ),
   pos: z.enum(PARTS_OF_SPEECH, {
@@ -51,9 +62,11 @@ const formSchema = z.object({
   }),
   definitions: z
     .array(z.object({ value: z.string() }))
-    .min(1, { message: "At least one definition is required" }),
+    .refine((defs) => defs.length > 0, {
+      message: "At least 1 definition is required.",
+    }),
   sentences: z.array(z.object({ kr: z.string(), en: z.string() })).min(1, {
-    message: "At least one setences is required",
+    message: "At least 1 setences is required.",
   }),
 });
 
@@ -93,15 +106,28 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  function onValid(data: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validaated.
-    console.log(data);
+    const payload = {
+      ...data,
+      definitions: data.definitions.map((def) => def.value),
+    };
+    console.log("submit called", payload);
+
+    // might be better to POST get the return and then write the approprate toast
+  }
+
+  function onInvalid(errors: FieldErrors<FormSchema>) {
+    console.log("error: ", errors);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onValid, onInvalid)}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="_wordId"
@@ -126,7 +152,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is word ID. It can't be modified.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
@@ -135,7 +161,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="word"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1 md:col-span-1">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
                   <Text size={14} className="mx-2" /> Korean
                 </span>
@@ -151,7 +177,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is the korean word written in hangul
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
@@ -160,7 +186,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="romaja"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1 md:col-span-1">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
                   <Text size={14} className="mx-2" /> Romaja
                 </span>
@@ -177,7 +203,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is the romaja for the korean word.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
@@ -203,7 +229,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               <FormDescription className="sr-only">
                 This is the hanja for the korean word.
               </FormDescription>
-              <FormMessage />
+              <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
             </FormItem>
           )}
         />
@@ -229,7 +255,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 >
                   <FormControl>
                     <SelectTrigger
-                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy focus:bg-white  focus:shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:outline-none  md:col-span-5"
+                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy focus:bg-background  focus:shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:outline-none  md:col-span-5"
                       placeholder="select part of speech"
                     >
                       <SelectValue placeholder="select part of speech" />
@@ -261,7 +287,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 <FormDescription className="sr-only">
                   This is the part of speech for the korean word.
                 </FormDescription>
-                <FormMessage />
+                <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
               </FormItem>
             );
           }}
@@ -291,10 +317,11 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
                   </FormItem>
                 )}
               />
+
               <button
                 type="button"
                 onClick={() => definitionsRemove(index)}
@@ -313,6 +340,11 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           >
             + Add Definition
           </Button>
+          {!definitionsFields.length && (
+            <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2">
+              You must include at least 1 definition.
+            </FormMessage>
+          )}
         </div>
         SENTENCES
         <div className="relative grid grid-cols-6 items-center gap-2">
@@ -339,7 +371,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                         placeholder={`Enter korean sentence ${index + 1}`}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
                   </FormItem>
                 )}
               />
@@ -356,7 +388,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2" />
                   </FormItem>
                 )}
               />
@@ -378,7 +410,22 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           >
             + Add Sentence
           </Button>
+          {!sentenceFields.length && (
+            <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2">
+              You must include at least 1 sentence.
+            </FormMessage>
+          )}
         </div>
+        <DialogFooter className="justify-between gap-2 px-4 pt-6">
+          <DialogClose
+            className={buttonVariants({ variant: "outline" })}
+            type="button"
+          >
+            Discard Changes
+          </DialogClose>
+
+          <Button>Save Changes</Button>
+        </DialogFooter>
       </form>
     </Form>
   );

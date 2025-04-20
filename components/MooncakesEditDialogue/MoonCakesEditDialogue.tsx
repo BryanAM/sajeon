@@ -2,16 +2,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
 } from "@/components/ui/dialog";
-import { buttonVariants } from "@/components/ui/button";
 import { DictionaryEntryType } from "@/types/SajeonTypes";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SajeonToastButton } from "@/components/SajeonToastButton/SajeonToastButton";
 import { MooncakesEditForm } from "../MooncakesEditForm/MooncakesEditForm";
 
 export default function MooncakesEditDialogue({
@@ -37,19 +33,6 @@ export default function MooncakesEditDialogue({
             </DialogDescription>
           </DialogHeader>
           <MooncakesEditForm word={word} />
-
-          <DialogFooter className="justify-between gap-2 px-4 pt-6">
-            <DialogClose
-              className={buttonVariants({ variant: "outline" })}
-              type="button"
-            >
-              Discard Changes
-            </DialogClose>
-
-            <SajeonToastButton variant="default">
-              Save Changes
-            </SajeonToastButton>
-          </DialogFooter>
         </ScrollArea>
       </DialogContent>
     </Dialog>
