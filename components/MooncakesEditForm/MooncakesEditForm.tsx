@@ -322,13 +322,15 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 )}
               />
 
-              <button
-                type="button"
-                onClick={() => definitionsRemove(index)}
-                className="px-2 text-sm text-muted-foreground"
-              >
-                <Trash2 size={16} aria-label={`delete definition ${field}`} />
-              </button>
+              {index >= 1 && (
+                <button
+                  type="button"
+                  onClick={() => definitionsRemove(index)}
+                  className="px-2 text-sm text-muted-foreground"
+                >
+                  <Trash2 size={16} aria-label={`delete definition ${field}`} />
+                </button>
+              )}
             </div>
           ))}
 
@@ -340,11 +342,6 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           >
             + Add Definition
           </Button>
-          {!definitionsFields.length && (
-            <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2">
-              You must include at least 1 definition.
-            </FormMessage>
-          )}
         </div>
         SENTENCES
         <div className="relative grid grid-cols-6 items-center gap-2">
@@ -392,13 +389,18 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                   </FormItem>
                 )}
               />
-              <button
-                type="button"
-                onClick={() => sentenceRemove(index)}
-                className="px-2 text-sm text-muted-foreground"
-              >
-                <Trash2 size={16} aria-label={`delete sentence ${field.en}}`} />
-              </button>
+              {index >= 1 && (
+                <button
+                  type="button"
+                  onClick={() => sentenceRemove(index)}
+                  className="px-2 text-sm text-muted-foreground"
+                >
+                  <Trash2
+                    size={16}
+                    aria-label={`delete sentence ${field.en}}`}
+                  />
+                </button>
+              )}
             </div>
           ))}
 
@@ -410,11 +412,6 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           >
             + Add Sentence
           </Button>
-          {!sentenceFields.length && (
-            <FormMessage className="col-span-4 col-start-3 md:col-span-5 md:col-start-2">
-              You must include at least 1 sentence.
-            </FormMessage>
-          )}
         </div>
         <DialogFooter className="justify-between gap-2 px-4 pt-6">
           <DialogClose
