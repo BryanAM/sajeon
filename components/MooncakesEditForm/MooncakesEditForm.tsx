@@ -19,90 +19,70 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DictionaryEntryType, SentenceType } from "@/types/SajeonTypes";
+import { DictionaryEntryType, PartOfSpeech } from "@/types/SajeonTypes";
 import { Input } from "@/components/ui/input";
 import { Text, PencilOff, List, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
+import { PARTS_OF_SPEECH } from "@/lib/constants";
 
-const PART_OF_SPEECH = [
-  "Noun",
-  "Adjective",
-  "Verb",
-  "Noun, 하다",
-  "Adverb",
-  "Particle",
-  "Pronoun",
-  "Determiner",
-  "Interjection",
-] as const;
-
-export type PartOfSpeech = (typeof PART_OF_SPEECH)[number];
+// CJK Unified Ideographs = Hanja
+const hanjaRegex = /^[\u4E00-\u9FFF]+$/;
 
 const formSchema = z.object({
   _wordId: z.string(),
   word: z.string().min(1, {
-    message: "Hangul must be at least 1 characters.",
+    message: "Hangul must be at least 1 character.",
   }),
-  romaja: z
-    .string()
-    .min(1, {
-      message: "Romaja must be at least 1 characters.",
-    })
-    .optional(),
+  romaja: z.string().min(1, {
+    message: "Romaja must be at least 1 character.",
+  }),
   hanja: z
     .string()
-    .min(1, {
-      message: "Hanja must be at least 1 characters.",
-    })
-    .optional(),
-  pos: z
-    .string()
-    .transform((val) => (val === "" ? undefined : val))
-    .refine((val) => !val || PART_OF_SPEECH.includes(val as PartOfSpeech), {
-      message: "Please select a valid part of speech.",
-    })
-    .optional(),
+    .optional()
+    .refine(
+      (val) =>
+        val === undefined || val === null || val === "" || hanjaRegex.test(val),
+      {
+        message: "Hanja must only contain valid Chinese characters.",
+      },
+    ),
+  pos: z.enum(PARTS_OF_SPEECH, {
+    errorMap: () => ({ message: "Please select a part of speech." }),
+  }),
   definitions: z
-    .array(z.object({ id: z.string(), value: z.string() }))
-    .optional(),
-  sentences: z
-    .array(z.object({ id: z.string(), kr: z.string(), en: z.string() }))
-    .default([]),
+    .array(z.object({ value: z.string() }))
+    .min(1, { message: "At least one definition is required" }),
+  sentences: z.array(z.object({ kr: z.string(), en: z.string() })).min(1, {
+    message: "At least one setences is required",
+  }),
 });
 
-// A helper to generate unique IDs.
-const generateUniqueId = () =>
-  `id-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+type FormSchema = z.infer<typeof formSchema>;
 
 export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       _wordId: word._id,
       word: word.word || "",
       romaja: word.romaja || "",
       hanja: word.hanja || "",
-      pos: typeof word.pos === "string" ? word.pos : "",
-      definitions: (word.definitions || []).map((def) => ({
-        id: generateUniqueId(),
-        value: def,
-      })),
-      sentences: (word.sentences || []).map((sentence: SentenceType) => ({
-        id: generateUniqueId(),
-        kr: sentence.kr,
-        en: sentence.en,
-      })),
+      pos: word.pos || "",
+      definitions: (word.definitions || []).map((def) => ({ value: def })),
+      sentences: word.sentences || [],
     },
   });
 
-  // Use the useFieldArray hook for dynamic definitions.
-  const { fields, append, remove } = useFieldArray({
+  // useFieldArray hook for dynamic definitions.
+  const {
+    fields: definitionsFields,
+    append: definitionsAppend,
+    remove: definitionsRemove,
+  } = useFieldArray({
     control: form.control,
     name: "definitions",
   });
 
-  // Use the useFieldArray hook for dynamic definitions.
   const {
     fields: sentenceFields,
     append: sentenceAppend,
@@ -113,10 +93,10 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(data: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validaated.
-    console.log(values);
+    console.log(data);
   }
 
   return (
@@ -127,14 +107,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="_wordId"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
                   <PencilOff size={14} className="mx-2" /> ID
                 </span>
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-4 mt-0 font-normal"
+                  className="col-span-4 mt-0 font-normal md:col-span-5"
                   variant="naked"
                   spellCheck={false}
                   readOnly
@@ -155,14 +135,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="word"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1 md:col-span-1">
                 <span className="flex items-start">
                   <Text size={14} className="mx-2" /> Korean
                 </span>
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-4 mt-0 font-light"
+                  className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add hangul"
                   variant="naked"
                   {...field}
@@ -180,14 +160,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="romaja"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1 md:col-span-1">
                 <span className="flex items-start">
                   <Text size={14} className="mx-2" /> Romaja
                 </span>
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-4 mt-0 font-light"
+                  className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add romaja"
                   variant="naked"
                   spellCheck={false}
@@ -206,14 +186,14 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           name="hanja"
           render={({ field }) => (
             <FormItem className="grid grid-cols-6 items-center">
-              <FormLabel className="col-span-2 font-normal text-muted-foreground">
+              <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                 <span className="flex items-start">
                   <Text size={14} className="mx-2" /> Hanja
                 </span>
               </FormLabel>
               <FormControl>
                 <Input
-                  className="col-span-4 mt-0 font-light"
+                  className="col-span-4 mt-0 font-light md:col-span-5"
                   placeholder="+ add hanja"
                   spellCheck={false}
                   variant="naked"
@@ -231,12 +211,12 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           control={form.control}
           name="pos"
           render={({ field }) => {
-            const isValidValue = PART_OF_SPEECH.includes(field.value);
+            const isValidValue = PARTS_OF_SPEECH.includes(field.value);
             const posValue = field.value ? field.value : "";
 
             return (
               <FormItem className="grid grid-cols-6 items-center">
-                <FormLabel className="col-span-2 font-normal text-muted-foreground">
+                <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
                   <span className="flex items-start">
                     <List size={14} className="mx-2" /> Part of Speech
                   </span>
@@ -249,7 +229,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 >
                   <FormControl>
                     <SelectTrigger
-                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy  focus:bg-white focus:shadow-md focus:ring-0 focus:ring-offset-0  focus-visible:outline-none"
+                      className="col-span-4 mt-1 border-0 font-light ring-0 hover:bg-muted focus:border-[1px] focus:border-muted-heavy focus:bg-white  focus:shadow-md focus:ring-0 focus:ring-offset-0 focus-visible:outline-none  md:col-span-5"
                       placeholder="select part of speech"
                     >
                       <SelectValue placeholder="select part of speech" />
@@ -266,7 +246,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                       </SelectItem>
                     )}
 
-                    {PART_OF_SPEECH.map((pos) => (
+                    {PARTS_OF_SPEECH.map((pos) => (
                       <SelectItem
                         className="text-lg font-light"
                         key={pos}
@@ -288,15 +268,15 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
         />
         {/* DEFINITIONS */}
         <div className="grid grid-cols-6 items-center gap-2">
-          <FormLabel className="col-span-2 font-normal text-muted-foreground">
+          <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
             <span className="flex items-start">
               <Text size={14} className="mx-2" /> Definitions
             </span>
           </FormLabel>
-          {fields.map((field, index) => (
+          {definitionsFields.map((field, index) => (
             <div
               key={field.id}
-              className="col-span-4 col-start-3 flex font-light"
+              className="col-span-4 col-start-3 flex font-light md:col-span-5 md:col-start-2"
             >
               <FormField
                 control={form.control}
@@ -317,13 +297,10 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
               />
               <button
                 type="button"
-                onClick={() => remove(index)}
+                onClick={() => definitionsRemove(index)}
                 className="px-2 text-sm text-muted-foreground"
               >
-                <Trash2
-                  size={16}
-                  aria-label={`delete definition ${field.value}`}
-                />
+                <Trash2 size={16} aria-label={`delete definition ${field}`} />
               </button>
             </div>
           ))}
@@ -331,16 +308,15 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           <Button
             type="button"
             variant="ghost"
-            onClick={() => append({ value: "", id: generateUniqueId() })}
-            className="col-start-3 w-max justify-start text-muted-foreground"
+            onClick={() => definitionsAppend({ value: "" })}
+            className="col-start-3 w-max justify-start text-muted-foreground md:col-start-2"
           >
             + Add Definition
           </Button>
         </div>
-
-        {/* SENTENCES */}
+        SENTENCES
         <div className="relative grid grid-cols-6 items-center gap-2">
-          <FormLabel className="col-span-2 font-normal text-muted-foreground">
+          <FormLabel className="col-span-2 font-normal text-muted-foreground md:col-span-1">
             <span className="flex items-start">
               <Text size={14} className="mx-2" /> Sentences
             </span>
@@ -348,7 +324,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           {sentenceFields.map((field, index) => (
             <div
               key={field.id}
-              className="col-span-4 col-start-3 flex font-light"
+              className="col-span-4 col-start-3 flex font-light md:col-span-5 md:col-start-2"
             >
               <FormField
                 control={form.control}
@@ -389,10 +365,7 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
                 onClick={() => sentenceRemove(index)}
                 className="px-2 text-sm text-muted-foreground"
               >
-                <Trash2
-                  size={16}
-                  aria-label={`delete definition ${field.en}}`}
-                />
+                <Trash2 size={16} aria-label={`delete sentence ${field.en}}`} />
               </button>
             </div>
           ))}
@@ -400,10 +373,8 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
           <Button
             type="button"
             variant="ghost"
-            onClick={() =>
-              sentenceAppend({ id: generateUniqueId(), kr: "", en: "" })
-            }
-            className="col-start-3 w-max justify-start text-muted-foreground"
+            onClick={() => sentenceAppend({ kr: "", en: "" })}
+            className="col-start-3 w-max justify-start text-muted-foreground md:col-start-2"
           >
             + Add Sentence
           </Button>

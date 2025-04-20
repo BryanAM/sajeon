@@ -24,8 +24,8 @@ export default function MooncakesEditDialogue({
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-h-full min-w-full overflow-y-auto pb-12 md:h-[75%]  md:min-w-[90%] md:py-4 ">
-        <ScrollArea className="px-2 sm:w-full  md:min-w-fit">
+      <DialogContent className="max-h-full min-w-full overflow-y-auto pb-12 md:h-[75%] md:min-w-[70%] md:py-4 ">
+        <ScrollArea className="px-4 sm:w-full md:min-w-fit">
           <DialogHeader className="py-6">
             <DialogTitle className="text-left md:text-2xl">
               Editing Vocabulary - {word.word}

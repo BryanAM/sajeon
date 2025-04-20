@@ -5,6 +5,21 @@ export type SentenceType = {
   en: string;
 };
 
+export type PartOfSpeech =
+  | "Noun"
+  | "Pronoun"
+  | "Numeral"
+  | "Determiner"
+  | "Verb"
+  | "Adjective"
+  | "Adverb"
+  | "Particle"
+  | "Auxiliary Verb"
+  | "Conjunction"
+  | "Interjection"
+  | "Onomatopoeia"
+  | "Counter";
+
 export type DictionaryEntryType = {
   _id: string;
   word: string;
@@ -12,7 +27,7 @@ export type DictionaryEntryType = {
   hanja: string;
   definitions: string[];
   explanation: string;
-  pos: string;
+  pos: PartOfSpeech;
   sentences: SentenceType[];
 };
 
