@@ -1,14 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useForm,
-  useFieldArray,
-  FieldErrors,
-  useController,
-} from "react-hook-form";
+import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { z } from "zod";
 import { DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+
 import {
   Form,
   FormControl,
@@ -164,6 +161,9 @@ export function MooncakesEditForm({ word }: { word: DictionaryEntryType }) {
         onSubmit={form.handleSubmit(onValid, onInvalid)}
         className="space-y-8"
       >
+        {form.formState.isDirty && (
+          <Badge className="absolute right-8 top-0">Unsaved Changes</Badge>
+        )}
         <FormField
           control={form.control}
           name="_wordId"
